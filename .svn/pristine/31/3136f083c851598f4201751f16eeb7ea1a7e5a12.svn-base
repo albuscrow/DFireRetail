@@ -1,0 +1,304 @@
+package com.dihuo.twodfire.retail.data;
+
+import java.sql.Date;
+import java.util.List;
+
+import android.R.integer;
+
+/**
+ * 店铺信息
+ * @author kyolee
+ *
+ */
+public class ShopVo {
+	
+	private String id;
+	/**
+	 * @return the id
+	 */
+	public String getId() {
+		return id;
+	}
+	/**
+	 * @param id the id to set
+	 */
+	public void setId(String id) {
+		this.id = id;
+	}
+	private String name;
+	
+	/**
+	 * @return the name
+	 */
+	public String getName() {
+		return name;
+	}
+	/**
+	 * @param name the name to set
+	 */
+	public void setName(String name) {
+		this.name = name;
+	}
+	private String shopId;//商户ID
+	private String shopName;//商户名称
+	private String shortName;//商户简称
+	private String address;//住址
+	private String provinceId;//省份ID
+	private String cityId;//城市ID
+	private String countyId;//区县ID
+	private String streetId;//街道ID
+	private String phone1;//联系电话一
+	private String phone2;//联系电话二
+	private String parentId;//上级商户ID
+	String code;
+	String businessTime;
+	String lastVer;
+	String copyFlag;
+	String startTime;
+	String endTime;
+	String shopType;
+	List<ShopVo> shopList;
+	String dataFromShopId;
+	byte[] file;
+	String fileName;
+	String fileSuffix;
+	
+	/**
+	 * @return the code
+	 */
+	public String getCode() {
+		return code;
+	}
+	/**
+	 * @param code the code to set
+	 */
+	public void setCode(String code) {
+		this.code = code;
+	}
+	/**
+	 * @return the businessTime
+	 */
+	public String getBusinessTime() {
+		return businessTime;
+	}
+	/**
+	 * @param businessTime the businessTime to set
+	 */
+	public void setBusinessTime(String businessTime) {
+		this.businessTime = businessTime;
+	}
+	/**
+	 * @return the lastVer
+	 */
+	public String getLastVer() {
+		return lastVer;
+	}
+	/**
+	 * @param lastVer the lastVer to set
+	 */
+	public void setLastVer(String lastVer) {
+		this.lastVer = lastVer;
+	}
+	/**
+	 * @return the copyFlag
+	 */
+	public String getCopyFlag() {
+		return copyFlag;
+	}
+	/**
+	 * @param copyFlag the copyFlag to set
+	 */
+	public void setCopyFlag(String copyFlag) {
+		this.copyFlag = copyFlag;
+	}
+	/**
+	 * @return the startTime
+	 */
+	public String getStartTime() {
+		return startTime;
+	}
+	/**
+	 * @param startTime the startTime to set
+	 */
+	public void setStartTime(String startTime) {
+		this.startTime = startTime;
+	}
+	/**
+	 * @return the endTime
+	 */
+	public String getEndTime() {
+		return endTime;
+	}
+	/**
+	 * @param endTime the endTime to set
+	 */
+	public void setEndTime(String endTime) {
+		this.endTime = endTime;
+	}
+	/**
+	 * @return the shopType
+	 */
+	public String getShopType() {
+		return shopType;
+	}
+	/**
+	 * @param shopType the shopType to set
+	 */
+	public void setShopType(String shopType) {
+		this.shopType = shopType;
+	}
+	/**
+	 * @return the shopList
+	 */
+	public List<ShopVo> getShopList() {
+		return shopList;
+	}
+	/**
+	 * @param shopList the shopList to set
+	 */
+	public void setShopList(List<ShopVo> shopList) {
+		this.shopList = shopList;
+	}
+	/**
+	 * @return the dataFromShopId
+	 */
+	public String getDataFromShopId() {
+		return dataFromShopId;
+	}
+	/**
+	 * @param dataFromShopId the dataFromShopId to set
+	 */
+	public void setDataFromShopId(String dataFromShopId) {
+		this.dataFromShopId = dataFromShopId;
+	}
+	/**
+	 * @return the file
+	 */
+	public byte[] getFile() {
+		return file;
+	}
+	/**
+	 * @param file the file to set
+	 */
+	public void setFile(byte[] file) {
+		this.file = file;
+	}
+	/**
+	 * @return the fileName
+	 */
+	public String getFileName() {
+		return fileName;
+	}
+	/**
+	 * @param fileName the fileName to set
+	 */
+	public void setFileName(String fileName) {
+		this.fileName = fileName;
+	}
+	/**
+	 * @return the fileSuffix
+	 */
+	public String getFileSuffix() {
+		return fileSuffix;
+	}
+	/**
+	 * @param fileSuffix the fileSuffix to set
+	 */
+	public void setFileSuffix(String fileSuffix) {
+		this.fileSuffix = fileSuffix;
+	}
+	public String getShopId() {
+		return shopId;
+	}
+	public void setShopId(String shopId) {
+		this.shopId = shopId;
+	}
+	public String getShopName() {
+		return shopName;
+	}
+	public void setShopName(String shopName) {
+		this.shopName = shopName;
+	}
+	public String getShortName() {
+		return shortName;
+	}
+	public void setShortName(String shortName) {
+		this.shortName = shortName;
+	}
+	public String getAddress() {
+		return address;
+	}
+	public void setAddress(String address) {
+		this.address = address;
+	}
+	
+	/**
+	 * @return the provinceId
+	 */
+	public String getProvinceId() {
+		return provinceId;
+	}
+	/**
+	 * @param provinceId the provinceId to set
+	 */
+	public void setProvinceId(String provinceId) {
+		this.provinceId = provinceId;
+	}
+	/**
+	 * @return the cityId
+	 */
+	public String getCityId() {
+		return cityId;
+	}
+	/**
+	 * @param cityId the cityId to set
+	 */
+	public void setCityId(String cityId) {
+		this.cityId = cityId;
+	}
+	/**
+	 * @return the countyId
+	 */
+	public String getCountyId() {
+		return countyId;
+	}
+	/**
+	 * @param countyId the countyId to set
+	 */
+	public void setCountyId(String countyId) {
+		this.countyId = countyId;
+	}
+	/**
+	 * @return the streetId
+	 */
+	public String getStreetId() {
+		return streetId;
+	}
+	/**
+	 * @param streetId the streetId to set
+	 */
+	public void setStreetId(String streetId) {
+		this.streetId = streetId;
+	}
+	public String getPhone1() {
+		return phone1;
+	}
+	public void setPhone1(String phone1) {
+		this.phone1 = phone1;
+	}
+	public String getPhone2() {
+		return phone2;
+	}
+	public void setPhone2(String phone2) {
+		this.phone2 = phone2;
+	}
+	public String getParentId() {
+		return parentId;
+	}
+	public void setParentId(String parentId) {
+		this.parentId = parentId;
+	}
+	
+
+
+}

@@ -1,0 +1,77 @@
+package com.dihuo.twodfire.retail.activity.goodsmanager;
+
+import com.dihuo.twodfire.retail.R;
+
+import android.os.Bundle;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
+
+public class GoodsDetailActivity extends GoodsManagerBaseActivity {
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_goods_detail);
+		setTitleText("商品详情");
+		initUI();
+	}
+
+	private void initUI() {
+		setEditTextContent(R.id.tiaoma,"商品条码","010100101001","");
+		setEditTextContent(R.id.daima,"商品代码","010100101001","");
+		setEditTextContent(R.id.name,"商品名称","亿滋卡夫卡趣多多曲奇饼干大块巧克力浓郁咖啡味216g","");
+		setEditTextContent(R.id.jinhuojia,"进货价（元）","12.4","");
+		setEditTextContent(R.id.lingshoujia,"零售价（元）","123.4","");
+		setEditTextContent(R.id.kucun,"库存数","333","");
+		
+		setSpinerConetent(R.id.tongbu, "商品同步", "所有门店");
+		
+		setEditTextContent(R.id.jianma,"简码","001","");
+		setEditTextContent(R.id.pingyinma,"拼音码","quduoduo","");
+		
+		setSpinerConetent(R.id.sort, "商品分类", "饼干");
+		
+		setEditTextContent(R.id.guige,"规格","408g","");
+		setEditTextContent(R.id.pinpan,"品牌","好丽友","");
+		setEditTextContent(R.id.chandi,"产地","中国上海","");
+		setEditTextContent(R.id.baozhiqi,"保质期","10个月","");
+		setEditTextContent(R.id.image,"商品图片","","");
+		setEditTextContent(R.id.ticheng,"销售提成比例(%)","0.5","");
+		
+		setCheckBoxContent(R.id.jifen, "不参与积分" ,false);
+		setCheckBoxContent(R.id.youhui, "不参任何活动" ,false);
+		
+	}
+
+	private void setCheckBoxContent(int id, String label, boolean b) {
+		View layout = findViewById(id);
+		TextView labelText = (TextView) layout.findViewById(R.id.check_title);
+		labelText.setText(label);
+		
+	}
+
+	private void setSpinerConetent(int tongbu, String label, String value) {
+		View layout = findViewById(tongbu);
+		TextView tongbuLable = (TextView) layout.findViewById(R.id.main);
+		tongbuLable.setText(label);
+		TextView tongbuValue = (TextView) layout.findViewById(R.id.secend);
+		tongbuValue.setText(value);
+	}
+
+	private void setEditTextContent(int id, String lable, String content,
+			String hint) {
+		View layout = findViewById(id);
+		TextView lableView = (TextView) layout.findViewById(R.id.main);
+		if (lable != null) {
+			lableView.setText(lable);
+		}
+		EditText inputView = (EditText) layout.findViewById(R.id.secend);
+		inputView.setHint(hint);
+		if (content != null) {
+			inputView.setText(content);
+		}
+		
+	}
+
+}

@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/login_bj"
+    android:orientation="vertical" >
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#448f97a6"
+                android:padding="8dp" >
+                
+                <ImageButton
+                    android:id="@+id/scan"
+                    android:contentDescription="@null"
+                    android:background="@null"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/user_info_flicking"/>
+                
+                
+                <TextView
+                    android:id="@+id/search"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:textSize="18.5sp"
+                    android:drawableEnd="@drawable/ico_next_down"
+                    android:drawableRight="@drawable/ico_next_down"
+                    android:textColor="#fff"
+                    android:text="查询" />
+                
+                <EditText
+                    android:id="@+id/code"
+                    android:layout_width="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_height="wrap_content"
+                    android:layout_toLeftOf="@id/search"
+                    android:layout_toRightOf="@id/scan"
+                    android:background="@drawable/recharge_search"
+                    android:inputType="text"
+                    android:orientation="horizontal"
+                    android:hint="条形码/简码/拼音码" />
+                
+            </RelativeLayout>
+            
+            <TextView
+                android:id="@+id/title"
+                style="@style/setting_explain_text"
+                android:text="基础设置" />
+            
+            <ListView 
+                android:id="@+id/list"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                
+            </ListView>
+            
+        </LinearLayout>
+        
+<!--         <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:padding="8dp" > -->
+            
+           <ImageButton
+               android:id="@+id/help"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:layout_alignParentBottom="true"
+               android:background="@null"
+               android:padding="8dp"
+               android:src="@drawable/help" />
+           
+            <ImageButton
+                android:id="@+id/add"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"
+                android:background="@null"
+                android:padding="8dp"
+                android:src="@drawable/user_info_add" />
+            
+             <ImageButton
+                android:id="@+id/scanButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toLeftOf="@id/add"
+                android:layout_alignParentBottom="true"
+                android:padding="8dp"
+                android:background="@null"
+                android:src="@drawable/user_info_add" /> 
+ 
+            
+        <!-- </RelativeLayout> -->
+
+</RelativeLayout>

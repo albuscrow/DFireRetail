@@ -1,0 +1,134 @@
+package com.dihuo.twodfire.retail.activity.goodsmanager;
+
+
+import java.util.ArrayList;
+
+import net.simonvt.menudrawer.MenuDrawer;
+import net.simonvt.menudrawer.Position;
+
+import com.dihuo.twodfire.retail.R;
+import com.dihuo.twodfire.retail.RetailApplication;
+import com.dihuo.twodfire.retail.activity.CaptureActivity;
+import com.dihuo.twodfire.retail.data.GoodsVo;
+import com.dihuo.twodfire.retail.global.Constants;
+import com.dohuo.twofire.retail.network.AsyncHttpPost;
+import com.dohuo.twofire.retail.network.RequestParameter;
+import com.dohuo.twofire.retail.network.RequestResultCallback;
+
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.FrameLayout;
+import android.widget.TextView;
+
+/**
+ * The Class GoodsSearchActivity.
+ * 
+ * @author albuscrow
+ */
+public class GoodsSearchActivity extends GoodsManagerBaseActivity implements OnClickListener {
+	
+	/** The m menu. */
+	private MenuDrawer mMenu;
+
+	/* (non-Javadoc)
+	 * @see com.dihuo.twodfire.retail.activity.goodsmanager.GoodsManagerBaseActivity#onCreate(android.os.Bundle)
+	 */
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		mMenu = MenuDrawer.attach(this, Position.RIGHT);
+		
+		mMenu.setContentView(R.layout.goods_manager_title_layout);
+		mMenu.setMenuView(R.layout.menu_scrollview);
+		FrameLayout body = (FrameLayout) mMenu.findViewById(R.id.body);
+		body.requestFocus();
+		getLayoutInflater().inflate(R.layout.activity_goods_search, body, true);
+		
+		findViewById(R.id.title_left).setOnClickListener(this);
+		findViewById(R.id.title_right).setOnClickListener(this);
+		((TextView)findViewById(R.id.title_text)).setText("商品");
+		
+		findViewById(R.id.add).setOnClickListener(this);
+		findViewById(R.id.search).setOnClickListener(this);
+		
+		findViewById(R.id.scan).setOnClickListener(this);
+	}
+
+	/* (non-Javadoc)
+	 * @see android.view.View.OnClickListener#onClick(android.view.View)
+	 */
+	@Override
+	public void onClick(View v) {
+		switch (v.getId()) {
+		case R.id.title_left:
+			finish();
+			break;
+			
+		case R.id.title_right:
+			mMenu.toggleMenu();
+			break;
+			
+		case R.id.add:
+			startActivity(new Intent(GoodsSearchActivity.this, GoodsDetailActivity.class).putExtra("mode", "add"));
+			break;
+			
+		case R.id.search:
+			search();
+			break;
+		case R.id.scan:
+			startActivityForResult(new Intent(this, CaptureActivity.class), 10086);
+			break;
+		default:
+			break;
+		}
+		
+	}
+	
+	/* (non-Javadoc)
+	 * @see android.app.Activity#onActivityResult(int, int, android.content.Intent)
+	 */
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
+		System.out.println(data.getStringExtra("deviceCode"));
+	}
+
+	/**
+	 * Search.
+	 */
+	private void search() {
+		String code = ((TextView)findViewById(R.id.code)).getText().toString();
+		System.out.println(code);
+		if (code == null || code.length() == 0) {
+			return;
+		}
+		RequestParameter params = new RequestParameter(true);
+		params.setParam("shopId", RetailApplication.getmShopInfo().getShopId());
+		params.setParam("searchCode", code);
+		params.setParam("currentPage", 1);
+		params.setUrl(Constants.BASE_URL + "goods/list");
+		new AsyncHttpPost(params, new RequestResultCallback() {
+			
+			@Override
+			public void onSuccess(String str) {
+				System.out.println(str);
+				ArrayList<GoodsVo> goods = parseJson(str);
+				startActivity(new Intent(GoodsSearchActivity.this, GoodsListWithImageActivity.class).putExtra("goods", goods));
+			}
+			
+			private ArrayList<GoodsVo> parseJson(String str) {
+				
+				return null;
+				
+			}
+
+			@Override
+			public void onFail(Exception e) {
+				e.printStackTrace();
+			}
+		}).execute();
+	}
+
+}

@@ -1,0 +1,521 @@
+package com.dihuo.twodfire.retail.activity.goodsmanager;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import com.dihuo.twodfire.retail.R;
+import com.dihuo.twodfire.retail.RetailApplication;
+import com.dihuo.twodfire.retail.data.CategoryVo;
+import com.dihuo.twodfire.retail.data.GoodsVo;
+import com.dihuo.twodfire.retail.data.ShopVo;
+import com.dihuo.twodfire.retail.global.Constants;
+import com.dihuo.twodfire.retail.widget.spinner.AbstractSpinerAdapter.IOnItemSelectListener;
+import com.dihuo.twodfire.retail.widget.spinner.SpinerPopWindow;
+import com.dohuo.twofire.retail.network.AsyncHttpPost;
+import com.dohuo.twofire.retail.network.RequestParameter;
+import com.dohuo.twofire.retail.network.RequestResultCallback;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+import com.google.gson.reflect.TypeToken;
+
+import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
+import android.widget.CompoundButton.OnCheckedChangeListener;
+import android.widget.EditText;
+import android.widget.TextView;
+
+/**
+ * The Class GoodsDetailActivity.
+ * 
+ * @author albuscrow
+ */
+public class GoodsDetailActivity extends GoodsManagerBaseActivity implements OnClickListener{
+	
+	/** The mode. */
+	private String mode;
+	
+	/** The goods. */
+	private GoodsVo goods;
+	
+	/** The edited. */
+	private boolean edited = false;
+	
+	/** The tongbu. */
+	private SpinerPopWindow tongbu;
+	
+	/** The fenlei. */
+	private SpinerPopWindow fenlei;
+	
+	/** The sort spinner view. */
+	private TextView sortSpinnerView;
+	
+	/** The tongbu spinner view. */
+	private TextView tongbuSpinnerView;
+	
+	/** The current category. */
+	private Category currentCategory;
+	
+	/** The categorys. */
+	private ArrayList<Category> categorys;
+	
+	
+	/** The shops. */
+	private List<ShopVo> shops;
+	
+	/** The current page. */
+	private int currentPage = 0;
+	
+	/** The current shop. */
+	private ShopVo currentShop;
+	
+	/** The current shop position. */
+	private int currentShopPosition;
+	
+	/* (non-Javadoc)
+	 * @see com.dihuo.twodfire.retail.activity.goodsmanager.GoodsManagerBaseActivity#onCreate(android.os.Bundle)
+	 */
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_goods_detail);
+		setTitleText("商品详情");
+		initUI();
+	}
+
+	/**
+	 * Inits the ui.
+	 */
+	private void initUI() {
+		switchToEditMode();
+		mode = getIntent().getStringExtra("mode");
+		
+		if (mode.equals("add")) {
+			edited = true;
+			setEditTextContent(R.id.tiaoma,"商品条码","001010100010","必填");
+			setEditTextContent(R.id.daima,"商品代码","010100101001","必填");
+			setEditTextContent(R.id.name,"商品名称","亿滋卡夫卡趣多多曲奇饼干大块巧克力浓郁咖啡味216g","必填");
+			setEditTextContent(R.id.jinhuojia,"进货价（元）","12.4","可不填");
+			setEditTextContent(R.id.lingshoujia,"零售价（元）","123.4","必填");
+			setEditTextContent(R.id.kucun,"库存数","333","可不填");
+			setSpinerConetent(R.id.tongbu, "商品同步", "所有门店");
+			setEditTextContent(R.id.jianma,"简码","001","可不填");
+			setEditTextContent(R.id.pingyinma,"拼音码","quduoduo","可不填");
+			setSpinerConetent(R.id.sort, "商品分类", "饼干");
+			setEditTextContent(R.id.guige,"规格","408g","可不填");
+			setEditTextContent(R.id.pinpan,"品牌","好丽友","可不填");
+			setEditTextContent(R.id.chandi,"产地","中国上海","可不填");
+			setEditTextContent(R.id.baozhiqi,"保质期","10个月","可不填");
+			setEditTextContent(R.id.image,"商品图片","","");
+			setEditTextContent(R.id.ticheng,"销售提成比例(%)","0.5","必填");
+			setCheckBoxContent(R.id.jifen, "不参与积分" ,false);
+			setCheckBoxContent(R.id.youhui, "不参任何活动" ,false);
+			switchToEditMode();
+			
+		}else{
+			goods = (GoodsVo)getIntent().getSerializableExtra("goods");
+			setEditTextContent(R.id.tiaoma,"商品条码",goods.getBarCode(),"必填");
+			setEditTextContent(R.id.daima,"商品代码",goods.getGoodsId(),"必填");
+			setEditTextContent(R.id.name,"商品名称",goods.getGoodsName(),"必填");
+			setEditTextContent(R.id.jinhuojia,"进货价（元）",goods.getPurchasePrice(),"可不填");
+			setEditTextContent(R.id.lingshoujia,"零售价（元）",goods.getPetailPrice(),"必填");
+			setEditTextContent(R.id.kucun,"库存数",String.valueOf(goods.getNumber()),"可不填");
+
+			setSpinerConetent(R.id.tongbu, "商品同步", "所有门店");
+
+			setEditTextContent(R.id.jianma,"简码",goods.getShortCode(),"可不填");
+			setEditTextContent(R.id.pingyinma,"拼音码",goods.getSpell(),"可不填");
+
+			setSpinerConetent(R.id.sort, "商品分类", goods.getCategoryName());
+
+			setEditTextContent(R.id.guige,"规格",goods.getSpecification(),"可不填");
+			setEditTextContent(R.id.pinpan,"品牌",goods.getBrandId(),"可不填");
+			setEditTextContent(R.id.chandi,"产地",goods.getOrigin(),"可不填");
+			setEditTextContent(R.id.baozhiqi,"保质期","" + goods.getPeriod() + "天","可不填");
+			setEditTextContent(R.id.image,"商品图片","","");
+			
+			setEditTextContent(R.id.ticheng,"销售提成比例(%)",goods.getPercentage(),"");
+
+			setCheckBoxContent(R.id.jifen, "不参与积分" ,goods.hasDegree());
+			setCheckBoxContent(R.id.youhui, "不参任何活动" ,goods.isSales());
+		}
+		sortSpinnerView = (TextView) findViewById(R.id.sort).findViewById(R.id.secend);
+		sortSpinnerView.setOnClickListener(this);
+		
+		tongbuSpinnerView = (TextView) findViewById(R.id.tongbu).findViewById(R.id.secend);
+		tongbuSpinnerView.setOnClickListener(this);
+		
+		tongbu = new SpinerPopWindow(this);
+		fenlei = new SpinerPopWindow(this);
+		getCategoryList();
+		getShop(false);
+	}
+
+
+	/**
+	 * Gets the shop.
+	 * 
+	 * @param next
+	 *            the next
+	 * @return the shop
+	 */
+	private void getShop(boolean next){
+		RequestParameter params = new RequestParameter(true);
+		params.setParam("shopId", RetailApplication.getmShopInfo().getShopId());
+		if (!next) {
+			currentPage = 0;
+		}
+		params.setParam("currentPage", ++ currentPage);
+		params.setUrl(Constants.BASE_URL+"shop/list");
+		
+		new AsyncHttpPost(params, new RequestResultCallback() {
+			
+
+			@Override
+			public void onSuccess(String str) {
+				JsonObject jo =new JsonParser().parse(str).getAsJsonObject();
+				String returnCode = jo.get("returnCode").getAsString();
+				if (!returnCode.equals("success")) {
+					return;
+				}
+				shops = new Gson().fromJson(jo.get("shopList"), new TypeToken<List<ShopVo>>(){}.getType());
+				final List<String> shopsString = new ArrayList<String>();
+				shopsString.add("不同步");
+				shopsString.add("同步所有");
+				for (ShopVo shop : shops) {
+					shopsString.add(shop.getName());
+				}
+				tongbu.refreshData(shopsString, 0);
+				tongbu.setItemListener(new IOnItemSelectListener() {
+
+
+					@Override
+					public void onItemClick(int pos) {
+						if (pos > 1) {
+							currentShop = shops.get(pos - 2);
+						}else{
+							currentShop = null;
+						}
+						currentShopPosition = pos;
+						tongbuSpinnerView.setText(shopsString.get(pos));
+					}
+				});
+			}
+			
+			@Override
+			public void onFail(Exception e) {
+				e.printStackTrace();
+			}
+		}).execute();
+	}
+
+	/**
+	 * Gets the category list.
+	 * 
+	 * @return the category list
+	 */
+	private void getCategoryList() {
+		RequestParameter params = new RequestParameter(true);
+		params.setUrl(Constants.BASE_URL+"category/list");
+		new AsyncHttpPost(params, new RequestResultCallback() {
+			@Override
+			public void onSuccess(String str) {
+				System.out.println(str);
+				JsonObject result = new JsonParser().parse(str).getAsJsonObject();
+				if (!result.get("returnCode").getAsString().equals("success")) {
+					return;
+				}else{
+					List<CategoryVo> categoryVo =  new Gson().fromJson(result.get("categoryList"), new TypeToken<List<CategoryVo>>(){}.getType());
+					categorys = new ArrayList<Category>();
+					getCategory(categoryVo,"",categorys);
+					List<String> categorysString = new ArrayList<String>();
+					for (Category item : categorys) {
+						categorysString.add(item.name);
+					}
+					fenlei.refreshData(categorysString, 0);
+					fenlei.setItemListener(new IOnItemSelectListener() {
+
+						@Override
+						public void onItemClick(int pos) {
+							System.out.println(pos);
+							currentCategory = categorys.get(pos);
+							sortSpinnerView.setText(currentCategory.name);
+						}
+					});
+				}
+			}
+			
+			
+
+			@Override
+			public void onFail(Exception e) {
+				e.printStackTrace();
+			}
+		}).execute();
+	}
+	
+	
+	/**
+	 * Gets the category.
+	 * 
+	 * @param categoryVo
+	 *            the category vo
+	 * @param parent
+	 *            the parent
+	 * @param categorys
+	 *            the categorys
+	 * @return the category
+	 */
+	private void getCategory(List<CategoryVo> categoryVo,
+					String parent, List<Category> categorys) {
+		for (CategoryVo item : categoryVo) {
+			
+			if (item.getCategoryList() == null) {
+				Category category = new Category();
+				if (parent.length() != 0) {
+					category.parents = parent.substring(0, parent.length() - 1);
+				}
+				category.name = item.getName();
+				category.id = item.getId();
+				categorys.add(category);
+			}else{
+				getCategory(item.getCategoryList(), parent + item.getName() + "-", categorys);
+			}
+		}
+	}
+
+	/**
+	 * Sets the check box content.
+	 * 
+	 * @param id
+	 *            the id
+	 * @param label
+	 *            the label
+	 * @param b
+	 *            the b
+	 */
+	private void setCheckBoxContent(int id, String label, boolean b) {
+		View layout = findViewById(id);
+		TextView labelText = (TextView) layout.findViewById(R.id.check_title);
+		labelText.setText(label);
+		CheckBox checkBox = (CheckBox) findViewById(R.id.checkbox);
+		checkBox.setChecked(b);
+		checkBox.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+
+			@Override
+			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+				if (!edited) {
+					switchToEditMode();
+				}
+			}
+		});
+		
+	}
+	
+	/* (non-Javadoc)
+	 * @see com.dihuo.twodfire.retail.activity.goodsmanager.GoodsManagerBaseActivity#switchToEditMode()
+	 */
+	@Override
+	protected void switchToEditMode() {
+		super.switchToEditMode();
+		findViewById(R.id.title_right).setOnClickListener(this);
+		findViewById(R.id.title_left).setOnClickListener(this);
+		edited = true;
+	}
+	
+
+	/**
+	 * Sets the spiner conetent.
+	 * 
+	 * @param tongbu
+	 *            the tongbu
+	 * @param label
+	 *            the label
+	 * @param value
+	 *            the value
+	 */
+	private void setSpinerConetent(int tongbu, String label, String value) {
+		View layout = findViewById(tongbu);
+		TextView tongbuLable = (TextView) layout.findViewById(R.id.main);
+		tongbuLable.setText(label);
+		TextView tongbuValue = (TextView) layout.findViewById(R.id.secend);
+		tongbuValue.setText(value);
+		
+	}
+
+	/**
+	 * Sets the edit text content.
+	 * 
+	 * @param id
+	 *            the id
+	 * @param lable
+	 *            the lable
+	 * @param content
+	 *            the content
+	 * @param hint
+	 *            the hint
+	 */
+	private void setEditTextContent(int id, String lable, String content,
+			String hint) {
+		View layout = findViewById(id);
+		TextView lableView = (TextView) layout.findViewById(R.id.main);
+		if (lable != null) {
+			lableView.setText(lable);
+		}
+		EditText inputView = (EditText) layout.findViewById(R.id.secend);
+		inputView.setHint(hint);
+		if (content != null) {
+			inputView.setText(content);
+		}
+		inputView.addTextChangedListener(new TextWatcher() {
+			
+			@Override
+			public void onTextChanged(CharSequence s, int start, int before, int count) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void beforeTextChanged(CharSequence s, int start, int count,
+					int after) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void afterTextChanged(Editable s) {
+				switchToEditMode();
+			}
+		});
+	}
+
+	/* (non-Javadoc)
+	 * @see android.view.View.OnClickListener#onClick(android.view.View)
+	 */
+	@Override
+	public void onClick(View v) {
+		switch (v.getId()) {
+		case R.id.title_right:
+			save();
+			break;
+			
+		case R.id.secend:
+			if (v == sortSpinnerView) {
+				fenlei.setWidth(sortSpinnerView.getWidth());
+				fenlei.showAsDropDown(sortSpinnerView);
+			}else{
+				tongbu.setWidth(tongbuSpinnerView.getWidth());
+				tongbu.showAsDropDown(tongbuSpinnerView);
+			}
+			break;
+		default:
+			break;
+		}
+	}
+
+	/**
+	 * Save.
+	 */
+	private void save() {
+		String goods = genGoods();
+		if (goods == null) {
+			return;
+		}
+		RequestParameter params = new RequestParameter(true);
+		params.setParam("shopId", RetailApplication.getmShopInfo().getShopId());
+		try {
+			params.setParam("goods", new JSONObject(goods));
+		} catch (JSONException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		params.setParam("operateType", "add");
+		params.setUrl(Constants.BASE_URL+"goods/save");
+		
+		new AsyncHttpPost(params, new RequestResultCallback() {
+			
+			@Override
+			public void onSuccess(String str) {
+				System.out.println(str);
+			}
+			
+			@Override
+			public void onFail(Exception e) {
+				e.printStackTrace();
+			}
+		}).execute();
+	}
+
+	/**
+	 * Gen goods.
+	 * 
+	 * @return the string
+	 */
+	private String genGoods() {
+		GoodsVo goods = GoodsVo.getObject();
+		String tiaoma = getValueStringFromTextView(R.id.tiaoma, true, "请输入商品条码");
+		String daima = getValueStringFromTextView(R.id.daima, true, "请输入商品代码");
+		String name = getValueStringFromTextView(R.id.name, true, "请输入商品名称");
+		String lingshou = getValueStringFromTextView(R.id.lingshoujia, true, "请输入商品零售价");
+		String leibie = getValueStringFromSpinner(R.id.sort, true, "请选择商品类别");
+		
+		if (daima == null || tiaoma == null 
+				||name == null || lingshou == null
+				||leibie == null) {
+			return null;
+		}else{
+//			goods.setBarCode(tiaoma);
+//			goods.setGoodsId(daima);
+//			goods.setGoodsName(name);
+//			goods.setPetailPrice(lingshou);
+//			goods.setCategoryId(leibie);
+		}
+		return new GsonBuilder().serializeNulls().create().toJson(goods);
+//		return new GsonBuilder().create().toJson(goods);
+	}
+
+	/**
+	 * Gets the value string from spinner.
+	 * 
+	 * @param lingshoujia
+	 *            the lingshoujia
+	 * @param b
+	 *            the b
+	 * @param string
+	 *            the string
+	 * @return the value string from spinner
+	 */
+	private String getValueStringFromSpinner(int lingshoujia, boolean b,
+			String string) {
+		// TODO Auto-generated method stub
+		return "1212121212";
+	}
+
+	/**
+	 * Gets the value string from text view.
+	 * 
+	 * @param tiaoma
+	 *            the tiaoma
+	 * @param b
+	 *            the b
+	 * @param string
+	 *            the string
+	 * @return the value string from text view
+	 */
+	private String getValueStringFromTextView(int tiaoma, boolean b, String string) {
+		// TODO Auto-generated method stub
+		return "1212121212";
+	}
+	
+}
+
+ 

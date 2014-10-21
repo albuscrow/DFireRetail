@@ -1,0 +1,17 @@
+package com.dihuo.twodfire.retail.activity.setting;
+
+import android.os.Bundle;
+
+import com.dihuo.twodfire.retail.R;
+import com.dihuo.twodfire.retail.activity.TitleActivity;
+
+
+public class SettingHelpActivity extends TitleActivity {
+    
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.setting_payway_help);
+        setTitle(R.string.help);
+    }
+}

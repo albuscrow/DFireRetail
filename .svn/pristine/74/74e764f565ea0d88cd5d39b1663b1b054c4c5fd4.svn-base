@@ -1,0 +1,105 @@
+package com.dihuo.twodfire.retail.activity.goodsmanager;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import com.dihuo.twodfire.retail.R;
+import com.dihuo.twodfire.retail.data.GoodsVo;
+import com.dihuo.twofire.retail.adapter.GoodsListAdapter;
+import com.dihuo.twofire.retail.adapter.GoodsListWithImageAdapter;
+
+import android.os.Bundle;
+import android.view.Gravity;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.view.ViewGroup.LayoutParams;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ListView;
+import android.widget.PopupWindow;
+
+public class GoodsListActivity extends GoodsManagerBaseActivity implements OnClickListener, OnItemClickListener{
+	private ArrayList<GoodsVo> goods;
+	private boolean[] goodsSelectStatus;
+	private ListView goodsListView;
+	private GoodsListAdapter adapter;
+	private PopupWindow popupWindow;
+
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_goods_manager_list);
+		setTitleText("商品");
+		
+		goods = (ArrayList<GoodsVo>) getIntent().getSerializableExtra("goods");
+		goods = new ArrayList<GoodsVo>();
+		goods.add(new GoodsVo());
+		goodsSelectStatus = new boolean[goods.size()];
+		selectAll(false);
+		
+		goodsListView = (ListView) findViewById(R.id.goodsList);
+		
+		adapter = new GoodsListAdapter(this, goods, goodsSelectStatus);
+		goodsListView.setAdapter(adapter);
+		goodsListView.setOnItemClickListener(this);
+		
+		findViewById(R.id.not).setOnClickListener(this);
+		findViewById(R.id.all).setOnClickListener(this);
+		
+		switchToEditMode();
+		
+		findViewById(R.id.title_right).setOnClickListener(this);;
+	}
+
+	private void selectAll(boolean b) {
+		for (int i = 0; i < goodsSelectStatus.length; ++i) {
+			goodsSelectStatus[i] = b; 
+		}
+	}
+
+	@Override
+	public void onClick(View v) {
+		switch (v.getId()) {
+		case R.id.not:
+			selectAll(false);
+			adapter.notifyDataSetChanged();
+			break;
+		case R.id.all:
+			selectAll(true);
+			adapter.notifyDataSetChanged();
+			break;
+		case R.id.title_right:
+			View view = LayoutInflater.from(this).inflate(R.layout.batch_menu, null);
+			view.findViewById(R.id.delete).setOnClickListener(this);
+			view.findViewById(R.id.setting).setOnClickListener(this);
+			view.findViewById(R.id.cancel).setOnClickListener(this);
+			popupWindow = new PopupWindow(view, LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT, true);
+			popupWindow.setAnimationStyle(R.style.anim_menu_bottombar);
+			popupWindow.showAtLocation(findViewById(R.id.root), Gravity.BOTTOM, 0, 0);
+			break;
+			
+		case R.id.delete:
+			System.out.println("delete");
+			break;
+			
+		case R.id.setting:
+			System.out.println("setting");
+			break;
+			
+		case R.id.cancel:
+			popupWindow.dismiss();
+			break;
+
+		default:
+			break;
+		}
+	}
+
+	@Override
+	public void onItemClick(AdapterView<?> parent, View view, int position,
+			long id) {
+		
+	}
+	
+}

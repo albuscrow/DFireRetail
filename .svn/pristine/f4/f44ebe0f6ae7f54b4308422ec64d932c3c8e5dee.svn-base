@@ -1,0 +1,31 @@
+package com.dihuo.twodfire.retail.data;
+
+public class SalesSetGoodsVo {
+Integer			districtId		;//区ID
+	String  	districtName	;//	区名称
+	/**
+	 * @return the districtId
+	 */
+	public Integer getDistrictId() {
+		return districtId;
+	}
+	/**
+	 * @param districtId the districtId to set
+	 */
+	public void setDistrictId(Integer districtId) {
+		this.districtId = districtId;
+	}
+	/**
+	 * @return the districtName
+	 */
+	public String getDistrictName() {
+		return districtName;
+	}
+	/**
+	 * @param districtName the districtName to set
+	 */
+	public void setDistrictName(String districtName) {
+		this.districtName = districtName;
+	}
+
+}

@@ -1,0 +1,44 @@
+package com.dihuo.twodfire.retail.activity.retailmanager;
+
+import java.util.ArrayList;
+
+import android.os.Bundle;
+import android.widget.ListView;
+
+import com.dihuo.twodfire.retail.R;
+import com.dihuo.twodfire.retail.activity.TitleActivity;
+import com.dihuo.twofire.retail.adapter.DateItem;
+import com.dihuo.twofire.retail.adapter.SelectDateAdapter;
+import com.dihuo.twofire.retail.util.Utility;
+
+public class SelectDateActivity extends TitleActivity{
+	
+	ArrayList<DateItem> mList;
+	private ListView mListView;
+	private SelectDateAdapter adapter;
+	
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		
+		setContentView(R.layout.select_date);
+		
+		setTitle("选择时间");
+		showBackbtn();
+		
+		mListView = (ListView)findViewById(R.id.selectdate_list);
+		
+		mList = new ArrayList<DateItem>();
+		
+		mList.add(new DateItem("今天", false));
+		mList.add(new DateItem("昨天", true));
+		mList.add(new DateItem("最近三天", false));
+		mList.add(new DateItem("本周", false));
+		mList.add(new DateItem("本月", false));
+		
+		adapter = new SelectDateAdapter(SelectDateActivity.this, mList);
+		mListView.setAdapter(adapter);
+		
+		Utility.setListViewHeightBasedOnChildren(mListView);
+	}
+}

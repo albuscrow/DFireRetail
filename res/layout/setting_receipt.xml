@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content" >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/setting_list_bg"
+            android:orientation="vertical" >
+
+            <include
+                android:id="@+id/logo"
+                layout="@layout/checkbox" />
+
+            <include
+                android:id="@+id/receipt_title"
+                layout="@layout/set_edit_textview" />
+
+            <include
+                android:id="@+id/endnote"
+                layout="@layout/set_edit_textview" />
+
+            <include
+                android:id="@+id/receipt_standard"
+                layout="@layout/next_down" />
+
+            <include
+                android:id="@+id/choice_temp"
+                layout="@layout/next_down" />
+
+            <TextView
+                style="@style/setting_list_main_text"
+                android:layout_gravity="center_vertical"
+                android:minHeight="50dp"
+                android:layout_marginLeft="20dp"
+                android:gravity="center_vertical"
+                android:text="@string/temp_preview" />
+            
+            <ImageView 
+                android:id="@+id/temp_preview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:contentDescription="@string/none"
+                android:src="@drawable/ico_receipt"
+                android:layout_gravity="center_vertical" />
+        </LinearLayout>
+
+</ScrollView>

@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+     <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/line_bottom"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:paddingBottom="5dp"
+        android:paddingTop="5dp"
+        android:orientation="horizontal"
+		android:layout_alignParentBottom="true"
+		android:layout_alignParentLeft="true"
+        >      
+           <Button
+                android:id="@+id/member_info_help"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0"
+                android:gravity="left|bottom"
+                android:layout_gravity="left|bottom"
+                android:background="@drawable/user_info_help" />
+           
+              <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:visibility="invisible"
+                android:clickable="false"
+                android:gravity="left|center_horizontal|bottom"
+                android:layout_gravity="left|center_horizontal" />
+         
+            <Button
+                android:id="@+id/member_info_add"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                 android:layout_weight="0"
+                android:layout_gravity="right|bottom"
+                android:gravity="right|bottom"             
+                android:background="@drawable/user_info_add" />
+
+           
+                
+      </LinearLayout> 
+     <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:gravity="right"
+        android:paddingBottom="5dp"
+        android:paddingTop="5dp"
+        android:background="@color/white" >
+    <TextView
+        android:id="@+id/start_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="开始时间"
+        android:layout_gravity="center_vertical"
+        android:layout_marginLeft="10dp"
+        android:layout_weight="1"
+        android:background="@null"
+        android:textSize="15sp" />
+
+    <Button
+        android:id="@+id/start_date_time"
+        android:layout_weight="1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+         android:layout_gravity="center_vertical"
+		android:background="@null"
+        android:text="2014-8-25"
+        android:gravity="right"
+        android:drawableRight="@drawable/arrow_down"/>
+</LinearLayout>
+     <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/black" /> 
+   	 <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:gravity="right"
+        android:paddingBottom="5dp"
+        android:paddingTop="5dp"
+        android:background="@color/white" >
+    <TextView
+        android:id="@+id/finish_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="结束时间"
+        android:layout_gravity="center_vertical"
+        android:layout_marginLeft="10dp"
+        android:layout_weight="1"
+        android:background="@null"
+        android:textSize="15sp" />
+
+    <Button
+        android:id="@+id/finish_date_time"
+        android:layout_weight="1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+         android:layout_gravity="center_vertical"
+		android:background="@null"
+        android:text="2014-8-25"
+        android:gravity="right"
+        android:drawableRight="@drawable/arrow_down"/>
+	</LinearLayout>  
+	    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/black" />    	 
+     <Button
+        android:layout_marginLeft="5dp" 
+        android:layout_marginRight="5dp"   
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/btn_full_g"
+        android:text="确认"
+        android:gravity="center"/>  
+        
+  	   <Button
+	    	 	android:layout_width="wrap_content"
+			    android:layout_height="100dp"
+	            android:id="@+id/add_sub_store"
+	            android:drawableLeft="@drawable/add_red"
+	            android:textColor="@color/red"
+	            android:text="添加下属店加..."
+	            android:layout_gravity="center"
+	            android:background="@null"
+	            android:gravity="center_vertical"
+           		/>    
+
+</LinearLayout>

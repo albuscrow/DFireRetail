@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/setting_list_bg"
+    android:orientation="vertical"
+    android:paddingLeft="@dimen/setting_payway_left"
+    android:paddingRight="@dimen/setting_payway_left" >
+
+    <include
+        android:id="@+id/goods_stock"
+        layout="@layout/checkbox" />
+
+    <include
+        android:id="@+id/odd_dispose"
+        layout="@layout/next_down" />
+
+    <include
+        android:id="@+id/bid_setting"
+        layout="@layout/next_down" />
+
+    <include
+        android:id="@+id/stock_warning"
+        layout="@layout/checkbox" />
+    
+    <include 
+        android:id="@+id/less_warning"
+        layout="@layout/text2_button1"/>
+
+    <include
+        android:id="@+id/past_stock_warning"
+        layout="@layout/checkbox" />
+
+    <include 
+        android:id="@+id/in_advance_warning"
+        layout="@layout/text2_button1"/>
+    
+</LinearLayout>

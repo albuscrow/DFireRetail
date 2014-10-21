@@ -1,0 +1,159 @@
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!--
+        Base application theme, dependent on API level. This theme is replaced
+        by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
+    -->
+    <style name="AppBaseTheme" parent="android:Theme.Light">
+        <!--
+            Theme customizations available in newer API levels can go in
+            res/values-vXX/styles.xml, while customizations related to
+            backward-compatibility can go here.
+        -->
+    </style>
+
+    <!-- Application theme. -->
+    <style name="AppTheme" parent="AppBaseTheme">
+        <!-- All customizations that are NOT specific to a particular API-level can go here. -->
+    </style>
+
+    <style name="dialog" parent="@android:Theme.Dialog">
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+    </style>
+
+    
+    <style name="header_btn_style">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@color/transparent</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">@dimen/header_btn_size</item>
+        <item name="android:visibility">gone</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:layout_gravity">center_vertical</item>
+    </style>
+    
+    <style name="homepage_search_school">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:background">@color/transparent</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">@dimen/header_btn_size</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:gravity">center</item>
+        <item name="android:drawablePadding">5dp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:layout_margin">@dimen/homepage_line1_item_margin</item>
+    </style>
+    
+    <style name="sliding_menu_btn_style">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:padding">10dp</item>
+        <item name="android:background">@color/transparent</item>
+        <item name="android:onClick">slidingBtnClick</item>
+    </style>
+     <style name="title_btn_style">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">@dimen/setting_normal_text_size</item>
+        <item name="android:background">@color/transparent</item>
+    </style>
+    
+    <style name="title_style">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">@dimen/header_title_size</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:background">@color/transparent</item>
+    </style>
+
+    <style name="setting_explain_text">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/whitesmoke</item>
+        <item name="android:gravity">center</item>
+   		<item name="android:layout_marginLeft">40dp</item>    
+   		<item name="android:layout_marginRight">40dp</item>    
+   		<item name="android:layout_marginTop">10dp</item>    
+   		<item name="android:layout_marginBottom">10dp</item>    
+   		<item name="android:background">@drawable/setting_main_explain</item>
+        <item name="android:textSize">@dimen/setting_normal_text_size</item>
+    </style>
+    
+    <style name="setting_explain_bg">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:minHeight">@dimen/setting_explain_height</item>
+        <item name="android:background">@color/setting_base</item>
+    </style>
+    
+    <style name="setting_list_main_text">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:paddingBottom">5dp</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">@dimen/setting_normal_text_size</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+    
+    <style name="setting_list_subhead_text">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">@dimen/setting_item_subhead_text_size</item>
+    </style>
+    
+        <style name="storemanager_list_main_text">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:paddingBottom">5dp</item>
+        <item name="android:textSize">@dimen/setting_normal_text_size</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+    
+    <style name="storemanager_list_subhead_text">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">@dimen/setting_item_subhead_text_size</item>
+    </style>
+      <style name="setting_payway_create_button">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/setting_payway_create</item>
+        <item name="android:textSize">@dimen/setting_normal_text_size</item>
+        <item name="android:background">@color/transparent</item>
+    </style>
+    
+    <style name="CustomCheckboxTheme" parent="@android:style/Widget.CompoundButton.CheckBox">  
+        <item name="android:button">@drawable/ico_switch</item>
+        <item name="android:paddingLeft">25.0dip</item>
+        <item name="android:maxHeight">10.0dip</item>
+    </style> 
+      
+    <style name="employee_detail_title" >
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/setting_payway_create</item>
+        <item name="android:textSize">@dimen/setting_normal_text_size</item>
+        <item name="android:background">@color/transparent</item>
+    </style>
+    
+        <style name="employee_detail_value" >
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/setting_payway_create</item>
+        <item name="android:textSize">@dimen/setting_normal_text_size</item>
+        <item name="android:background">@color/transparent</item>
+    </style>
+</resources>

@@ -1,0 +1,24 @@
+/**
+ * 
+ */
+package com.dihuo.twodfire.retail.common;
+
+/**
+ * @author qiuch
+ * 
+ */
+public class CommonUtils {
+	/**
+	 * 判断文字列为空
+	 * 
+	 * @param value
+	 * @return boolean
+	 */
+	public static boolean isEmpty(String value) {
+		if (value == null || value.length() == 0) {
+			return true;
+		}
+		return false;
+	}
+
+}

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:minHeight="50dp"
+    android:clickable="true" >
+    
+    <TextView 
+        android:id="@+id/main"
+        android:layout_centerVertical="true"
+        style="@style/setting_list_main_text"/>
+
+    <EditText 
+        android:id="@+id/secend"
+        style="@style/setting_list_main_text"
+        android:layout_width="match_parent"
+        android:gravity="right"
+        android:background="@null"
+        android:textColor="@color/setting_payway_create"
+        android:layout_toRightOf="@id/main"
+        android:layout_centerVertical="true" />
+    
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_alignParentBottom="true"
+        android:background="@color/black" />
+</RelativeLayout>

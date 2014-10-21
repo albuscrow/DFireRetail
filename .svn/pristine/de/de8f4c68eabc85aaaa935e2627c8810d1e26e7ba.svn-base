@@ -1,0 +1,45 @@
+package com.dihuo.twofire.retail.adapter;
+
+import com.dihuo.twodfire.retail.R;
+import com.dihuo.twodfire.retail.R.layout;
+import com.dihuo.twodfire.retail.activity.goodsmanager.GoodsSearchActivity;
+import com.dihuo.twodfire.retail.activity.goodsmanager.GoodsSortListActivity;
+
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.BaseAdapter;
+
+public class GoodsSortListAdapter extends BaseAdapter {
+	
+	GoodsSortListActivity activity;
+	LayoutInflater layoutInflater;
+	
+	public GoodsSortListAdapter(GoodsSortListActivity activity) {
+		this.activity = activity;
+		this.layoutInflater = LayoutInflater.from(activity);
+	}
+
+	@Override
+	public int getCount() {
+		return 10;
+	}
+
+	@Override
+	public Object getItem(int position) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public long getItemId(int position) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public View getView(int position, View convertView, ViewGroup parent) {
+		return layoutInflater.inflate(R.layout.item_goods_sort, null);
+	}
+
+}

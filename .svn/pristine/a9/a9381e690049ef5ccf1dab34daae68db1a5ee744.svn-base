@@ -1,0 +1,55 @@
+package com.dihuo.twodfire.retail.activity.stockmanager;
+
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.LinearLayout;
+
+import com.dihuo.twodfire.retail.R;
+import com.dihuo.twodfire.retail.activity.TitleActivity;
+
+
+/**
+ * 库存管理
+ * @author wangpeng
+ *
+ */
+public class StockManagerActivity extends TitleActivity implements OnClickListener{
+	
+	private LinearLayout stock_query_layout;
+	private LinearLayout stock_check_records_layout;
+	
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_store_manager);
+		setTitleText("库存管理");
+		showBackbtn();
+		findView();
+	}
+	public void findView(){
+		stock_query_layout=(LinearLayout)findViewById(R.id.stock_query_layout);
+		stock_query_layout.setOnClickListener(this);
+		stock_check_records_layout=(LinearLayout)findViewById(R.id.stock_check_records_layout);
+		stock_check_records_layout.setOnClickListener(this);
+	}
+	@Override
+	public void onClick(View v) {
+		switch (v.getId()) {
+		case R.id.stock_query_layout:
+			Intent query=new Intent(StockManagerActivity.this,StockQueryActivity.class);
+			startActivity(query);
+			
+			break;
+
+		case R.id.stock_check_records_layout:
+			Intent check_records=new Intent(StockManagerActivity.this,StockCheckRecordActivity.class);
+			startActivity(check_records);
+			
+			break;
+		}
+		
+	}
+
+}

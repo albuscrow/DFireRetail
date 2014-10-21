@@ -1,0 +1,61 @@
+package com.dihuo.twodfire.retail.activity.logisticmanager;
+
+import android.app.Activity;
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.ImageButton;
+import android.widget.RelativeLayout;
+
+import com.dihuo.twodfire.retail.R;
+
+/**
+ * 物流管理-添加门店订货
+ * @author wangpeng
+ *
+ */
+public class StoreOrderAddActivity extends Activity implements OnClickListener{
+
+	ImageButton title_left;
+	ImageButton title_right;
+	RelativeLayout add_layout;
+    
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_store_order_add);
+		findView();
+	}
+	
+	public void findView(){
+		title_left=(ImageButton)findViewById(R.id.title_left);
+		title_left.setOnClickListener(this);
+		title_right=(ImageButton)findViewById(R.id.title_right);
+		title_right.setOnClickListener(this);
+		add_layout=(RelativeLayout)findViewById(R.id.add_layout);
+		add_layout.setOnClickListener(this);
+	}
+	
+ 
+	@Override
+	public void onClick(View v) {
+		// TODO Auto-generated method stub
+		switch (v.getId()) {
+		case R.id.title_left:
+			
+			break;
+
+		case R.id.title_right:
+			
+			break;
+			
+		case R.id.add_layout:
+			Intent addGoods=new Intent(StoreOrderAddActivity.this,StoreOrderAddGoodsActivity.class);
+			addGoods.putExtra("add", 1);
+			startActivity(addGoods);
+			break;
+		}
+	}
+
+}

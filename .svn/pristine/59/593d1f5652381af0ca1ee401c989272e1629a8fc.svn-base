@@ -1,0 +1,143 @@
+package com.dihuo.twodfire.retail.activity.logisticmanager;
+
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.HttpStatus;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.StringEntity;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.util.EntityUtils;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import android.app.ProgressDialog;
+import android.os.AsyncTask;
+import android.os.Bundle;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.ListView;
+import android.widget.TextView;
+
+import com.dihuo.twodfire.retail.R;
+import com.dihuo.twodfire.retail.RetailApplication;
+import com.dihuo.twodfire.retail.activity.TitleActivity;
+import com.dihuo.twodfire.retail.data.OrderGoodsDetailVo;
+import com.dihuo.twodfire.retail.global.Constants;
+
+/**
+ * 物流管理-门店订货
+ * @author wangpeng
+ *
+ */
+public class StoreOrderDetailActivity extends TitleActivity implements OnClickListener{
+	
+	private ListView store_order_lv;
+	private TextView store_order_time;
+	
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_store_order_detail);
+		setTitleText("门店订货");
+		showBackbtn();
+		findView();
+	}
+	
+	public void findView(){
+		store_order_lv=(ListView)findViewById(R.id.store_order_lv);
+		store_order_time=(TextView)findViewById(R.id.store_order_time);
+		store_order_time.setOnClickListener(this);
+	}
+
+	@Override
+	public void onClick(View v) {
+		switch (v.getId()) {
+		case R.id.store_order_time:
+			
+			
+			break;
+
+		default:
+			break;
+		}
+	}
+	
+	class Task extends AsyncTask<Void, Void, Void> {
+		ProgressDialog progressDialog;
+		String res;
+		OrderGoodsDetailVo orderGoodsDetailVo;
+		
+		@Override
+		protected void onPreExecute() {
+			super.onPreExecute();
+			progressDialog = new ProgressDialog(StoreOrderDetailActivity.this);
+			progressDialog.setCancelable(false);
+			progressDialog.setCanceledOnTouchOutside(false);
+			progressDialog.setMessage("加载中，请稍后。。。");
+			progressDialog.show();
+		}
+
+		@Override
+		protected Void doInBackground(Void... params) {
+
+			System.out.println("sessionId----------"+RetailApplication.getLoginResult().getJsessionId());
+			JSONObject json = new JSONObject();
+			try {
+				json.put("orderGoodsId", "14100802201");
+				
+				json.put("sessionId", RetailApplication.getLoginResult().getJsessionId());
+				json.put("version", "1");
+				json.put("appKey", "1");
+				json.put("timestamp", System.currentTimeMillis());
+				json.put("sign", "1");
+			} catch (JSONException e1) {
+				e1.printStackTrace();  
+			}
+
+			try {
+				HttpClient httpClient = new DefaultHttpClient();
+				HttpPost post = new HttpPost(Constants.BASE_URL +"orderGoods/detail?");
+				StringEntity entity = new StringEntity(json.toString());  
+				entity.setContentEncoding("UTF-8");  
+				entity.setContentType("application/json");  
+				post.setEntity(entity); 
+				HttpResponse response = httpClient.execute(post);
+
+				if(response.getStatusLine().getStatusCode() == HttpStatus.SC_OK){  
+					HttpEntity ent = response.getEntity();  
+					res = EntityUtils.toString(ent);
+					System.out.println("----------------------"+res);
+
+				}  
+
+			} catch (Exception e) {  
+				throw new RuntimeException(e);  
+			}
+
+			return null;
+		}
+
+		@Override
+		protected void onPostExecute(Void result) {
+			progressDialog.dismiss();
+			if (res != null) {
+				try {
+					parserJson(res);
+				} catch (JSONException e) {
+					e.printStackTrace();
+				}
+				/////////////////////////////////////////适配       StoreOrderGoodsDetailAdapter
+			}
+			super.onPostExecute(result);
+		}
+		
+		protected void parserJson(String result) throws JSONException {
+			orderGoodsDetailVo=new OrderGoodsDetailVo();
+			
+
+		}
+
+	}
+
+}

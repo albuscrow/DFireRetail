@@ -1,0 +1,85 @@
+package com.dihuo.twodfire.retail.activity.setting;
+
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
+
+import com.dihuo.twodfire.retail.R;
+import com.dihuo.twodfire.retail.activity.TitleActivity;
+
+public class SettingActivity extends TitleActivity implements OnClickListener {
+
+	public static final int[][] RES = new int[][]{
+		/*setting中位置,  图片, 主标题, 副标题, 小图标 */
+		{R.id.systemParamenter, R.drawable.setting_params, R.string.param_setting, R.string.param_setting},/* 参数设置 */
+		{R.id.shopInformation, R.drawable.setting_account_info, R.string.account_info, R.string.account_info},/* 账号信息 */
+		{R.id.busnessMode, R.drawable.setting_business_model, R.string.business_setting, R.string.business_setting_subhead},/* 商业模式设置 */
+
+		{R.id.printPatern, R.drawable.setting_receipt, R.string.receipt_setting, R.string.receipt_setting},/* 小票设置 */
+
+		{R.id.clearData, R.drawable.setting_data_clear, R.string.data_clear, R.string.data_clear_subhead}, /* 数据清理 */
+		{R.id.oprateLog, R.drawable.setting_operate_log, R.string.operate_log, R.string.operate_log},/* 查看操作日志 */
+	};
+
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.setting_main);
+		setTitleRes(R.string.setting_main);
+		for (int[] item : RES) {
+			RelativeLayout layout = (RelativeLayout) findViewById(item[0]);
+			ImageView imageView = (ImageView) layout.findViewById(R.id.setting_item_img);
+			TextView mainText = (TextView) layout.findViewById(R.id.setting_item_main_title);
+			TextView subText = (TextView) layout.findViewById(R.id.setting_item_subhead_title);
+			//            ImageView lockImage = (ImageView) layout.findViewById(R.id.setting_item_lock);
+
+			imageView.setImageResource(item[1]);
+			mainText.setText(item[2]);
+			subText.setText(item[3]);
+			layout.setOnClickListener(this);
+
+		}
+		
+		showBackbtn();
+	}
+
+
+	@Override
+	public void onClick(View view) {
+		Class<?> tag = null;
+		switch (view.getId()) {
+		case R.id.shopInformation:
+			tag = AccountInfoSettingActivity.class;
+			break;
+		case R.id.systemParamenter :
+			tag = ParamSettingActivity.class;
+			break;
+		case R.id.printPatern :
+			tag = ReceiptSettingActicity.class;
+			break;
+		case R.id.busnessMode :
+			tag = BusinessSettingActivity.class;
+			break;
+		case R.id.oprateLog:
+			tag = OperateLogSettingActivity.class;
+			break;
+		case R.id.clearData:
+			tag = DataClearSettingActivity.class;
+			break;
+		default:
+			break;
+		}
+
+		Intent intent = new Intent();
+		if (tag != null) {
+			intent.setClass(this, tag);
+			startActivity(intent);
+		}
+	}
+
+
+}

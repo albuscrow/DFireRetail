@@ -1,0 +1,148 @@
+package com.dihuo.twodfire.retail.activity.goodsmanager;
+
+
+import java.util.ArrayList;
+import java.util.List;
+
+import com.dihuo.twodfire.retail.R;
+import com.dihuo.twodfire.retail.data.GoodsHandleVo;
+import com.dihuo.twodfire.retail.data.GoodsVo;
+import com.dihuo.twodfire.retail.global.Constants;
+import com.dihuo.twofire.retail.util.JsonUtil;
+import com.dihuo.twofire.retail.util.ToastUtil;
+import com.dohuo.twofire.retail.network.AsyncHttpPost;
+import com.dohuo.twofire.retail.network.RequestParameter;
+import com.dohuo.twofire.retail.network.RequestResultCallback;
+import com.google.gson.reflect.TypeToken;
+
+import android.app.ProgressDialog;
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.TextView;
+
+/**
+ * The Class GoodsSearchForProcessActivity.
+ * 
+ * @author albuscrow
+ */
+public class GoodsSearchForProcessActivity extends GoodsManagerBaseActivity implements OnClickListener {
+	
+	/** The mode. */
+	int mode;
+	
+	/** The title. */
+	private TextView title;
+	
+	private List<GoodsHandleVo> goodsHandleList;
+
+	/* (non-Javadoc)
+	 * @see com.dihuo.twodfire.retail.activity.goodsmanager.GoodsManagerBaseActivity#onCreate(android.os.Bundle)
+	 */
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		
+		setContentView(R.layout.activity_goods_search_for_process);
+		hideRight();
+		mode = getIntent().getIntExtra("mode", -1);
+		
+		findViewById(R.id.title_left).setOnClickListener(this);
+		((TextView)findViewById(R.id.title_text)).setText("商品");
+		
+		findViewById(R.id.add).setOnClickListener(this);
+		findViewById(R.id.search).setOnClickListener(this);
+		
+		title = (TextView)findViewById(R.id.title);
+		switch (mode) {
+		case GoodsManagerMainMenuActivity.CHAIFEN:
+			title.setText("商品拆分规则");
+			break;
+		case GoodsManagerMainMenuActivity.ZUZHUANG:
+			title.setText("商品组装规则");
+			break;
+		case GoodsManagerMainMenuActivity.JIAGONG:
+			title.setText("商品加工规则");
+			break;
+
+		default:
+			break;
+		}
+		
+	}
+
+	/* (non-Javadoc)
+	 * @see android.view.View.OnClickListener#onClick(android.view.View)
+	 */
+	@Override
+	public void onClick(View v) {
+		switch (v.getId()) {
+		case R.id.title_left:
+			finish();
+			break;
+			
+		case R.id.add:
+			startActivity(new Intent(GoodsSearchForProcessActivity.this, GoodsDetailActivity.class).putExtra("mode", "add"));
+			break;
+			
+		case R.id.search:
+			search();
+			break;
+			
+		default:
+			break;
+		}
+		
+	}
+
+	/**
+	 * Search.
+	 */
+	private void search() {
+		String code = ((TextView)findViewById(R.id.code)).getText().toString();
+		if (code == null || code.length() == 0) {
+			ToastUtil.showShortToast(this, Constants.INPUT_SEARCH_CODE);
+//			return;
+		}
+		RequestParameter params = new RequestParameter(true);
+//		params.setParam("shopId", RetailApplication.getmShopInfo().getShopId());
+		params.setParam(Constants.SEARCH_CODE, code);
+		params.setParam(Constants.PAGE, Constants.PAGE_SIZE_OFFSET);
+		switch (mode) {
+		case GoodsManagerMainMenuActivity.CHAIFEN:
+			params.setUrl(Constants.GOODS_SPLIT_URL);
+			break;
+		case GoodsManagerMainMenuActivity.ZUZHUANG:
+			params.setUrl(Constants.GOODS_ASSEMBLE_URL);
+			break;
+		case GoodsManagerMainMenuActivity.JIAGONG:
+			params.setUrl(Constants.GOODS_PROCESSING_URL);
+			break;
+
+		default:
+			break;
+		}
+		final ProgressDialog pd = ProgressDialog.show(GoodsSearchForProcessActivity.this, null, Constants.WAIT_SEARCH_RULE, true, false);
+		new AsyncHttpPost(params, new RequestResultCallback() {
+			
+			@Override
+			public void onSuccess(String str) {
+				pd.dismiss();
+				JsonUtil ju = new JsonUtil(str);
+				if (ju.isError(GoodsSearchForProcessActivity.this)) {
+					return;
+				}
+				goodsHandleList = (List<GoodsHandleVo>) ju.get("goodsHandleList", new TypeToken<List<GoodsHandleVo>>(){}.getType());
+			}
+			
+			@Override
+			public void onFail(Exception e) {
+				pd.dismiss();
+				ToastUtil.showUnknowError(GoodsSearchForProcessActivity.this);
+				e.printStackTrace();
+			}
+		}).execute();
+	}
+
+}

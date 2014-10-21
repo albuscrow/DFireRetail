@@ -1,0 +1,13 @@
+package com.dihuo.twodfire.retail.netData;
+
+public class CardTranRecordDetailParams extends BaseRequestData {
+	private String orderId;//订单ID
+
+	public String getOrderId() {
+		return orderId;
+	}
+
+	public void setOrderId(String orderId) {
+		this.orderId = orderId;
+	}
+}

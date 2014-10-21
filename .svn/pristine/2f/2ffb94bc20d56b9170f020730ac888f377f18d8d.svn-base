@@ -1,0 +1,142 @@
+package com.dihuo.twodfire.retail.activity.stockmanager;
+
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.HttpStatus;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.StringEntity;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.util.EntityUtils;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import android.app.ProgressDialog;
+import android.os.AsyncTask;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+
+import com.dihuo.twodfire.retail.R;
+import com.dihuo.twodfire.retail.RetailApplication;
+import com.dihuo.twodfire.retail.activity.TitleActivity;
+import com.dihuo.twodfire.retail.data.StockCheckRecordDetailVo;
+import com.dihuo.twodfire.retail.data.StockCheckRecordVo;
+import com.dihuo.twodfire.retail.global.Constants;
+
+/**
+ * 库存管理-盘点记录结果报告
+ * @author wangpeng
+ *
+ */
+public class StockCheckRecordResultActivity extends TitleActivity  {
+
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_stock_check_records_result);
+		setTitleText("盘点结果报告");
+		showBackbtn();
+		findView();
+	}
+	
+	public void findView(){
+		handler.sendEmptyMessage(1);
+	}
+	
+	Handler handler=new Handler(){
+		@Override
+		public void handleMessage(Message msg) {
+			super.handleMessage(msg);
+			switch (msg.what) {
+			case 1:
+				new Task().execute();
+				break;
+
+			default:
+				break;
+			}
+		}
+	};
+	
+	class Task extends AsyncTask<Void, Void, Void> {
+		ProgressDialog progressDialog;
+		String res;
+		StockCheckRecordDetailVo stockCheckRecordDetailVo;
+		
+		@Override
+		protected void onPreExecute() {
+			super.onPreExecute();
+			progressDialog = new ProgressDialog(StockCheckRecordResultActivity.this);
+			progressDialog.setCancelable(false);
+			progressDialog.setCanceledOnTouchOutside(false);
+			progressDialog.setMessage("加载中，请稍后。。。");
+			progressDialog.show();
+		}
+
+		@Override
+		protected Void doInBackground(Void... params) {
+
+			System.out.println("sessionId----------"+RetailApplication.getLoginResult().getJsessionId());
+			JSONObject json = new JSONObject();
+			try {
+				json.put("shopId", "8888");
+				json.put("currentPage", "1");
+				json.put("stockCheckId", "1");
+				json.put("recordStyle", "1");
+
+				json.put("sessionId", RetailApplication.getLoginResult().getJsessionId());
+				json.put("version", "1");
+				json.put("appKey", "1");
+				json.put("timestamp", System.currentTimeMillis());
+				json.put("sign", "1");
+			} catch (JSONException e1) {
+				e1.printStackTrace();  
+			}
+
+			try {
+				HttpClient httpClient = new DefaultHttpClient();
+				HttpPost post = new HttpPost(Constants.BASE_URL +"checkStockRecord/detail?");
+				StringEntity entity = new StringEntity(json.toString());  
+				entity.setContentEncoding("UTF-8");  
+				entity.setContentType("application/json");  
+				post.setEntity(entity); 
+				HttpResponse response = httpClient.execute(post);
+
+				if(response.getStatusLine().getStatusCode() == HttpStatus.SC_OK){  
+					HttpEntity ent = response.getEntity();  
+					res = EntityUtils.toString(ent);
+					System.out.println("----------------------"+res);
+
+				}  
+
+			} catch (Exception e) {  
+				throw new RuntimeException(e);  
+			}
+
+			return null;
+		}
+
+		@Override
+		protected void onPostExecute(Void result) {
+			progressDialog.dismiss();
+			if (res != null) {
+				try {
+					parserJson(res);
+				} catch (JSONException e) {
+					e.printStackTrace();
+				}
+				/////////////////////////////////////////适配
+			}
+			super.onPostExecute(result);
+		}
+		
+		protected void parserJson(String result) throws JSONException {
+			stockCheckRecordDetailVo=new StockCheckRecordDetailVo();
+			
+
+		}
+
+	}
+
+}

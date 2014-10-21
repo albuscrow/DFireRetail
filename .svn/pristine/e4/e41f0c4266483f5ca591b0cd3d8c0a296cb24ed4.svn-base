@@ -1,0 +1,41 @@
+package com.dihuo.twodfire.retail.activity.goodsmanager;
+
+import java.util.List;
+
+import com.dihuo.twodfire.retail.R;
+import com.dihuo.twodfire.retail.data.GoodsVo;
+import com.dihuo.twofire.retail.adapter.GoodsListWithImageAdapter;
+
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ListView;
+
+public class GoodsListWithImageActivity extends GoodsManagerBaseActivity implements OnItemClickListener{
+	private List<GoodsVo> goods;
+
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_goods_manager_list);
+		setTitleText("商品");
+		
+		goods = (List<GoodsVo>) getIntent().getSerializableExtra("goods");
+		
+		ListView goodsListView = (ListView) findViewById(R.id.goodsList);
+		
+		goodsListView.setAdapter(new GoodsListWithImageAdapter(this, goods));
+		goodsListView.setOnItemClickListener(this);
+	}
+
+	@Override
+	public void onItemClick(AdapterView<?> parent, View view, int position,
+			long id) {
+		startActivity(new Intent(this, GoodsDetailActivity.class)
+		.putExtra("goods", goods.get(position))
+		.putExtra("mode", "display"));
+	}
+
+}

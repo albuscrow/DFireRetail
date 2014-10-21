@@ -1,0 +1,9 @@
+# cache for current jar dependency. DO NOT EDIT.
+# format is <lastModified> <length> <SHA-1> <path>
+# Encoding is UTF-8
+1412168567000 26938 e70d34d98f7f7f3b2b92105b9f2fe2a7a7184461 /home/albuscrow/workspace/DaoshunLibary/libs/httpmime-4.1.3.jar
+1412168593000 26938 e70d34d98f7f7f3b2b92105b9f2fe2a7a7184461 /home/albuscrow/workspace/Retail/libs/httpmime-4.1.3.jar
+1412168567000 190418 973e832af433b44c3ed11c426f2f390b29f3f3f8 /home/albuscrow/workspace/DaoshunLibary/libs/gson-2.2.4.jar
+1412168593000 190418 973e832af433b44c3ed11c426f2f390b29f3f3f8 /home/albuscrow/workspace/Retail/libs/gson-2.2.4.jar
+1412168567000 758727 efec67655f6db90757faa37201efcee2a9ec3507 /home/albuscrow/workspace/DaoshunLibary/libs/android-support-v4.jar
+1412168593000 758727 efec67655f6db90757faa37201efcee2a9ec3507 /home/albuscrow/workspace/Retail/libs/android-support-v4.jar

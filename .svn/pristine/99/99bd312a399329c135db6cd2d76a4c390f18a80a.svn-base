@@ -1,0 +1,21 @@
+package com.dihuo.twodfire.retail.activity.goodsmanager;
+
+import com.dihuo.twodfire.retail.R;
+import com.dihuo.twofire.retail.adapter.GoodsListWithImageAdapter;
+
+import android.os.Bundle;
+import android.widget.ListView;
+
+public class GoodsListWithImageActivity extends GoodsManagerBaseActivity{
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_goods_manager_list);
+		setTitleText("商品");
+		
+		ListView goodsListView = (ListView) findViewById(R.id.goodsList);
+		
+		goodsListView.setAdapter(new GoodsListWithImageAdapter(this));
+	}
+
+}

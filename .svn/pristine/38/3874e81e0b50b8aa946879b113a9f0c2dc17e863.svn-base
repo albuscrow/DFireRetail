@@ -1,0 +1,15 @@
+package com.dihuo.twodfire.retail.netData;
+
+import com.dihuo.twodfire.retail.data.SalesSwapVo;
+
+public class SalesSwapDetailResult extends BaseResult {
+	private SalesSwapVo salesSwap;
+
+	public SalesSwapVo getSalesSwap() {
+		return salesSwap;
+	}
+
+	public void setSalesSwap(SalesSwapVo salesSwap) {
+		this.salesSwap = salesSwap;
+	}
+}

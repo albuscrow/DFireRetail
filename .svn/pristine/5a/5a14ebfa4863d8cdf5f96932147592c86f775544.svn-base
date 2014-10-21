@@ -1,0 +1,115 @@
+package com.dihuo.twodfire.retail.activity.setting;
+
+import android.os.Bundle;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
+import android.widget.CompoundButton.OnCheckedChangeListener;
+import android.widget.TextView;
+
+import com.dihuo.twodfire.retail.R;
+import com.dihuo.twodfire.retail.activity.TitleActivity;
+
+
+public class ParamSettingActivity extends TitleActivity 
+    implements OnCheckedChangeListener, OnClickListener {
+    
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.setting_param);
+        setTitle(R.string.param_setting);
+             
+        View view = findViewById(R.id.goods_stock);
+        TextView text = (TextView) view.findViewById(R.id.check_title);
+        text.setText(R.string.goods_stock);
+        CheckBox check = (CheckBox) view.findViewById(R.id.checkbox);
+        check.setChecked(false);
+        
+        view = findViewById(R.id.odd_dispose);
+        text = (TextView) view.findViewById(R.id.main);
+        text.setText(R.string.odd_dispose);
+        text = (TextView) view.findViewById(R.id.secend);
+        text.setText("不抹零");
+        
+        view = findViewById(R.id.bid_setting);
+        text = (TextView) view.findViewById(R.id.main);
+        text.setText(R.string.bid_setting);
+        text = (TextView) view.findViewById(R.id.secend);
+        text.setText("最新进价");
+        
+        view = findViewById(R.id.stock_warning);
+        text = (TextView) view.findViewById(R.id.check_title);
+        text.setText(R.string.stock_warning);
+        check = (CheckBox) view.findViewById(R.id.checkbox);
+        check.setOnCheckedChangeListener(this);
+        
+        view = findViewById(R.id.less_warning);
+        check.setTag(view);
+        text = (TextView) view.findViewById(R.id.text1);
+        text.setText(R.string.less_warning);
+        text = (TextView) view.findViewById(R.id.text2);
+        text.setText("10");
+        Button button = (Button) view.findViewById(R.id.btn1);
+        button.setOnClickListener(this);
+        button.setTag(text);
+        if (check.isChecked()) {
+            view.setVisibility(View.VISIBLE);
+        } else {
+            view.setVisibility(View.GONE);
+        }
+        
+        view = findViewById(R.id.past_stock_warning);
+        text = (TextView) view.findViewById(R.id.check_title);
+        text.setText(R.string.past_stock_warning);
+        check = (CheckBox) view.findViewById(R.id.checkbox);
+        check.setOnCheckedChangeListener(this);
+        
+        view = findViewById(R.id.in_advance_warning);
+        check.setTag(view);
+        text = (TextView) view.findViewById(R.id.text1);
+        text.setText(R.string.in_advance_warning);
+        text = (TextView) view.findViewById(R.id.text2);
+        text.setText("30");
+        button = (Button) view.findViewById(R.id.btn1);
+        button.setOnClickListener(this);
+        button.setTag(text);
+        if (check.isChecked()) {
+            view.setVisibility(View.VISIBLE);
+        } else {
+            view.setVisibility(View.GONE);
+        }
+    }
+
+    @Override
+    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+        switch (buttonView.getId()) {
+        case R.id.checkbox:
+            if (isChecked) {
+                ((View)buttonView.getTag()).setVisibility(View.VISIBLE);
+            } else {
+                ((View)buttonView.getTag()).setVisibility(View.GONE);
+            }
+            break;
+
+        default:
+            break;
+        }
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+        case R.id.btn1:
+            TextView text = (TextView) v.getTag();
+            text.setText(String.valueOf(Integer.valueOf(text.getText().toString()).intValue() + 1));
+            break;
+
+        default:
+            break;
+        }
+    }
+    
+}

@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/member_background"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
+        android:orientation="horizontal" >
+
+        <ImageView
+            android:id="@+id/member_info__flicking"
+            android:layout_width="50dp"
+            android:layout_height="match_parent"
+            android:paddingBottom="5dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:paddingTop="5dp"
+            android:src="@drawable/user_info_flicking" />
+
+            <EditText
+                android:id="@+id/member_info__search_input"
+                android:layout_width="0dp"
+            android:layout_height="35dp"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:background="@drawable/user_info_search"
+            android:gravity="center_vertical"
+            android:hint="@string/member_info_search_hint"
+            android:paddingLeft="30dp"
+            android:paddingRight="7dp"
+            android:singleLine="true"
+            android:textColorHint="@color/member_info_search_hint"
+            android:textSize="14sp"
+            android:textColor="@color/white" />
+
+        <TextView
+            android:id="@+id/member_info_search"
+            android:layout_width="60dp"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="@string/member_info_search"
+            android:textColor="@color/white"
+            android:textSize="14sp" />
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/member_info_card_type_rl"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:background="@drawable/user_info_bg_02" >
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="15dp"
+            android:src="@drawable/user_info_card_type" />
+
+        <TextView
+            android:id="@+id/member_info_card_type_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="39dp"
+            android:text=""
+            android:textColor="@color/member_info_gold_card"
+            android:textSize="17sp"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="15dp"
+            android:src="@drawable/user_info_arrow_below" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/user_info_bg_02"
+        android:orientation="vertical"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp" >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="44dp" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:text="@string/member_info_total_num"
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/member_info_num"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:text=""
+                android:textColor="@color/member_info_num"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="@drawable/user_info_line" />
+
+        <LinearLayout
+            android:id="@+id/member_info_card_type_and_num"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+        </LinearLayout>
+
+        
+        
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="44dp" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:text="@string/member_info_this_month_apply_num"
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/member_info_this_month_apply_num"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:text=""
+                android:textColor="@color/member_info_num"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="@drawable/user_info_line" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingBottom="11dp" >
+
+            <ImageView
+                android:id="@+id/member_info_add"
+                android:layout_width="53dp"
+                android:layout_height="53dp"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"
+                android:src="@drawable/user_info_add" />
+
+            <ImageView
+                android:id="@+id/member_info_help"
+                android:layout_width="34dp"
+                android:layout_height="34dp"
+                android:layout_alignParentBottom="true"
+                android:src="@drawable/user_info_help" />
+        </RelativeLayout>
+    </LinearLayout>
+
+</LinearLayout>

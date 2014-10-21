@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/login_bj"
+    android:orientation="vertical" >
+
+ 		    
+     <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"   
+        android:scrollbars="none" >    
+    <LinearLayout     
+        android:layout_width="match_parent"
+    	android:layout_height="wrap_content"
+    	android:orientation="vertical" >
+        
+		 <LinearLayout
+	        android:layout_width="match_parent"
+	        android:layout_height="60dp"
+	        android:paddingLeft="10dp"
+	        android:paddingRight="10dp"
+	        android:gravity="right"
+	        android:paddingBottom="5dp"
+	        android:paddingTop="5dp"
+	        android:background="@color/white" >
+	    <TextView
+	        android:id="@+id/textView1"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:text="选择时间"
+	        android:layout_gravity="center_vertical"
+	        android:layout_marginLeft="10dp"
+	        android:layout_weight="1"
+	        android:background="@null"
+	        android:textSize="15sp" />
+
+	    <Button
+	        android:id="@+id/logbook_time"
+	        android:layout_weight="1"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	         android:layout_gravity="center_vertical"
+			android:background="@null"
+	        android:text="2014-8-25"
+	        android:gravity="right"
+	        android:tag="1"
+	        android:onClick="ClickListener"
+	        android:drawableRight="@drawable/arrow_down"/>
+		</LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:background="@drawable/login_line" />
+				 <LinearLayout
+			        android:layout_width="match_parent"
+			        android:layout_height="60dp"
+			        android:paddingLeft="10dp"
+			        android:paddingRight="10dp"
+			        android:gravity="right"
+			        android:paddingBottom="5dp"
+			        android:paddingTop="5dp"
+			        android:background="@color/white" >
+			    <TextView
+			        android:id="@+id/textView1"
+			        android:layout_width="wrap_content"
+			        android:layout_height="wrap_content"
+			        android:text="选择门店"
+			        android:layout_gravity="center_vertical"
+			        android:layout_marginLeft="10dp"
+			        android:layout_weight="1"
+			        android:background="@null"
+			        android:textSize="15sp" />
+			
+			    <Button
+			        android:id="@+id/button2"
+			        android:layout_weight="1"
+			        android:layout_width="wrap_content"
+			        android:layout_height="wrap_content"
+			         android:layout_gravity="center_vertical"
+					android:background="@null"
+			        android:text="西湖区体育场路店"
+			        android:gravity="right"
+			        android:drawableRight="@drawable/arrow_down"/>
+			</LinearLayout>	 
+    
+		    <LinearLayout
+		        android:layout_width="match_parent"
+		        android:layout_height="60dp"
+		        android:paddingLeft="10dp"
+		        android:paddingRight="10dp"
+		        android:paddingBottom="5dp"
+		        android:paddingTop="5dp"
+		        >
+		        <EditText
+		            android:id="@+id/edit_user_name"
+		            android:layout_width="0dp"
+		            android:layout_height="wrap_content"
+		            android:layout_gravity="center_vertical"
+		            android:layout_marginLeft="10dp"
+		            android:paddingLeft="30dp"
+		            android:layout_weight="1"
+		            android:ems="10"
+		            android:background="@drawable/user_info_search"
+		            android:hint="@string/hint_usersearch"
+		            android:textColor="#ffffff"
+		            android:textColorHint="#99ffffff"
+		            android:textSize="15sp" />				        		        
+		        <Button
+		            android:id="@+id/edit_user_name_clear"
+		            android:layout_width="wrap_content"
+		            android:layout_height="match_parent"
+		            android:paddingLeft="15dp"
+		            android:layout_gravity="center_vertical"
+		            android:text="查询"
+		            android:background="@null"
+		            android:textSize="20sp"
+		 	/>
+		    </LinearLayout>
+           <ListView 
+		    android:id="@+id/attendance_list"
+		    android:layout_width="match_parent"
+		    android:layout_height="match_parent"
+		    android:background="@color/white"
+		    android:cacheColorHint="#00000000"
+		    android:scrollbars="none" />           
+        
+
+ 
+    <!-- bottom -->
+    
+	  <LinearLayout
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:id="@+id/line_bottom"
+	        android:paddingLeft="10dp"
+	        android:paddingRight="10dp"
+	        android:paddingBottom="5dp"
+	        android:paddingTop="5dp"
+	        android:orientation="horizontal"
+	        >      
+  		 <Button
+                android:id="@+id/member_info_help"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0"
+                android:gravity="left|bottom"
+                android:layout_gravity="left|bottom"
+                android:background="@drawable/user_info_help" />
+           
+              <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:visibility="invisible"
+                android:clickable="false"
+                android:gravity="left|center_horizontal|bottom"
+                android:layout_gravity="left|center_horizontal" />
+         
+            <Button
+                android:id="@+id/member_info_add"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                 android:layout_weight="0"
+                android:layout_gravity="right|bottom"
+                android:gravity="right|bottom"             
+                android:background="@drawable/user_info_add" />                         
+      </LinearLayout> 
+  
+ </LinearLayout>
+ </ScrollView>
+</LinearLayout>

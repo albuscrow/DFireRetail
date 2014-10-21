@@ -1,0 +1,32 @@
+/**
+ * 
+ */
+package com.dihuo.twodfire.retail.activity;
+
+import com.dihuo.twodfire.retail.R;
+import com.dihuo.twodfire.retail.RetailApplication;
+
+import android.app.Activity;
+import android.os.Bundle;
+
+/**
+ * activity基类
+ * 
+ * @author qiuch
+ * 
+ */
+public class BaseActivity extends Activity {
+
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		RetailApplication.addCurrentActivity(this);
+	}
+
+	@Override
+	protected void onDestroy() {
+		RetailApplication.removeActivity(this);
+		super.onDestroy();
+	}
+
+}

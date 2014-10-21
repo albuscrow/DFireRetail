@@ -1,0 +1,202 @@
+package com.dihuo.twodfire.retail.activity.retailmanager;
+
+import android.content.Intent;
+import android.graphics.drawable.BitmapDrawable;
+import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.ListView;
+import android.widget.PopupWindow;
+import android.widget.TextView;
+
+import com.dihuo.twodfire.retail.R;
+import com.dihuo.twodfire.retail.activity.TitleActivity;
+import com.dihuo.twodfire.retail.global.Constants;
+import com.dihuo.twofire.retail.adapter.AttendItemAdapter;
+import com.dihuo.twofire.retail.adapter.AttendanceItem;
+import com.dihuo.twofire.retail.util.ToastUtil;
+import com.dihuo.twofire.retail.util.Utility;
+import com.dohuo.twofire.retail.network.AsyncHttpPost;
+import com.dohuo.twofire.retail.network.RequestParameter;
+import com.dohuo.twofire.retail.network.RequestResultCallback;
+
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+
+public class EmployeeInfoActivity extends TitleActivity implements RequestResultCallback {
+
+    private TextView _shopChoiceButton;
+    private TextView _roleChoiceButton;
+    
+    ArrayList<AttendanceItem> mList;
+    private ListView mListView;
+    private AttendItemAdapter adapter;
+    
+    private PopupWindow _shopPopupWindow;
+    private PopupWindow _rolePopupWindow;
+    
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        setContentView(R.layout.employee_info);
+        mListView = (ListView) findViewById(R.id.attendance_list);
+        _shopChoiceButton = (TextView) findViewById(R.id.shop_choice);
+        _shopChoiceButton.setClickable(true);
+        _roleChoiceButton = (TextView) findViewById(R.id.role_choice);
+        _roleChoiceButton.setClickable(true);
+        
+        setTitleRes(R.string.employee_info);
+        showBackbtn();
+        startRequestListData();
+    }
+
+    private void testListData() {
+        mList = new ArrayList<AttendanceItem>();
+        mList.add(new AttendanceItem(
+                getResources().getDrawable(R.drawable.man), "收银员", "王晓红",
+                "工号：001", "", "12121212121", "", "", "二维火文一店", "手机"));
+        mList.add(new AttendanceItem(
+                getResources().getDrawable(R.drawable.man), "店长", "王宇",
+                "工号：002", "", "12121212121", "", "", "二维火文一店", "手机"));
+        mList.add(new AttendanceItem(
+                getResources().getDrawable(R.drawable.man), "收银员", "孙晓梅",
+                "工号：003", "", "12121212121", "", "", "二维火文一店", "手机"));
+
+        adapter = new AttendItemAdapter(EmployeeInfoActivity.this, mList);
+        mListView.setAdapter(adapter);
+        Utility.setListViewHeightBasedOnChildren(mListView);
+
+        mListView.setOnItemClickListener(new OnItemClickListener() {
+
+            @Override
+            public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
+                    long arg3) {
+                Intent intent = new Intent(EmployeeInfoActivity.this,
+                        EmployeeDetailActivity.class);
+                startActivity(intent);
+            }
+        });
+        
+    }
+
+    private void initList(String str) {
+
+    }
+
+    private void initShopPopupWindow() {
+        ListView listView = (ListView) LayoutInflater.from(this).inflate(R.layout.list, null);
+        //测试数据.
+        listView.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, 
+                Arrays.asList(new String[]{"文一店", "文二店", "文三店"})));
+        //网络获取数据.
+        listView.setOnItemClickListener(new OnItemClickListener() {
+
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view,
+                    int position, long id) {
+                _shopPopupWindow.dismiss();
+                _shopChoiceButton.setText(((TextView)view).getText());
+            }
+        });
+        
+        _shopPopupWindow = new PopupWindow(listView, 400, 300, true);
+        _shopPopupWindow.setBackgroundDrawable(new BitmapDrawable());
+        _shopPopupWindow.setOutsideTouchable(true);
+    }
+    
+    private void initRolePopupWindow() {
+        ListView listView = (ListView) LayoutInflater.from(this).inflate(R.layout.list, null);
+        //测试数据.
+        listView.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, 
+                Arrays.asList(new String[]{"区域经理", "店长", "收银员"})));
+        //网络获取数据.
+        listView.setOnItemClickListener(new OnItemClickListener() {
+
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view,
+                    int position, long id) {
+                _rolePopupWindow.dismiss();
+                _roleChoiceButton.setText(((TextView)view).getText());
+            }
+        });
+        
+        _rolePopupWindow = new PopupWindow(listView, 300, 300, true);
+        _rolePopupWindow.setBackgroundDrawable(new BitmapDrawable());
+        _rolePopupWindow.setOutsideTouchable(true);
+    }
+    
+    public void ClickListener(View v) {
+        switch (Integer.parseInt(String.valueOf(v.getTag()))) {
+        case 1:
+            if (_shopPopupWindow == null) {
+                initShopPopupWindow();
+            }
+            _shopPopupWindow.showAsDropDown(v);
+            break;
+            
+        case 2:
+            if (_rolePopupWindow == null) {
+                initRolePopupWindow();
+            }
+            _rolePopupWindow.showAsDropDown(v);
+            break;
+        }
+    }
+
+    /**
+     * 网络请求，显示员工列表.
+     */
+    private void startRequestListData() {
+        getProgressDialog().setCancelable(false);
+        getProgressDialog().setMessage(getResources().getText(R.string.in_login));
+        getProgressDialog().show();
+        RequestParameter parameters = new RequestParameter(true);
+        parameters.setUrl(Constants.EMPLOYEE_INFO_LIST);
+        parameters.setParam("shopId", "8888");
+        parameters.setParam("currentPage", "0");
+        new AsyncHttpPost(parameters, this).execute();
+    }
+    
+    @Override
+    public void onSuccess(String str) {
+        getProgressDialog().dismiss();
+        try {
+            JSONObject object = new JSONObject(str);
+            if (object.isNull("returnCode") || "fail".equals(object.getString("returnCode"))) {
+                testListData();
+            } else {
+                initList(str);
+            }
+        } catch (Exception e) {
+        }
+    }
+
+    @Override
+    public void onFail(Exception e) {
+        getProgressDialog().dismiss();
+        ToastUtil.showShortToast(getApplicationContext(), e.toString());
+        testListData();
+    }
+
+    @Override
+    protected void onDestroy() {
+        // TODO Auto-generated method stub
+        super.onDestroy();
+        if (_shopPopupWindow != null) {
+            _shopPopupWindow.dismiss();
+            _shopPopupWindow = null;
+        }
+        
+        if (_rolePopupWindow != null) {
+            _rolePopupWindow.dismiss();
+            _rolePopupWindow = null;
+        }
+    }
+}

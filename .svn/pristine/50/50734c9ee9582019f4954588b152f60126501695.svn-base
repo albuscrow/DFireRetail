@@ -1,0 +1,266 @@
+package com.dihuo.twodfire.retail.activity.goodsmanager;
+
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import com.dihuo.twodfire.retail.R;
+import com.dihuo.twodfire.retail.data.CategoryVo;
+import com.dihuo.twodfire.retail.global.Constants;
+import com.dihuo.twodfire.retail.widget.spinner.SpinerPopWindow;
+import com.dihuo.twodfire.retail.widget.spinner.AbstractSpinerAdapter.IOnItemSelectListener;
+import com.dihuo.twofire.retail.util.ToastUtil;
+import com.dohuo.twofire.retail.network.AsyncHttpPost;
+import com.dohuo.twofire.retail.network.RequestParameter;
+import com.dohuo.twofire.retail.network.RequestResultCallback;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+
+import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
+import android.widget.CompoundButton.OnCheckedChangeListener;
+import android.widget.EditText;
+import android.widget.TextView;
+
+public class GoodsSortDetailActivity extends GoodsManagerBaseActivity implements
+		OnClickListener, IOnItemSelectListener, OnCheckedChangeListener{
+	
+	private Category category;
+	private SpinerPopWindow spinner;
+	private List<Category> parentCategory;
+	private String parentId;
+	private String parentIdBackup;
+	private CheckBox hasParentView;
+	private TextView parentTextView;
+	
+	public static final int EDIT = 0;
+	public static final int ADD = 1;
+	private int mode;
+
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_sort_detail);
+		parentCategory = (List<Category>) getIntent().getSerializableExtra("parentCategory");
+		mode = getIntent().getIntExtra("mode", -1);
+		if (mode == EDIT) {
+			category = (Category) getIntent().getSerializableExtra("category");
+			setEditTextContent(R.id.name, "商品分类名称", category.name, "");
+			setEditTextContent(R.id.code, "商品分类编码", category.original.getCode(), "");
+			boolean hasParent = category.original.hasParent();
+			hasParentView = setCheckBoxContent(R.id.hasUp, "此分类有上级", hasParent);
+			if (!hasParent) {
+				findViewById(R.id.shangji).setVisibility(View.GONE);
+			}
+			setTitleText(category.name);
+		}else{
+			category = new Category();
+			category.original = new CategoryVo();
+			setEditTextContent(R.id.name, "商品分类名称", "", "必填");
+			setEditTextContent(R.id.code, "商品分类编码", "", "可不填");
+			hasParentView = setCheckBoxContent(R.id.hasUp, "此分类有上级", true);
+			setTitleText("添加分类");
+		}
+		
+	
+		hasParentView.setOnCheckedChangeListener(this);
+		parentTextView = setSpinerConetent(R.id.shangji, "上级分类", category.parentName);
+		parentTextView.setOnClickListener(this);
+		parentId = category.original.getParentId();
+		parentIdBackup = parentId;
+		
+
+		
+		hideRight();
+		
+		findViewById(R.id.title_left).setOnClickListener(this);
+		findViewById(R.id.title_right).setOnClickListener(this);
+		spinner = new SpinerPopWindow(this);
+		List<String> parentCategoryStr = new ArrayList<String>();
+		for (Category item : parentCategory) {
+			parentCategoryStr.add(item.name);
+		}
+		spinner.refreshData(parentCategoryStr, 0);
+		spinner.setItemListener(this);
+		if (mode == EDIT) {
+			findViewById(R.id.delete).setOnClickListener(this);
+		}else{
+			findViewById(R.id.delete).setVisibility(View.GONE);;
+		}
+	}
+
+	@Override
+	public void onClick(View v) {
+		switch (v.getId()) {
+		case R.id.title_left:
+			finish();
+			break;
+		case R.id.title_right:
+			save();
+			break;
+		case R.id.secend:
+			spinner.setWidth(parentTextView.getWidth());
+			spinner.showAsDropDown(parentTextView);
+			break;
+		case R.id.delete:
+			delete();
+			break;
+		default:
+			break;
+		}
+	}
+	
+	
+	private void delete() {
+		RequestParameter params = new RequestParameter(true);
+		params.setParam("categoryId", category.id);
+		params.setUrl(Constants.BASE_URL + "category/delete");
+		new AsyncHttpPost(params, new RequestResultCallback() {
+			
+			@Override
+			public void onSuccess(String str) {
+				System.out.println(str);
+			}
+			
+			@Override
+			public void onFail(Exception e) {
+				ToastUtil.showShortToast(GoodsSortDetailActivity.this, "删除失败");
+				e.printStackTrace();
+			}
+		}).execute();
+	}
+
+	private void save() {
+		category.original.setName(((TextView)findViewById(R.id.name).findViewById(R.id.secend)).getText().toString());
+		category.original.setCode(((TextView)findViewById(R.id.code).findViewById(R.id.secend)).getText().toString());
+		category.original.setParentId(parentId);
+		RequestParameter params = new RequestParameter(true);
+		try {
+			params.setParam("category",new JSONObject(category.original.toString()));
+		} catch (JSONException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		
+		if (mode == EDIT) {
+			params.setParam("operateType","edit");
+		}else{
+			params.setParam("operateType","add");
+		}
+		
+		params.setUrl(Constants.BASE_URL + "category/save");
+		
+		new	AsyncHttpPost(params, new RequestResultCallback() {
+			
+			@Override
+			public void onSuccess(String str) {
+				JsonObject jo = new JsonParser().parse(str).getAsJsonObject();
+				String returnCode = jo.get("returnCode").getAsString();
+				if (returnCode.equals("success")) {
+					if (mode == EDIT) {
+						ToastUtil.showShortToast(GoodsSortDetailActivity.this, "修改成功");
+					}else{
+						ToastUtil.showShortToast(GoodsSortDetailActivity.this, "添加成功");
+					}
+					finish();
+				}
+			}
+			@Override
+			public void onFail(Exception e) {
+				if (mode == EDIT) {
+					ToastUtil.showShortToast(GoodsSortDetailActivity.this, "修改失败");
+				}else{
+					ToastUtil.showShortToast(GoodsSortDetailActivity.this, "添加失败");
+				}
+				e.printStackTrace();
+			}
+		}).execute();
+	}
+
+	private CheckBox setCheckBoxContent(int id, String label, boolean b) {
+		View layout = findViewById(id);
+		TextView labelText = (TextView) layout.findViewById(R.id.check_title);
+		labelText.setText(label);
+		CheckBox checkBox = (CheckBox)findViewById(R.id.checkbox);
+		checkBox.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+			
+			@Override
+			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+				switchToEditMode();
+			}
+		});
+		checkBox.setChecked(b);
+		return checkBox;
+	}
+
+	private TextView setSpinerConetent(int tongbu, String label, String value) {
+		View layout = findViewById(tongbu);
+		TextView tongbuLable = (TextView) layout.findViewById(R.id.main);
+		tongbuLable.setText(label);
+		TextView tongbuValue = (TextView) layout.findViewById(R.id.secend);
+		tongbuValue.setText(value);
+		return tongbuValue;
+	}
+
+	private void setEditTextContent(int id, String lable, String content,
+			String hint) {
+		View layout = findViewById(id);
+		TextView lableView = (TextView) layout.findViewById(R.id.main);
+		if (lable != null) {
+			lableView.setText(lable);
+		}
+		EditText inputView = (EditText) layout.findViewById(R.id.secend);
+		inputView.setHint(hint);
+		if (content != null) {
+			inputView.setText(content);
+		}
+		inputView.addTextChangedListener(new TextWatcher() {
+			
+			@Override
+			public void onTextChanged(CharSequence s, int start, int before, int count) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void beforeTextChanged(CharSequence s, int start, int count,
+					int after) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void afterTextChanged(Editable s) {
+				switchToEditMode();
+			}
+		});
+	}
+
+	@Override
+	public void onItemClick(int pos) {
+		parentId = parentCategory.get(pos).original.getId();
+		parentTextView.setText(parentCategory.get(pos).name);
+		switchToEditMode();
+	}
+
+	@Override
+	public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+		if (isChecked) {
+			findViewById(R.id.shangji).setVisibility(View.VISIBLE);
+			parentId = parentIdBackup;
+		}else{
+			findViewById(R.id.shangji).setVisibility(View.GONE);
+			parentIdBackup = parentId;
+			parentId = null;
+		}
+	}
+
+}

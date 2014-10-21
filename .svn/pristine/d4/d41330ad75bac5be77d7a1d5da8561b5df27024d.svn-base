@@ -1,0 +1,66 @@
+/**
+ * 
+ */
+package com.dihuo.twodfire.retail.netData;
+
+import java.util.List;
+
+import com.dihuo.twodfire.retail.global.ActionInfo;
+import com.dihuo.twodfire.retail.global.ShopInfo;
+import com.dihuo.twodfire.retail.global.UserInfo;
+
+/**
+ * 登录返回
+ * 
+ * @author qiuch
+ * 
+ */
+public class LoginResult {
+
+	private UserInfo user;
+	private ShopInfo shop;
+	private String jsessionId;
+	private String postAttachmentUrl;
+	private List<ActionInfo> userActions;
+
+	public UserInfo getUser() {
+		return user;
+	}
+
+	public void setUser(UserInfo user) {
+		this.user = user;
+	}
+
+	public ShopInfo getShop() {
+		return shop;
+	}
+
+	public void setShop(ShopInfo shop) {
+		this.shop = shop;
+	}
+
+	public String getJsessionId() {
+		return jsessionId;
+	}
+
+	public void setJsessionId(String jsessionId) {
+		this.jsessionId = jsessionId;
+	}
+
+	public String getPostAttachmentUrl() {
+		return postAttachmentUrl;
+	}
+
+	public void setPostAttachmentUrl(String postAttachmentUrl) {
+		this.postAttachmentUrl = postAttachmentUrl;
+	}
+
+	public List<ActionInfo> getUserActions() {
+		return userActions;
+	}
+
+	public void setUserActions(List<ActionInfo> userActions) {
+		this.userActions = userActions;
+	}
+
+}

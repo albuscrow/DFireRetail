@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    
+    <include layout="@layout/setting_cancel_title"/>
+    
+    <ListView
+        android:id="@+id/setting_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/setting_payway_bottom"
+        android:layout_marginTop="@dimen/header_height"
+        android:paddingLeft="@dimen/setting_payway_left"
+        android:paddingRight="@dimen/setting_payway_left"
+        android:background="@color/setting_list_bg"
+        android:cacheColorHint="@color/transparent"
+        android:footerDividersEnabled="false"
+        android:scrollbars="none" />
+    
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/setting_payway_bottom"
+        android:layout_gravity="bottom"
+        android:paddingLeft="10dp"
+        android:paddingTop="5dp"
+        android:paddingRight="10dp"
+        android:paddingBottom="5dp" >
+        
+        <LinearLayout
+            android:id="@+id/batch"
+            android:layout_width="@dimen/setting_payway_botton_pic"
+            android:layout_height="@dimen/setting_payway_botton_pic"
+            android:layout_marginRight="70dp"
+            android:background="@drawable/ico_rnd_red2"
+            android:layout_gravity="right|bottom"
+            android:gravity="center"
+            android:clickable="true"
+            android:orientation="vertical">
+            
+            <ImageView 
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ico_checkall"
+                android:contentDescription="@string/batch"/>
+            
+            <TextView
+                style="@style/setting_explain_text"
+                android:textSize="12sp"
+                android:text="@string/check_all"/>
+        </LinearLayout>
+        
+        <LinearLayout
+            android:id="@+id/uncheck_all"
+            android:layout_width="@dimen/setting_payway_botton_pic"
+            android:layout_height="@dimen/setting_payway_botton_pic"
+            android:background="@drawable/ico_rnd_red2"
+            android:layout_gravity="right|bottom"
+            android:gravity="center"
+            android:clickable="true"
+            android:orientation="vertical">
+            
+            <ImageView 
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ico_uncheck"
+                android:contentDescription="@string/setting_payway_add"/>
+            
+            <TextView
+                style="@style/setting_explain_text"
+                android:textSize="12sp"
+                android:text="@string/uncheck_all"/>
+        </LinearLayout>
+    </FrameLayout>
+</FrameLayout>

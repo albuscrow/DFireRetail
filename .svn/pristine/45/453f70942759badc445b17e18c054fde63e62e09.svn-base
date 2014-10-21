@@ -1,0 +1,97 @@
+package com.dihuo.twodfire.retail.data;
+
+import java.math.BigDecimal;
+
+public class GoodsVo {
+	private String goodsId;
+	private String goodsName;
+	private String shopId;
+	private BigDecimal price;
+	private int number;
+	private String productionDate;
+	private String expireDate;
+	private String returnTypeId;
+	private String categorytId;
+	private String barCode;
+	private String spell;
+	private String type;
+	private String name;
+	public String getGoodsId() {
+		return goodsId;
+	}
+	public void setGoodsId(String goodsId) {
+		this.goodsId = goodsId;
+	}
+	public String getGoodsName() {
+		return goodsName;
+	}
+	public void setGoodsName(String goodsName) {
+		this.goodsName = goodsName;
+	}
+	public String getShopId() {
+		return shopId;
+	}
+	public void setShopId(String shopId) {
+		this.shopId = shopId;
+	}
+	public BigDecimal getPrice() {
+		return price;
+	}
+	public void setPrice(BigDecimal price) {
+		this.price = price;
+	}
+	public int getNumber() {
+		return number;
+	}
+	public void setNumber(int number) {
+		this.number = number;
+	}
+	public String getProductionDate() {
+		return productionDate;
+	}
+	public void setProductionDate(String productionDate) {
+		this.productionDate = productionDate;
+	}
+	public String getExpireDate() {
+		return expireDate;
+	}
+	public void setExpireDate(String expireDate) {
+		this.expireDate = expireDate;
+	}
+	public String getReturnTypeId() {
+		return returnTypeId;
+	}
+	public void setReturnTypeId(String returnTypeId) {
+		this.returnTypeId = returnTypeId;
+	}
+	public String getCategorytId() {
+		return categorytId;
+	}
+	public void setCategorytId(String categorytId) {
+		this.categorytId = categorytId;
+	}
+	public String getBarCode() {
+		return barCode;
+	}
+	public void setBarCode(String barCode) {
+		this.barCode = barCode;
+	}
+	public String getSpell() {
+		return spell;
+	}
+	public void setSpell(String spell) {
+		this.spell = spell;
+	}
+	public String getType() {
+		return type;
+	}
+	public void setType(String type) {
+		this.type = type;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+}

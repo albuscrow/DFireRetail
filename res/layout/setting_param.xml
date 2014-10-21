@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/setting_list_bg"
+    android:orientation="vertical" >
+
+    <include
+        android:id="@+id/goods_stock"
+        layout="@layout/checkbox" />
+
+    <include
+        android:id="@+id/odd_dispose"
+        layout="@layout/next_down" />
+
+</LinearLayout>

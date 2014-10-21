@@ -1,0 +1,80 @@
+package com.dihuo.twodfire.retail.activity.setting;
+
+import android.os.Bundle;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.TextView;
+
+import com.dihuo.twodfire.retail.R;
+import com.dihuo.twodfire.retail.activity.TitleActivity;
+
+
+public class ReceiptSettingActicity extends TitleActivity implements OnClickListener{
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.setting_receipt);
+        setTitleRes(R.string.receipt_setting_title);
+        change2saveMode();
+        mLeft.setOnClickListener(this);
+        mRight.setOnClickListener(this);
+        
+//        View view = findViewById(R.id.cancel_title);
+//        view.findViewById(R.id.title_left_btn).setOnClickListener(this);
+//        view.findViewById(R.id.title_right_btn).setOnClickListener(this);
+//        TextView text = (TextView) view.findViewById(R.id.titleText);
+//        text.setText(R.string.receipt_setting);
+//        
+        View view = findViewById(R.id.logo);
+        TextView text = (TextView) view.findViewById(R.id.check_title);
+        text.setText(R.string.shop_logo);
+        
+        view = findViewById(R.id.receipt_title);
+        text = (TextView) view.findViewById(R.id.main);
+        text.setText(R.string.receipt_title);
+        text = (TextView) view.findViewById(R.id.secend);
+        text.setText("二维火文一店");
+        
+        view = findViewById(R.id.endnote);
+        text = (TextView) view.findViewById(R.id.main);
+        text.setText(R.string.endnote);
+        text = (TextView) view.findViewById(R.id.secend);
+        text.setText("祝你生活愉快");
+        
+//        view = findViewById(R.id.avorable);
+//        text = (TextView) view.findViewById(R.id.check_title);
+//        text.setText(R.string.avorable);
+//        
+//        view = findViewById(R.id.exchange);
+//        text = (TextView) view.findViewById(R.id.check_title);
+//        text.setText(R.string.exchange);
+        
+        view = findViewById(R.id.receipt_standard);
+        text = (TextView) view.findViewById(R.id.main);
+        text.setText(R.string.receipt_standard);
+        text = (TextView) view.findViewById(R.id.secend);
+        text.setText("58mm");
+        
+        view = findViewById(R.id.choice_temp);
+        text = (TextView) view.findViewById(R.id.main);
+        text.setText(R.string.choice_temp);
+        text = (TextView) view.findViewById(R.id.secend);
+        text.setText("默认模板");
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+        case R.id.title_left:
+            finish();
+            break;
+
+        case R.id.title_right:
+        	//TODO 提交操作结果
+            finish();
+            break;
+        }
+    }
+    
+}

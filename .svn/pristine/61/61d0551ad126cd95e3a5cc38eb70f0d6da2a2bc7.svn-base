@@ -1,0 +1,63 @@
+package com.dihuo.twodfire.retail.activity.goodsmanager;
+
+import com.dihuo.twodfire.retail.R;
+
+import android.os.Bundle;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.EditText;
+import android.widget.TextView;
+
+public class GoodsSortDetail extends GoodsManagerBaseActivity implements
+		OnClickListener {
+	
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_sort_detail);
+		
+		setEditTextContent(R.id.name, "商品分类名称", "瓜子", "");
+		setEditTextContent(R.id.code, "商品分类编码", "123", "");
+		setCheckBoxContent(R.id.hasUp, "此分类有上级", true);
+		setSpinerConetent(R.id.shangji, "上级分类", "坚果炒货");
+		setTitleText("瓜子");
+	}
+
+	@Override
+	public void onClick(View v) {
+		// TODO Auto-generated method stub
+
+	}
+	
+	
+	private void setCheckBoxContent(int id, String label, boolean b) {
+		View layout = findViewById(id);
+		TextView labelText = (TextView) layout.findViewById(R.id.check_title);
+		labelText.setText(label);
+		
+	}
+
+	private void setSpinerConetent(int tongbu, String label, String value) {
+		View layout = findViewById(tongbu);
+		TextView tongbuLable = (TextView) layout.findViewById(R.id.main);
+		tongbuLable.setText(label);
+		TextView tongbuValue = (TextView) layout.findViewById(R.id.secend);
+		tongbuValue.setText(value);
+	}
+
+	private void setEditTextContent(int id, String lable, String content,
+			String hint) {
+		View layout = findViewById(id);
+		TextView lableView = (TextView) layout.findViewById(R.id.main);
+		if (lable != null) {
+			lableView.setText(lable);
+		}
+		EditText inputView = (EditText) layout.findViewById(R.id.secend);
+		inputView.setHint(hint);
+		if (content != null) {
+			inputView.setText(content);
+		}
+		
+	}
+
+}

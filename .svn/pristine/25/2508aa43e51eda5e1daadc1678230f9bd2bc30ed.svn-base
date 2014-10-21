@@ -1,0 +1,56 @@
+package com.dihuo.twodfire.retail.activity.goodsmanager;
+
+import org.w3c.dom.Text;
+
+import com.dihuo.twodfire.retail.R;
+import com.dihuo.twodfire.retail.activity.BaseActivity;
+
+import android.app.Activity;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.FrameLayout;
+import android.widget.TextView;
+
+public class GoodsManagerBaseActivity extends BaseActivity {
+	
+	protected TextView mLeft, mRight;
+
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+	}
+
+	@Override
+	public void setContentView(int layoutResID) {
+		super.setContentView(R.layout.goods_manager_title_layout);
+		FrameLayout body = (FrameLayout) findViewById(R.id.body);
+		body.requestFocus();
+		getLayoutInflater().inflate(layoutResID, body, true);
+	}
+
+	/**
+	 * 设置头部标题内容
+	 * 
+	 * @param 标题字符串
+	 */
+	public void setTitleText(String title) {
+		((TextView) findViewById(R.id.title_text)).setText(title);
+	}
+
+	/**
+	 * 设置头部标题内容
+	 * 
+	 * @param 标题资源ID
+	 */
+	public void setTitleRes(int resId) {
+		((TextView) findViewById(R.id.title_text)).setText(resId);
+	}
+
+	public TextView setRightBtn(int ResId) {
+		mRight = (TextView) findViewById(R.id.title_right);
+		mRight.setVisibility(View.VISIBLE);
+		return mRight;
+	}
+
+
+}

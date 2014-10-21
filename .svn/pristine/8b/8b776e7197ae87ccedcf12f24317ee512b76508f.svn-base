@@ -1,0 +1,128 @@
+package com.dihuo.twodfire.retail.data;
+
+import java.util.List;
+
+public class SalesSetVo {
+	Float percentAge;
+	Short hasDegree;
+	Short IsSales;
+	String specialFlag;
+	Float discountRate;
+	String startTime;
+	String endTime;
+	Short isMember;
+	List<SalesSetGoodsVo> salesSetGoodsList;
+	
+	static class SalesSetGoodsVo {
+		String goodsId;
+		Float retailPrice;
+	}
+	/**
+	 * @return the percentAge
+	 */
+	public Float getPercentAge() {
+		return percentAge;
+	}
+	/**
+	 * @param percentAge the percentAge to set
+	 */
+	public void setPercentAge(Float percentAge) {
+		this.percentAge = percentAge;
+	}
+	/**
+	 * @return the hasDegree
+	 */
+	public Short getHasDegree() {
+		return hasDegree;
+	}
+	/**
+	 * @param hasDegree the hasDegree to set
+	 */
+	public void setHasDegree(Short hasDegree) {
+		this.hasDegree = hasDegree;
+	}
+	/**
+	 * @return the isSales
+	 */
+	public Short getIsSales() {
+		return IsSales;
+	}
+	/**
+	 * @param isSales the isSales to set
+	 */
+	public void setIsSales(Short isSales) {
+		IsSales = isSales;
+	}
+	/**
+	 * @return the specialFlag
+	 */
+	public String getSpecialFlag() {
+		return specialFlag;
+	}
+	/**
+	 * @param specialFlag the specialFlag to set
+	 */
+	public void setSpecialFlag(String specialFlag) {
+		this.specialFlag = specialFlag;
+	}
+	/**
+	 * @return the discountRate
+	 */
+	public Float getDiscountRate() {
+		return discountRate;
+	}
+	/**
+	 * @param discountRate the discountRate to set
+	 */
+	public void setDiscountRate(Float discountRate) {
+		this.discountRate = discountRate;
+	}
+	/**
+	 * @return the startTime
+	 */
+	public String getStartTime() {
+		return startTime;
+	}
+	/**
+	 * @param startTime the startTime to set
+	 */
+	public void setStartTime(String startTime) {
+		this.startTime = startTime;
+	}
+	/**
+	 * @return the endTime
+	 */
+	public String getEndTime() {
+		return endTime;
+	}
+	/**
+	 * @param endTime the endTime to set
+	 */
+	public void setEndTime(String endTime) {
+		this.endTime = endTime;
+	}
+	/**
+	 * @return the isMember
+	 */
+	public Short getIsMember() {
+		return isMember;
+	}
+	/**
+	 * @param isMember the isMember to set
+	 */
+	public void setIsMember(Short isMember) {
+		this.isMember = isMember;
+	}
+	/**
+	 * @return the salesSetGoodsList
+	 */
+	public List<SalesSetGoodsVo> getSalesSetGoodsList() {
+		return salesSetGoodsList;
+	}
+	/**
+	 * @param salesSetGoodsList the salesSetGoodsList to set
+	 */
+	public void setSalesSetGoodsList(List<SalesSetGoodsVo> salesSetGoodsList) {
+		this.salesSetGoodsList = salesSetGoodsList;
+	}
+}

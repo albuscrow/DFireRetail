@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+    
+    <ImageView 
+        android:id="@+id/good_image"
+        android:layout_width="wrap_content"
+        android:src="@drawable/ic_launcher"
+        android:layout_height="wrap_content" />
+	
+    <TextView 
+        android:id="@+id/good_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/good_image"
+        android:text="城城需要需要无可奈何"/>
+    
+    <TextView 
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/good_price"
+        android:textColor="#f00"
+        android:layout_toRightOf="@id/good_image"
+        android:layout_alignBottom="@id/good_image"
+        android:text="￥17.5"/>
+
+</RelativeLayout>

@@ -1,0 +1,162 @@
+package com.dihuo.twodfire.retail.activity.goodsmanager;
+
+import com.dihuo.twodfire.retail.R;
+
+import android.os.Bundle;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
+import android.widget.CompoundButton.OnCheckedChangeListener;
+import android.widget.EditText;
+import android.widget.TextView;
+
+/**
+ * The Class SaleSettingActivity.
+ * 
+ * @author albuscrow
+ */
+public class SaleSettingActivity extends GoodsManagerBaseActivity implements OnClickListener, OnCheckedChangeListener{
+	
+	/* (non-Javadoc)
+	 * @see com.dihuo.twodfire.retail.activity.goodsmanager.GoodsManagerBaseActivity#onCreate(android.os.Bundle)
+	 */
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_sale_setting);
+		switchToEditMode();
+		findViewById(R.id.title_left).setOnClickListener(this);
+		findViewById(R.id.title_right).setOnClickListener(this);
+		
+		setEditTextContent(R.id.ticheng,"销售提成比例(%)","","");
+
+		setCheckBoxContent(R.id.jifen, "不参与积分" ,false, null);
+		setCheckBoxContent(R.id.youhui, "不参任何活动" ,false, null);
+		
+		setCheckBoxContent(R.id.isOpen, "是否启用", true, this);
+		setEditTextContent(R.id.zhekou, "折扣(%)", "", "");
+		setSpinerConetent(R.id.beginTime, "开始时间", "点击选择");;
+		setSpinerConetent(R.id.endTime, "开始时间", "点击选择");;
+		setCheckBoxContent(R.id.huiyuanzhuanxiang, "会员专享", false, null);
+	}
+	
+	/**
+	 * Show tejis shezhi.
+	 */
+	void showTejisShezhi(){
+		findViewById(R.id.zhekou).setVisibility(View.VISIBLE);;
+		findViewById(R.id.beginTime).setVisibility(View.VISIBLE);;
+		findViewById(R.id.endTime).setVisibility(View.VISIBLE);;
+		findViewById(R.id.huiyuanzhuanxiang).setVisibility(View.VISIBLE);;
+	};
+	
+	/**
+	 * Hide tejia shezhi.
+	 */
+	void hideTejiaShezhi(){
+		findViewById(R.id.zhekou).setVisibility(View.GONE);;
+		findViewById(R.id.beginTime).setVisibility(View.GONE);;
+		findViewById(R.id.endTime).setVisibility(View.GONE);;
+		findViewById(R.id.huiyuanzhuanxiang).setVisibility(View.GONE);;
+	}
+	
+	/**
+	 * Sets the check box content.
+	 * 
+	 * @param id
+	 *            the id
+	 * @param label
+	 *            the label
+	 * @param b
+	 *            the b
+	 * @param listener
+	 *            the listener
+	 */
+	private void setCheckBoxContent(int id, String label, boolean b, OnCheckedChangeListener listener) {
+		View layout = findViewById(id);
+		TextView labelText = (TextView) layout.findViewById(R.id.check_title);
+		labelText.setText(label);
+		CheckBox checkBox = (CheckBox) layout.findViewById(R.id.checkbox);
+		checkBox.setOnCheckedChangeListener(listener);
+		checkBox.setChecked(b);
+				
+	}
+	
+
+	/**
+	 * Sets the spiner conetent.
+	 * 
+	 * @param tongbu
+	 *            the tongbu
+	 * @param label
+	 *            the label
+	 * @param value
+	 *            the value
+	 */
+	private void setSpinerConetent(int tongbu, String label, String value) {
+		View layout = findViewById(tongbu);
+		TextView tongbuLable = (TextView) layout.findViewById(R.id.main);
+		tongbuLable.setText(label);
+		TextView tongbuValue = (TextView) layout.findViewById(R.id.secend);
+		tongbuValue.setText(value);
+		
+	}
+
+	/**
+	 * Sets the edit text content.
+	 * 
+	 * @param id
+	 *            the id
+	 * @param lable
+	 *            the lable
+	 * @param content
+	 *            the content
+	 * @param hint
+	 *            the hint
+	 */
+	private void setEditTextContent(int id, String lable, String content,
+			String hint) {
+		View layout = findViewById(id);
+		TextView lableView = (TextView) layout.findViewById(R.id.main);
+		if (lable != null) {
+			lableView.setText(lable);
+		}
+		EditText inputView = (EditText) layout.findViewById(R.id.secend);
+		inputView.setHint(hint);
+		if (content != null) {
+			inputView.setText(content);
+		}
+		
+	}
+
+	/* (non-Javadoc)
+	 * @see android.view.View.OnClickListener#onClick(android.view.View)
+	 */
+	@Override
+	public void onClick(View v) {
+		switch (v.getId()) {
+		case R.id.title_left:
+			
+			break;
+		case R.id.title_right:
+			
+			break;
+
+		default:
+			break;
+		}
+	}
+
+	/* (non-Javadoc)
+	 * @see android.widget.CompoundButton.OnCheckedChangeListener#onCheckedChanged(android.widget.CompoundButton, boolean)
+	 */
+	@Override
+	public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+		if (isChecked) {
+			showTejisShezhi();
+		}else{
+			hideTejiaShezhi();
+		}
+	}
+}

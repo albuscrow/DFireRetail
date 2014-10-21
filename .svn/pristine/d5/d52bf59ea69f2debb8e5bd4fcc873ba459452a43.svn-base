@@ -1,0 +1,136 @@
+package com.dihuo.twodfire.retail.activity.goodsmanager;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import com.dihuo.twodfire.retail.R;
+import com.dihuo.twodfire.retail.data.CategoryVo;
+import com.dihuo.twodfire.retail.global.Constants;
+import com.dihuo.twofire.retail.adapter.GoodsSortListAdapter;
+import com.dohuo.twofire.retail.network.AsyncHttpPost;
+import com.dohuo.twofire.retail.network.RequestParameter;
+import com.dohuo.twofire.retail.network.RequestResultCallback;
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+import com.google.gson.reflect.TypeToken;
+
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ListView;
+
+public class GoodsSortListActivity extends GoodsManagerBaseActivity implements
+		OnItemClickListener, OnClickListener {
+	
+	private ListView sorts;
+	private ArrayList<Category> categorys;
+
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_goods_sort_layout);
+		setTitleText("商品分类");
+		hideRight();
+		setLeftBtn(R.drawable.shutdown, "");
+		setBack();
+		sorts = (ListView) findViewById(R.id.goods_sort_list);
+		findViewById(R.id.add).setOnClickListener(this);
+	}
+	
+	@Override
+	protected void onResume() {
+		getCategoryList();
+		super.onResume();
+	}
+
+	@Override
+	public void onItemClick(AdapterView<?> parent, View view, int position,
+			long id) {
+		ArrayList<Category> parentCategorys = new ArrayList<Category>();
+		for (Category item : categorys) {
+			if (item.depth < 3) {
+				parentCategorys.add(item);
+			}
+		}
+		startActivity(new Intent(this, GoodsSortDetailActivity.class)
+		.putExtra("category", categorys.get(position))
+		.putExtra("mode", GoodsSortDetailActivity.EDIT)
+		.putExtra("parentCategory", parentCategorys));
+	}
+	
+	private void getCategory(String parentName, List<CategoryVo> categoryVo,
+					String parent, List<Category> categorys, int depth) {
+		for (CategoryVo item : categoryVo) {
+			Category category = new Category();
+			if (parent.length() != 0) {
+				category.parents = parent.substring(0, parent.length() - 1);
+				category.parentName = parentName;
+			}
+			category.name = item.getName();
+			category.id = item.getId();
+			category.depth = depth;
+			category.original = item;
+			categorys.add(category);
+			if (item.getCategoryList() != null) {
+				getCategory(item.getName(), item.getCategoryList(), parent + item.getName() + "-", categorys, depth + 1);
+			}
+		}
+	}
+	
+	private void getCategoryList() {
+		getProgressDialog().show();
+		RequestParameter params = new RequestParameter(true);
+		params.setUrl(Constants.BASE_URL+"category/list");
+		new AsyncHttpPost(params, new RequestResultCallback() {
+
+			public void onSuccess(String str) {
+				System.out.println(str);
+				JsonObject result = new JsonParser().parse(str).getAsJsonObject();
+				if (!result.get("returnCode").getAsString().equals("success")) {
+					return;
+				}else{
+					List<CategoryVo> categoryVo =  new Gson().fromJson(result.get("categoryList"), new TypeToken<List<CategoryVo>>(){}.getType());
+					categorys = new ArrayList<Category>();
+					getCategory("", categoryVo,"",categorys, 0);
+					List<String> categorysString = new ArrayList<String>();
+					for (Category item : categorys) {
+						categorysString.add(item.name);
+					}
+					sorts.setAdapter(new GoodsSortListAdapter(GoodsSortListActivity.this, categorys));
+					sorts.setOnItemClickListener(GoodsSortListActivity.this);
+				}
+				getProgressDialog().dismiss();
+			}	
+
+			@Override
+			public void onFail(Exception e) {
+				e.printStackTrace();
+			}
+		}).execute();
+	}
+
+	@Override
+	public void onClick(View v) {
+		switch (v.getId()) {
+		case R.id.add:
+			ArrayList<Category> parentCategorys = new ArrayList<Category>();
+			for (Category item : categorys) {
+				if (item.depth < 3) {
+					parentCategorys.add(item);
+				}
+			}
+			startActivity(new Intent(this, GoodsSortDetailActivity.class)
+			.putExtra("parentCategory", parentCategorys)
+			.putExtra("mode", GoodsSortDetailActivity.ADD));
+			break;
+
+		default:
+			break;
+		}
+	}
+
+}

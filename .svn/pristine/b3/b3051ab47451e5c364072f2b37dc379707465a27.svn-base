@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/login_bj" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#8fff"
+        android:orientation="vertical" >
+        
+	    <TextView
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:background="#e8ecef"
+	        android:padding="10dp"
+	        android:text="销售设置"
+	        android:textSize="18sp"
+	        android:textStyle="bold" />
+	    
+		<include
+            android:id="@+id/ticheng"
+            layout="@layout/set_edit_textview" />
+		
+        <include
+            android:id="@+id/jifen"
+            layout="@layout/checkbox" />
+        
+        <include
+            android:id="@+id/youhui"
+            layout="@layout/checkbox" />
+        
+ 	    <TextView 
+		    android:layout_marginTop="30dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#e8ecef"
+            android:padding="10dp"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:text="特价设置"/>       
+            
+        <include
+            android:id="@+id/isOpen"
+            layout="@layout/checkbox" />
+        
+		<include
+            android:id="@+id/zhekou"
+            layout="@layout/set_edit_textview" />
+		
+        <include
+            android:id="@+id/beginTime"
+            layout="@layout/next_down" />
+        
+        <include
+            android:id="@+id/endTime"
+            layout="@layout/next_down" />
+        
+        <include
+            android:id="@+id/huiyuanzhuanxiang"
+            layout="@layout/checkbox" />
+		
+    </LinearLayout>
+
+</ScrollView>

@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="setting_payway_type_array">
+        <item>现金</item>
+        <item>银行卡</item>
+        <item>优惠</item>
+        <item>自己发行的储值卡</item>
+        <item>免单</item>
+        <item>挂账</item>
+        <item>第三方结算</item>
+    </string-array>
+    
+    <string-array name="setting_role">
+        <item>总部</item>
+        <item>区域代理</item>
+        <item>店长</item>
+        <item>收银员</item>
+        <item>销售导购</item>
+        <item>供应商</item>
+    </string-array>
+    
+    <string-array name="setting_checkstand">
+        <item>收银台权限</item>
+        <item>收银</item>
+        <item>同类商品合并</item>
+        <item>挂单</item>
+        <item>取单</item>
+        <item>删单</item>
+        <item>退货</item>
+        <item>打折</item>
+        <item>交接班</item>
+    </string-array>
+    
+    <string-array name="role_pre_proscenium">
+        <item>收银台</item>
+        <item>会员</item>
+        <item>交易流水</item>
+        <item>消息中心</item>
+        <item>系统参数</item>
+        <item>物流管理</item>
+    </string-array>
+    
+    <string-array name="role_bg_proscenium">
+        <item>商品管理</item>
+        <item>会员管理</item>
+        <item>营销管理</item>
+        <item>报表中心</item>
+        <item>物流管理</item>
+        <item>库存管理</item>
+        <item>门店管理</item>
+        <item>系统管理</item>
+    </string-array>
+    
+    <string-array name="member_permission">
+        <item>会员权限</item>
+        <item>会员</item>
+        <item>新开会员</item>
+        <item>会员修改</item>
+        <item>会员充值</item>
+        <item>积分兑换</item>
+        <item>充值报表</item>
+        <item>会员挂失</item>
+        <item>会员激活</item>
+        <item>导入</item>
+        <item>导出</item>
+    </string-array>
+    
+    <string-array name="bill_permission">
+        <item>账单权限</item>
+        <item>交易流水</item>
+        <item>查看全部</item>
+        <item>查看个人报表</item>
+        <item>收银汇总</item>
+        <item>退货清单</item>
+        <item>导入</item>
+        <item>导出</item>
+        <item>打印报表</item>
+    </string-array>
+    
+    <string-array name="message_permission">
+        <item>消息权限</item>
+        <item>消息中心</item>
+        <item>库存预警</item>
+        <item>过期预警</item>
+        <item>促销信息</item>
+        <item>订单信息</item>
+        <item>生日提醒</item>
+        <item>其它信息</item>
+        <item>删除信息</item>
+        <item>打印信息</item>
+    </string-array>
+    
+    <string-array name="system_param_permission">
+        <item>系统参数权限</item>
+        <item>系统参数</item>
+        <item>门店信息</item>
+        <item>通讯录</item>
+        <item>更换背景</item>
+        <item>更换收银机</item>
+        <item>上传数据</item>
+        <item>下载更新</item>
+        <item>清空数据</item>
+        <item>更改密码</item>
+        <item>打印模板</item>
+        <item>收银打印</item>
+    </string-array>
+    
+    <string-array name="logistics_permission">
+        <item>物流权限</item>   
+        <item>门店叫货</item>
+        <item>门店收货</item>
+        <item>直配收货</item>
+        <item>门店调货</item>
+        <item>删除订单</item>
+        <item>打印信息</item>
+        <item>库存盘点</item>
+        <item>隐藏进货价</item>
+    </string-array>
+    
+    <string-array name="business_type">
+        <item>单店版</item>   
+        <item>连锁版</item>
+    </string-array>
+</resources>

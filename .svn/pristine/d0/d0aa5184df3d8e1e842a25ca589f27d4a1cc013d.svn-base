@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/transparent"
+    android:paddingLeft="10dp"
+    android:paddingRight="10dp"
+    android:paddingBottom="15dp"
+    android:orientation="vertical" >
+    <TextView
+        android:layout_width="match_parent"
+    	android:layout_height="wrap_content"
+    	android:minHeight="50dp"
+        android:text="@string/store_add_title" 
+        android:layout_gravity="center_horizontal"
+        android:gravity="center_horizontal|center_vertical"
+        android:background="@drawable/textshape"
+        />
+    	<View android:layout_width="match_parent"
+    	android:layout_height="1px"
+    	android:background="@color/black"
+    	/>
+       <Button
+        android:layout_width="match_parent"
+    	android:layout_height="wrap_content"
+    	android:minHeight="50dp"
+    	android:background="@color/white"
+        android:text="@string/store_add_ablum" 
+        android:tag="3"
+        android:onClick="addClick"
+        android:textColor="#7B68EE"
+        />
+       	<View android:layout_width="match_parent"
+    	android:layout_height="1px"
+    	android:background="@color/black"
+    	/>
+        <Button
+        android:layout_width="match_parent"
+    	android:layout_height="wrap_content"
+    	android:minHeight="50dp"
+    	android:background="@drawable/textradius"
+    	android:textColor="#7B68EE"
+        android:text="@string/store_add_capture" 
+        android:tag="2"
+        android:onClick="addClick"
+        />
+        
+       <View android:layout_width="match_parent"
+    	android:layout_height="6dp"
+    	android:background="@null"
+    	/>
+       <Button
+        android:layout_width="match_parent"
+    	android:layout_height="wrap_content"
+    	android:minHeight="50dp"
+    	android:tag="4"
+    	android:onClick="addClick"
+    	android:background="@drawable/radius"
+    	android:textColor="#7B68EE"
+
+        android:text="@string/store_add_cancel" 
+        />
+
+</LinearLayout>

@@ -1,0 +1,78 @@
+package com.dihuo.twodfire.retail.activity.setting;
+
+import android.os.Bundle;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.EditText;
+import android.widget.TextView;
+
+import com.dihuo.twodfire.retail.R;
+import com.dihuo.twodfire.retail.activity.TitleActivity;
+
+public class AccountPWActivity extends TitleActivity implements OnClickListener {
+    
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.setting_account_password);
+        
+
+        View view = findViewById(R.id.cancel_title);
+        view.findViewById(R.id.title_left_btn).setOnClickListener(this);
+        view.findViewById(R.id.title_right_btn).setOnClickListener(this);
+        TextView text = (TextView) view.findViewById(R.id.titleText);
+        text.setText(R.string.password_change);
+        
+        //原信息从login中拿去
+        view = findViewById(R.id.user_name);
+        text = (TextView) view.findViewById(R.id.main);
+        text.setText(R.string.account_name);
+        text = (TextView) view.findViewById(R.id.secend);
+        text.setText("13888888888");
+        
+        view = findViewById(R.id.user_number);
+        text = (TextView) view.findViewById(R.id.main);
+        text.setText(R.string.account_name_number);
+        text = (TextView) view.findViewById(R.id.secend);
+        text.setText("0001");
+        
+        view = findViewById(R.id.current_password);
+        text = (TextView) view.findViewById(R.id.main);
+        text.setText(R.string.old_password);
+        EditText edit = (EditText) view.findViewById(R.id.edit);
+        edit.setText("13888888888");
+        edit.setOnClickListener(this);
+        
+        view = findViewById(R.id.new_password);
+        text = (TextView) view.findViewById(R.id.main);
+        text.setText(R.string.new_password);
+        edit = (EditText) view.findViewById(R.id.edit);
+        edit.setText("1388888888");
+        edit.setOnClickListener(this);
+        
+        view = findViewById(R.id.again_password);
+        text = (TextView) view.findViewById(R.id.main);
+        text.setText(R.string.new_password_again);
+        edit = (EditText) view.findViewById(R.id.edit);
+        edit.setText("1388888888");
+        edit.setOnClickListener(this);
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+        case R.id.title_left_btn:
+            finish();
+            break;
+
+        case R.id.title_right_btn:
+            finish();
+            break;
+            
+        case R.id.edit:
+            ((EditText)v).setText(null);
+            break;
+        }
+    }
+    
+}

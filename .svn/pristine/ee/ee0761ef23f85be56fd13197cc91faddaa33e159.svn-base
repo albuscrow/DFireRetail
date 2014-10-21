@@ -1,0 +1,173 @@
+package com.dihuo.twodfire.retail.activity.setting;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import android.os.Bundle;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
+import android.widget.CompoundButton.OnCheckedChangeListener;
+import android.widget.TextView;
+
+import com.dihuo.twodfire.retail.R;
+import com.dihuo.twodfire.retail.RetailApplication;
+import com.dihuo.twodfire.retail.activity.TitleActivity;
+import com.dihuo.twodfire.retail.data.ConfigItemOptionVo;
+import com.dihuo.twodfire.retail.global.Constants;
+import com.dihuo.twodfire.retail.widget.spinner.SpinerPopWindow;
+import com.dihuo.twodfire.retail.widget.spinner.AbstractSpinerAdapter.IOnItemSelectListener;
+import com.dihuo.twofire.retail.util.ToastUtil;
+import com.dohuo.twofire.retail.network.AsyncHttpPost;
+import com.dohuo.twofire.retail.network.RequestParameter;
+import com.dohuo.twofire.retail.network.RequestResultCallback;
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+import com.google.gson.reflect.TypeToken;
+
+
+public class ParamSettingActivity extends TitleActivity 
+    implements OnCheckedChangeListener, OnClickListener, IOnItemSelectListener {
+    
+    private SpinerPopWindow mSpinerPopWindow;
+	private TextView zeroInputText;
+	private ArrayList<String> nameList;
+	private int currentLingtou;
+	private boolean currentFu;
+
+	@Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.setting_param);
+        setTitleRes(R.string.param_setting);
+        showBackbtn();
+        
+        View view = findViewById(R.id.goods_stock);
+        TextView text = (TextView) view.findViewById(R.id.check_title);
+        text.setText(R.string.goods_stock);
+        CheckBox check = (CheckBox) view.findViewById(R.id.checkbox);
+        check.setChecked(false);
+        check.setOnCheckedChangeListener(this);
+        
+        View zeroView = findViewById(R.id.odd_dispose);
+        
+        TextView zeroLabel = (TextView) zeroView.findViewById(R.id.main);
+        zeroLabel.setText(R.string.odd_dispose);
+        
+        zeroInputText = (TextView) zeroView.findViewById(R.id.secend);
+        zeroInputText.setText("不抹零");
+        zeroInputText.setOnClickListener(this);
+        
+        
+        mSpinerPopWindow = new SpinerPopWindow(this);
+        
+        
+        getParams();
+        getLingTou();
+
+        findViewById(R.id.title_right).setOnClickListener(this);
+    }
+
+    private void getLingTou() {
+    	RequestParameter params = new RequestParameter(true);
+    	params.setUrl(Constants.BASE_URL+"config/getRemnantModelList");
+    	new AsyncHttpPost(params, new RequestResultCallback() {
+			
+			@Override
+			public void onSuccess(String str) {
+				JsonObject jsonObject = new JsonParser().parse(str).getAsJsonObject();
+				String returnCode = jsonObject.get("returnCode").getAsString();
+				if (!returnCode.equals("success")) {
+					ToastUtil.showShortToast(ParamSettingActivity.this, "获取零头处理方式失败");
+					return;
+				}
+				List<ConfigItemOptionVo> lingtous = new Gson().fromJson(jsonObject.get("remnantModelList"), new TypeToken<List<ConfigItemOptionVo>>(){}.getType());
+				nameList = new ArrayList<String>();
+				for (ConfigItemOptionVo item : lingtous) {
+					nameList.add(item.getName());
+				}
+				mSpinerPopWindow.refreshData(nameList, 0);
+				mSpinerPopWindow.setItemListener(ParamSettingActivity.this);
+			}
+			
+			@Override
+			public void onFail(Exception e) {
+				e.printStackTrace();
+			}
+		}).execute();
+	}
+
+	private void getParams() {
+    	RequestParameter params = new RequestParameter(true);
+    	params.setUrl(Constants.BASE_URL+"config/detail");
+    	params.setParam("shopId", RetailApplication.getmShopInfo().getShopId());
+    	new AsyncHttpPost(params, new RequestResultCallback() {
+			
+			@Override
+			public void onSuccess(String str) {
+				System.out.println(str);
+			}
+			
+			@Override
+			public void onFail(Exception e) {
+				e.printStackTrace();
+			}
+		}).execute();
+	}
+
+	@Override
+    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+		currentFu = isChecked;
+	}
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+        case R.id.secend:
+        	mSpinerPopWindow.setWidth(zeroInputText.getWidth());
+        	mSpinerPopWindow.showAsDropDown(zeroInputText);
+        	
+        case R.id.title_right:
+        	save();
+        	break;
+
+        default:
+            break;
+        }
+    }
+
+	private void save() {
+		RequestParameter params = new RequestParameter(true);
+		params.setUrl(Constants.BASE_URL+"config/setting");
+		if (currentFu) {
+			params.setParam("negativestoreStatus", 1);
+		}else{
+			params.setParam("negativestoreStatus", 2);
+		}
+		params.setParam("remnantModel", currentLingtou);
+		new AsyncHttpPost(params, new RequestResultCallback() {
+			
+			@Override
+			public void onSuccess(String str) {
+				System.out.println(str);
+				change2saveFinishMode();
+			}
+			
+			@Override
+			public void onFail(Exception e) {
+				e.printStackTrace();
+			}
+		}).execute();
+	}
+
+	@Override
+	public void onItemClick(int pos) {
+		zeroInputText.setText(nameList.get(pos));
+		currentLingtou = pos + 1;
+		change2saveMode();
+	}
+    
+}

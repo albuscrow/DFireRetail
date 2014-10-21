@@ -1,0 +1,112 @@
+/**
+ * 
+ */
+package com.dihuo.twodfire.retail.global;
+
+import android.R.integer;
+
+/**
+ * 商店信息
+ * 
+ * @author qiuch
+ * 
+ */
+public class ShopInfo {
+	private String shopId;//商户ID
+	private String shopName;//商户名
+	private String shortName;//商户简称
+	private String address;//地址
+	private int provinceId;//省份ID
+	private int cityId;//城市ID
+	private int countyId;//区县ID
+	private int streetId;//街道ID
+	private String phone1;//联系电话一
+	private String phone2;//联系电话二
+	private String parentId;//上级商户ID
+
+	public String getShopId() {
+		return shopId;
+
+	}
+
+	public void setShopId(String shopId) {
+		this.shopId = shopId;
+	}
+
+	public String getShopName() {
+		return shopName;
+	}
+
+	public void setShopName(String shopName) {
+		this.shopName = shopName;
+	}
+
+	public String getShortName() {
+		return shortName;
+	}
+
+	public void setShortName(String shortName) {
+		this.shortName = shortName;
+	}
+
+	public String getAddress() {
+		return address;
+
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	
+	public int getProvinceId() {
+		return provinceId;
+	}
+
+	public void setProvinceId(int provinceId) {
+		this.provinceId = provinceId;
+	}
+
+	public int getCityId() {
+		return cityId;
+	}
+
+	public void setCityId(int cityId) {
+		this.cityId = cityId;
+	}
+
+	public int getCountyId() {
+		return countyId;
+	}
+
+	public void setCountyId(int countyId) {
+		this.countyId = countyId;
+	}
+
+	public int getStreetId() {
+		return streetId;
+	}
+
+	public void setStreetId(int streetId) {
+		this.streetId = streetId;
+	}
+
+	public String getPhone1(){
+		return phone1;
+		
+	}public void setPhone1(String phone1) {
+		this.phone1 = phone1;
+	}
+	public String getPhone2(){
+		return phone2;
+		
+	}public void setPhone2(String phone2) {
+		this.phone2 = phone2;
+	}
+	public String getParentId(){
+		return parentId;
+		
+	}public void setParentId(String parentId) {
+		this.parentId = parentId;
+	}
+}

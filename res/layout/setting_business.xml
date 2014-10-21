@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <ListView
+        android:id="@+id/setting_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/setting_payway_bottom"
+        android:background="@color/setting_list_bg"
+        android:cacheColorHint="@color/transparent"
+        android:footerDividersEnabled="false"
+        android:paddingLeft="@dimen/setting_payway_left"
+        android:paddingRight="@dimen/setting_payway_left"
+        android:scrollbars="none" />
+
+    <ImageButton
+        android:id="@+id/help"
+        style="@style/title_btn_style"
+        android:layout_gravity="bottom"
+        android:contentDescription="@string/help"
+        android:paddingBottom="5dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:paddingTop="5dp"
+        android:src="@drawable/ico_help" />
+
+</merge>

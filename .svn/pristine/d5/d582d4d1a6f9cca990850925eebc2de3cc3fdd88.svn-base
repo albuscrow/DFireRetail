@@ -1,0 +1,257 @@
+/**
+ * 
+ */
+package com.dihuo.twodfire.retail.activity.login;
+
+import org.json.JSONException;
+
+import android.content.Intent;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.util.Log;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.view.View.OnFocusChangeListener;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.Toast;
+
+import com.dihuo.twodfire.retail.R;
+import com.dihuo.twodfire.retail.RetailApplication;
+import com.dihuo.twodfire.retail.activity.TitleActivity;
+import com.dihuo.twodfire.retail.activity.retailmanager.RetailBGdetailActivity;
+import com.dihuo.twodfire.retail.common.CommonUtils;
+import com.dihuo.twodfire.retail.common.DateDialog;
+import com.dihuo.twodfire.retail.data.ShopVo;
+import com.dihuo.twodfire.retail.global.Constants;
+import com.dihuo.twodfire.retail.netData.LoginResult;
+import com.dihuo.twofire.retail.util.MD5;
+import com.dihuo.twofire.retail.util.ToastUtil;
+import com.dohuo.twofire.retail.network.AsyncHttpPost;
+import com.dohuo.twofire.retail.network.RequestParameter;
+import com.dohuo.twofire.retail.network.RequestResultCallback;
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+
+/**
+ * 登录
+ * 
+ * @author qiuch
+ * 
+ */
+public class LoginActivity extends TitleActivity {
+	
+	private static final String TAG="LoginActivity";
+
+
+	private EditText mShop, mUserName, mPassword;
+	private ImageView mShopClear, mUserNameClear, mPasswordClaear;
+	private Button mLogin;
+	LoginResult mResultData;
+
+
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.login_layout);
+
+		findviews();
+	}
+
+	private void findviews() {
+		setTitleRes(R.string.login_title);
+		setRightBtn(R.drawable.help).setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				new DateDialog(LoginActivity.this).show();
+				// new CardTypeDialog(LoginActivity.this).show();
+
+			}
+		});
+
+		mShop = (EditText) findViewById(R.id.edit_shop_num);
+		mUserName = (EditText) findViewById(R.id.edit_user_name);
+		mPassword = (EditText) findViewById(R.id.edit_pass);
+		
+
+
+		mShopClear = (ImageView) findViewById(R.id.edit_shop_num_clear);
+		mUserNameClear = (ImageView) findViewById(R.id.edit_user_name_clear);
+		mPasswordClaear = (ImageView) findViewById(R.id.edit_pass_clear);
+		mLogin = (Button) findViewById(R.id.loigin_button);
+		
+		
+
+		mShopClear.setVisibility(View.VISIBLE);
+		mShop.setOnFocusChangeListener(new OnFocusChangeListener() {
+
+			@Override
+			public void onFocusChange(View v, boolean hasFocus) {
+				
+				if (hasFocus) {
+					mShopClear.setVisibility(View.VISIBLE);
+				} else {
+					mShopClear.setVisibility(View.INVISIBLE);
+					mLogin.setBackgroundResource(R.drawable.login_btn_press);
+					mLogin.setClickable(true);
+				}
+			}
+		});
+
+		mUserName.setOnFocusChangeListener(new OnFocusChangeListener() {
+
+			@Override
+			public void onFocusChange(View v, boolean hasFocus) {
+				if (hasFocus) {
+					mUserNameClear.setVisibility(View.VISIBLE);
+				} else {
+					mUserNameClear.setVisibility(View.INVISIBLE);
+				}
+			}
+		});
+
+		mPassword.setOnFocusChangeListener(new OnFocusChangeListener() {
+
+			@Override
+			public void onFocusChange(View v, boolean hasFocus) {
+				if (hasFocus) {
+					mPasswordClaear.setVisibility(View.VISIBLE);
+				} else {
+					mPasswordClaear.setVisibility(View.INVISIBLE);
+				}
+			}
+		});
+
+		mLogin.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				
+				//Intent intent = new Intent(LoginActivity.this, RetailBGdetailActivity.class);
+				//startActivity(intent);
+				
+				if (CommonUtils.isEmpty(mShop.getText().toString())) {
+					Toast.makeText(LoginActivity.this, "请输入店家编号",
+							Toast.LENGTH_SHORT).show();
+					return;
+				}
+
+				if (CommonUtils.isEmpty(mUserName.getText().toString())) {
+					Toast.makeText(LoginActivity.this, "请输入员工",
+							Toast.LENGTH_SHORT).show();
+					return;
+				}
+				if (CommonUtils.isEmpty(mPassword.getText().toString())) {
+					Toast.makeText(LoginActivity.this, "请输入密码",
+							Toast.LENGTH_SHORT).show();
+					return;
+				}
+				
+				//new LoginTask().execute();
+				//显示进度条对话框
+
+				getProgressDialog().setCancelable(false);
+				// progressDialog.setCanceledOnTouchOutside(false);
+				getProgressDialog()
+						.setMessage(getResources().getText(R.string.in_login));
+				getProgressDialog().show();
+				
+				//传递请求参数
+				RequestParameter parameters = new RequestParameter();
+				parameters.setUrl(Constants.LOGIN);
+				String strPass="";
+				strPass = MD5.GetMD5Code(mPassword.getText().toString());
+				parameters.setParam("shopCode", mShop.getText().toString());
+				parameters.setParam("username", mUserName.getText().toString());
+				parameters.setParam("password", strPass);
+	
+				
+				AsyncHttpPost httppost = new AsyncHttpPost(parameters,
+		        new RequestResultCallback() {
+			        @Override
+			        public void onSuccess(String str) {
+			        	RetailApplication.setShopVo(new Gson().fromJson(new JsonParser().parse(str).getAsJsonObject().get("shop"), ShopVo.class));
+                        Log.e("results", str);
+                        Message msg = new Message();
+                        if(CommonUtils.isResuestSucess(str)){
+                        	msg.what = Constants.HANDLER_SUCESS;
+                            msg.obj = str;
+                        }
+                        else{
+                        	msg.what = Constants.HANDLER_ERROR;
+                        	msg.obj = CommonUtils.getUMFailMsg(getBaseContext(),str);
+                        }
+
+                        mLoginHandler.sendMessage(msg);
+			        }
+			        @Override
+			        public void onFail(Exception e) {
+                        e.printStackTrace();
+                        Log.e("results", "Login FaiL");
+                        Message msg = new Message();
+                        msg.what = Constants.HANDLER_FAIL;
+                        msg.obj = e.getMessage();
+                        mLoginHandler.sendMessage(msg);
+			        }
+		        });
+				httppost.execute();
+		
+		
+			}
+		});
+
+		//被陆哲琪注释，以方便调试
+//		mLogin.setClickable(false);
+
+	}
+
+	/**
+	 * 处理返回的结果，如果成功解析网络返回的json数据
+	 */
+	Handler mLoginHandler = new Handler(){
+		@Override
+		public void handleMessage(Message msg) {
+			getProgressDialog().dismiss();
+			
+			switch (msg.what) {
+				case Constants.HANDLER_SUCESS:
+					
+					try {
+						parserJson(msg.obj.toString());
+					} catch (JSONException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					startActivity(new Intent(LoginActivity.this, RetailBGdetailActivity.class));
+				break;
+				
+				case Constants.HANDLER_FAIL:
+				    if (msg.obj != null) {
+    					ToastUtil.showShortToast(getApplicationContext(),
+    					        msg.obj.toString());
+				    }
+					break;
+				case Constants.HANDLER_ERROR:
+				    if (msg.obj != null) {
+    					ToastUtil.showShortToast(getApplicationContext(),
+    				        msg.obj.toString());
+				    }
+					break;
+			}
+		}
+	};
+	
+	//解析json数据
+	protected void parserJson(String result) throws JSONException {
+		mResultData=new LoginResult(result);	
+		//save the login info in application
+		RetailApplication.setLoginResult(mResultData);
+		Log.i(TAG," jsessionId =  "+mResultData.getJsessionId());
+	}
+	
+	
+}
