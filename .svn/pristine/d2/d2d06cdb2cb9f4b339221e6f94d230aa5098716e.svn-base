@@ -1,0 +1,5 @@
+package com.dfire.retail.app.manage.activity.item;
+
+public class StoreOrderGoodsItem {
+
+}

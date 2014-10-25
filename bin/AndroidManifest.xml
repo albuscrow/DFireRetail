@@ -539,6 +539,12 @@
             android:theme="@android:style/Theme.Light.NoTitleBar" >
         </activity>
         <activity
+            android:name="com.dfire.retail.app.manage.activity.stockmanager.StockListActivity"
+            android:configChanges="keyboardHidden|navigation|orientation"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Light.NoTitleBar" >
+        </activity>
+        <activity
             android:name="com.dfire.retail.app.manage.activity.stockmanager.StockCheckRecordActivity"
             android:configChanges="keyboardHidden|navigation|orientation"
             android:screenOrientation="portrait"
@@ -568,6 +574,14 @@
         <!-- 消息管理 -->
         <activity
             android:name="com.dfire.retail.app.manage.activity.messagemanage.MessageManangeActivity"
+            android:configChanges="keyboardHidden|navigation|orientation"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Light.NoTitleBar" >
+        </activity>
+        
+       <!-- 店家信息 -->
+        <activity
+            android:name="com.dfire.retail.app.manage.activity.shopmanager.ShopInfoActivity"
             android:configChanges="keyboardHidden|navigation|orientation"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Light.NoTitleBar" >

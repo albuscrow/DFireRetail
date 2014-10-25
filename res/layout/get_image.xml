@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="8dp" >
+    
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/batch_background"
+        android:orientation="vertical" >
+    
+    <Button
+        android:id="@+id/from_camera"
+        android:layout_width="match_parent"
+        android:textColor="#87bbdd"
+        android:layout_height="wrap_content"
+        android:background="@null"
+        android:padding="15dp"
+        android:text="拍照"
+        android:textSize="18sp" />
+    
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#959595" />
+
+    <Button
+        android:id="@+id/from_ablum"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@null"
+        android:textColor="#87bbdd"
+        android:padding="15dp"
+        android:text="从手机相册获取"
+        android:textSize="18sp" />
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/cancel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/batch_background"
+        android:padding="15dp"
+        android:textColor="#87bbdd"
+        android:text="取消"
+        android:textSize="18sp" />
+
+</LinearLayout>

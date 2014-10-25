@@ -1,0 +1,15 @@
+package com.dfire.retail.app.manage.data;
+
+import java.io.Serializable;
+import java.util.List;
+
+//省份信息
+public class ProvinceVo implements Serializable {
+	
+	private static final String TAG = "ProvinceVo";
+	
+	//基本数据类型
+	Integer provinceId;
+	String provinceName;
+	List<CityVo> cityVoList;
+}
