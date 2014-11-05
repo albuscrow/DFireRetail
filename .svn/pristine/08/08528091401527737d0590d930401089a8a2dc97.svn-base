@@ -1,0 +1,277 @@
+package com.dfire.retail.app.manage.activity.retailmanager;
+
+import android.app.DatePickerDialog;
+import android.app.DatePickerDialog.OnDateSetListener;
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.DatePicker;
+import android.widget.ImageView;
+import android.widget.ListView;
+import android.widget.TextView;
+
+import com.dfire.retail.app.manage.R;
+import com.dfire.retail.app.manage.activity.TitleActivity;
+import com.dfire.retail.app.manage.adapter.EmployeeInfoDetailAdapter;
+import com.dfire.retail.app.manage.adapter.EmployeeInfoDetailItem;
+import com.dfire.retail.app.manage.data.DicVo;
+import com.dfire.retail.app.manage.data.RoleVo;
+import com.dfire.retail.app.manage.data.ShopVo;
+import com.dfire.retail.app.manage.data.UserVo;
+import com.dfire.retail.app.manage.util.Utility;
+import com.dfire.retail.app.manage.widget.spinner.AbstractSpinerAdapter.IOnItemSelectListener;
+import com.dfire.retail.app.manage.widget.spinner.SpinerPopWindow;
+
+import java.util.ArrayList;
+import java.util.Calendar;
+
+public class EmployeeDetailActivity extends TitleActivity implements
+        OnClickListener{
+
+    private UserVo mEmployee;
+    
+    ArrayList<EmployeeInfoDetailItem> mList;
+    private ListView mListView;
+    private EmployeeInfoDetailAdapter mAdapter;
+
+    private SpinerPopWindow _shopPopupWindow;
+    private SpinerPopWindow _rolePopupWindow;
+    private SpinerPopWindow _sexPopupWindow;
+    private SpinerPopWindow _identityPopupWindow;
+    private DatePickerDialog _inDateDialog;
+    private DatePickerDialog _birthDayDialog;
+    
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        setContentView(R.layout.employe_detal_info);
+        change2saveFinishMode().setOnClickListener(this);
+        setRightBtn(R.drawable.save);
+        
+        Intent intent = getIntent();
+        mEmployee = (UserVo) intent.getSerializableExtra("data");
+        setTitleText(mEmployee.getName());
+        
+        ImageView logo = (ImageView) findViewById(R.id.start_date_time);
+        logo.setImageResource(mEmployee.getLogoId());
+        
+        findViewById(R.id.delete).setOnClickListener(this);
+        
+        initEmployeeInfo();
+        mListView = (ListView) findViewById(R.id.employee_info_detail_list);
+        mAdapter = new EmployeeInfoDetailAdapter(EmployeeDetailActivity.this, mList);
+        mListView.setAdapter(mAdapter);
+        Utility.setListViewHeightBasedOnChildren(mListView);
+    }
+
+    private void initEmployeeInfo() {
+        mList = new ArrayList<EmployeeInfoDetailItem>();
+        mList.add(new EmployeeInfoDetailItem("员工姓名", mEmployee.getName(), false));
+        mList.add(new EmployeeInfoDetailItem("员工工号", mEmployee.getStaffId(), false));
+        mList.add(new EmployeeInfoDetailItem("登陆密码", "******", false));//到设置页面修改
+        mList.add(new EmployeeInfoDetailItem("员工角色", mEmployee.getRoleName(), true, 1));
+        mList.add(new EmployeeInfoDetailItem("所属门店", mEmployee.getShopName(), true, 2));
+        mList.add(new EmployeeInfoDetailItem("入职时间", mEmployee.getInDateStr(), true, 3));
+        mList.add(new EmployeeInfoDetailItem("联系电话", mEmployee.getMobile(), false));
+        mList.add(new EmployeeInfoDetailItem("性别", UserInfoInit.getInstance().getSex(mEmployee.getSex().intValue()), true, 4));
+        mList.add(new EmployeeInfoDetailItem("生日", mEmployee.getBirthdayStr(), true, 5));
+        mList.add(new EmployeeInfoDetailItem("证件类型", UserInfoInit.getInstance().getIdentityType(mEmployee.getIdentityTypeId().intValue()), true, 6));
+        mList.add(new EmployeeInfoDetailItem("证件号码", mEmployee.getIdentityNo(), false));
+        mList.add(new EmployeeInfoDetailItem("住址", mEmployee.getAddress(), false));
+    }
+    
+    private void initRolePopupWidnow(final TextView v) {
+        if (_rolePopupWindow == null) {
+            _rolePopupWindow = new SpinerPopWindow(this);
+            _rolePopupWindow.setItemListener(new IOnItemSelectListener() {
+
+                @Override
+                public void onItemClick(int position) {
+                    RoleVo role = UserInfoInit.getInstance().getRoleList().get(position);
+                    mEmployee.setRoleName(role.getRoleName());
+                    mEmployee.setRoleId(role.getRoleId());
+                    v.setText(role.getRoleName());
+                }
+            });
+            _rolePopupWindow.refreshData(UserInfoInit.getInstance().getRoleList(), 0);
+            _rolePopupWindow.setWidth((int)(v.getPaint().measureText(UserInfoInit.getInstance().getRoleListMax()) * 1.4f));
+        }
+    }
+    
+    private void initShopPopupWindow(final TextView v) {
+        if (_shopPopupWindow == null) {
+            _shopPopupWindow = new SpinerPopWindow(this);
+            _shopPopupWindow.setItemListener(new IOnItemSelectListener() {
+
+                @Override
+                public void onItemClick(int position) {
+                    ShopVo shop = UserInfoInit.getInstance().getShopList().get(position);
+                    mEmployee.setShopId(shop.getShopId());
+                    mEmployee.setShopName(shop.getShopName());
+                    v.setText(shop.getShopName());
+                }
+            });
+            _shopPopupWindow.refreshData(UserInfoInit.getInstance().getShopList(), 0);
+            _shopPopupWindow.setWidth((int)(v.getPaint().measureText(UserInfoInit.getInstance().getShopListMax()) * 1.4f));
+        }
+    }
+    
+    private void initDateDialog(View v) {
+        if (_inDateDialog == null) {
+            final TextView textView = ((TextView)v);
+            Calendar calendar = Calendar.getInstance();
+            _inDateDialog = new DatePickerDialog(this, 
+                    new OnDateSetListener() {
+                        
+                        @Override
+                        public void onDateSet(DatePicker view, int year, int monthOfYear,
+                                int dayOfMonth) {
+                            String str = new StringBuilder().append(year).append("-")
+                            .append(monthOfYear + 1).append("-").append(dayOfMonth).toString();
+                            textView.setText(str);
+                            mEmployee.setInDate(str);
+                        }
+                    }, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
+        }
+    }
+    
+    private void initSexPopupWindow(final TextView v) {
+        if (_sexPopupWindow == null) {
+            _sexPopupWindow = new SpinerPopWindow(this);
+            _sexPopupWindow.setItemListener(new IOnItemSelectListener() {
+
+                @Override
+                public void onItemClick(int position) {
+                    DicVo sex = UserInfoInit.getInstance().getSexList().get(position);
+                    mEmployee.setSex(sex.getVal());
+                    v.setText(sex.getName());
+                }
+            });
+            _sexPopupWindow.refreshData(UserInfoInit.getInstance().getSexList(), 0);
+            _sexPopupWindow.setWidth((int)(v.getPaint().measureText(UserInfoInit.getInstance().getSexListMax()) * 1.4f));
+        }
+    }
+    
+    private void initBirthdayDialog(View v) {
+        if (_birthDayDialog == null) {
+            final TextView textView = ((TextView)v);
+            Calendar calendar = Calendar.getInstance();
+            _birthDayDialog = new DatePickerDialog(this, 
+                    new OnDateSetListener() {
+                        
+                        @Override
+                        public void onDateSet(DatePicker view, int year, int monthOfYear,
+                                int dayOfMonth) {
+                            String str = new StringBuilder().append(year).append("-")
+                            .append(monthOfYear + 1).append("-").append(dayOfMonth).toString();
+                            textView.setText(str);
+                            mEmployee.setBirthday(str);
+                        }
+                    }, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
+        }
+    }
+    
+    private void initIdentityPopupWindow(final TextView v) {
+        if (_identityPopupWindow == null) {
+            _identityPopupWindow = new SpinerPopWindow(this);
+            _identityPopupWindow.setItemListener(new IOnItemSelectListener() {
+
+                @Override
+                public void onItemClick(int position) {
+                    DicVo identityType = UserInfoInit.getInstance().getIdentityTypeList().get(position);
+                    mEmployee.setIdentityTypeId(identityType.getVal());
+                    v.setText(identityType.getName());
+                }
+            });
+            _identityPopupWindow.refreshData(UserInfoInit.getInstance().getIdentityTypeList(), 0);
+            _identityPopupWindow.setWidth((int)(v.getPaint().measureText(UserInfoInit.getInstance().getIdentityListMax()) * 1.4f));
+        }
+    }
+    
+    public void ClickListener(View v) {
+        int position = Integer.parseInt(String.valueOf(v.getTag()));
+        switch (mList.get(position).getTag()) {
+        case 1:
+            initRolePopupWidnow((TextView)v);
+            _rolePopupWindow.showAsDropDown(v);
+            break;
+            
+        case 2:
+            initShopPopupWindow((TextView)v);
+            _shopPopupWindow.showAsDropDown(v);
+            break;
+            
+        case 3:
+            initDateDialog(v);
+            _inDateDialog.show();
+            break;
+            
+        case 4:
+            initSexPopupWindow((TextView)v);
+            _sexPopupWindow.showAsDropDown(v);
+            break;
+            
+        case 5:
+            initBirthdayDialog(v);
+            _birthDayDialog.show();
+            break;
+            
+        case 6:
+            initIdentityPopupWindow((TextView)v);
+            _identityPopupWindow.showAsDropDown(v);
+            break;
+        }
+    }
+    
+    @Override
+    public void onClick(View v) {
+        Intent intent = new Intent();
+        if (v.getId() == R.id.delete) {
+            intent.putExtra("result", true);
+            setResult(RESULT_OK, intent);
+        } else {
+            intent.putExtra("result", false);
+            Bundle bundle = new Bundle();
+            bundle.putSerializable("employee_info", mEmployee);
+            intent.putExtras(bundle);
+            setResult(RESULT_OK, intent);
+        }
+        finish();
+    }
+    
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (_shopPopupWindow != null) {
+            _shopPopupWindow.dismiss();
+            _shopPopupWindow = null;
+        }
+        
+        if (_rolePopupWindow != null) {
+            _rolePopupWindow.dismiss();
+            _rolePopupWindow = null;
+        }
+        
+        if (_sexPopupWindow != null) {
+            _sexPopupWindow.dismiss();
+            _sexPopupWindow = null;
+        }
+        
+        if (_identityPopupWindow != null) {
+            _identityPopupWindow.dismiss();
+            _identityPopupWindow = null;
+        }
+        
+        if (_inDateDialog != null) {
+            _inDateDialog.dismiss();
+            _inDateDialog = null;
+        }
+        
+        if (_birthDayDialog != null) {
+            _birthDayDialog.dismiss();
+            _inDateDialog = null;
+        }
+    }
+}

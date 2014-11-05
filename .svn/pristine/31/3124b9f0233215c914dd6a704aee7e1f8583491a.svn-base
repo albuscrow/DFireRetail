@@ -1,0 +1,318 @@
+/**
+ * 
+ */
+package com.dfire.retail.app.manage.activity.logisticmanager;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.ImageButton;
+import android.widget.LinearLayout;
+import android.widget.ListView;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
+
+import com.dfire.retail.app.common.event.OnSampleItemClickListener;
+import com.dfire.retail.app.common.item.ItemEditList;
+import com.dfire.retail.app.common.item.ItemTextView;
+import com.dfire.retail.app.common.item.listener.IItemListListener;
+import com.dfire.retail.app.manage.R;
+import com.dfire.retail.app.manage.RetailApplication;
+import com.dfire.retail.app.manage.activity.TitleActivity;
+import com.dfire.retail.app.manage.common.DateDialog;
+import com.dfire.retail.app.manage.data.AllShopVo;
+import com.dfire.retail.app.manage.global.Constants;
+import com.dfire.retail.app.manage.network.AsyncHttpPost;
+import com.dfire.retail.app.manage.network.RequestParameter;
+import com.dfire.retail.app.manage.network.RequestResultCallback;
+import com.dfire.retail.app.manage.util.JsonUtil;
+import com.dfire.retail.app.manage.vo.ReturnGoodsVo;
+import com.dfire.retail.app.manage.widget.spinner.AbstractSpinerAdapter.IOnItemSelectListener;
+import com.dfire.retail.app.manage.widget.spinner.SpinerPopWindow;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+import com.google.gson.reflect.TypeToken;
+
+/**
+ * 物流管理-门店退货
+ * 
+ * @author 李锦运 2014-10-20
+ */
+public class StoreReturnGoodsActivity extends TitleActivity implements OnClickListener, OnSampleItemClickListener, IOnItemSelectListener, IItemListListener {
+
+	private ImageButton add;
+	private ListView store_collect_lv;
+	private TextView store_collect_time;
+	private ItemEditList lsStatus;
+
+	private List<ReturnGoodsVo> returnGoodsVoList;
+	private StoreReturnGoodsActivity context;
+	private LayoutInflater inflater;
+	private LinearLayout store_collect_add_layout;
+
+	private RetailApplication application;
+
+	private RelativeLayout date;
+
+	private ItemEditList shop_name;
+
+	private List<AllShopVo> shopList = new ArrayList<AllShopVo>();;
+
+	private SpinerPopWindow shopsSpinner;
+
+	private ItemTextView shop_name1;
+	
+	private DateDialog mDateDialog;
+	
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_store_return_goods);
+		this.inflater = LayoutInflater.from(this);
+		application = (RetailApplication) getApplication();
+		setTitleText("门店退货");
+
+		showBackbtn();
+		findShopView();
+
+	}
+
+	private void findShopView() {
+
+		date = (RelativeLayout) findViewById(R.id.date);
+		date.setOnClickListener(this);
+		shop_name = (ItemEditList) findViewById(R.id.shop_name);
+		shop_name1 = (ItemTextView) findViewById(R.id.shop_name1);
+		store_collect_lv = (ListView) findViewById(R.id.store_collect_lv);
+		store_collect_time = (TextView) findViewById(R.id.store_collect_time);
+		store_collect_time.setOnClickListener(this);
+		add = (ImageButton) findViewById(R.id.add);
+		add.setOnClickListener(this);
+		store_collect_add_layout = (LinearLayout) findViewById(R.id.store_collect_add_layout);
+
+		lsStatus = (ItemEditList) findViewById(R.id.lsStatus);
+
+		initView();
+	}
+
+	private void initView() {
+		shop_name.initLabel("门店", null, Boolean.TRUE, this);
+		shop_name.initData(RetailApplication.getmShopInfo().getShopName(), RetailApplication.getmShopInfo().getShopName());
+		lsStatus.initLabel("状态", null, Boolean.TRUE, this);
+		lsStatus.initData("未确认", "1");
+		shop_name1.initLabel("门店", null);
+		shop_name1.initData(RetailApplication.getmShopInfo().getShopName(), RetailApplication.getmShopInfo().getShopName());
+		
+		// shopType 1公司（parentId=null 总公司；parentId!=null 分公司） ，2门店
+		
+		
+		if (application.getmShopInfo().getShopType() == 1) {
+			date.setVisibility(View.GONE);
+			add.setVisibility(View.GONE);
+			shop_name1.setVisibility(View.GONE);
+			initCompanyData();
+
+		} else if (application.getmShopInfo().getShopType() == 2) {
+			date.setVisibility(View.VISIBLE);
+			shop_name.setVisibility(View.GONE);
+			initData(RetailApplication.getmShopInfo().getShopId());
+		}
+	}
+
+	private void initCompanyData() {
+
+		RequestParameter params = new RequestParameter(true);
+		params.setUrl(Constants.ALL_SHOP_LIST_URL);
+		params.setParam(Constants.SHOP_ID, RetailApplication.getmShopInfo().getShopId());
+		params.setParam(Constants.PAGE, 1);
+		new AsyncHttpPost(params, new RequestResultCallback() {
+			@Override
+			public void onSuccess(String str) {
+
+				JsonUtil ju = new JsonUtil(str);
+				List<AllShopVo> shopVoList = (List<AllShopVo>) ju.get("allShopList", new TypeToken<List<AllShopVo>>() {
+				}.getType());
+
+				if (shopVoList != null && shopVoList.size() > 0) {
+					shop_name.initData(shopVoList.get(0).getShopName(), shopVoList.get(0).getShopName());
+
+					List<String> strList = new ArrayList<String>();
+					for (AllShopVo dic : shopVoList) {
+						strList.add(dic.getShopName());
+						shopList.add(dic);
+					}
+					shopsSpinner = new SpinerPopWindow(StoreReturnGoodsActivity.this);
+					shopsSpinner.refreshData(strList, 0);
+					shopsSpinner.setItemListener(StoreReturnGoodsActivity.this);
+				}
+
+				initData(shopVoList.get(0).getShopId());
+
+			}
+
+			@Override
+			public void onFail(Exception e) {
+				e.printStackTrace();
+			}
+		}).execute();
+
+	}
+
+	@Override
+	public void onItemClick(int pos) {
+		String vo = shopList.get(pos).getShopName();
+		shop_name.initData(vo, vo);
+
+		initData(shopList.get(pos).getShopId());
+
+	}
+
+	// 加载退货单号列表
+	private void initData(String str) {
+
+		// 传递请求参数
+		RequestParameter parameters = new RequestParameter(true);
+		parameters.setUrl(Constants.RETURN_GOODS_LIST);
+		parameters.setParam("shopId", str);
+		parameters.setParam("currentPage", "1");
+
+		AsyncHttpPost httppost = new AsyncHttpPost(parameters, new RequestResultCallback() {
+			@Override
+			public void onSuccess(String str) {
+				JsonObject object = new JsonParser().parse(str).getAsJsonObject();
+				returnGoodsVoList = new ArrayList<ReturnGoodsVo>();
+
+				returnGoodsVoList.clear();
+				returnGoodsVoList = getJson(str);
+
+				addItemView(returnGoodsVoList);
+			}
+
+			@Override
+			public void onFail(Exception e) {
+				e.printStackTrace();
+			}
+		});
+		httppost.execute();
+
+	}
+
+	private void addItemView(List<ReturnGoodsVo> list) {
+		store_collect_add_layout.removeAllViews();
+		if (list != null && list.size() != 0) {
+			for (int i = 0; i < list.size(); ++i) {
+
+				StoreReturnGoodsListItem storeReturnGoodsListItem = new StoreReturnGoodsListItem(this, inflater);
+
+				storeReturnGoodsListItem.initWithAppInfo((ReturnGoodsVo) list.get(i));
+
+				store_collect_add_layout.addView(storeReturnGoodsListItem.getItemView());
+
+			}
+
+		}
+
+	}
+
+	public static List<ReturnGoodsVo> getJson(String json) {
+
+		List<ReturnGoodsVo> list = new ArrayList<ReturnGoodsVo>();
+		try {
+			JSONObject jsonObj = new JSONObject(json);
+			if (jsonObj != null && jsonObj.length() > 0) {
+				JSONArray jsonArray = jsonObj.getJSONArray("returnGoodsList");
+				for (int i = 0; i < jsonArray.length(); i++) {
+					ReturnGoodsVo returnGoodsVo = new ReturnGoodsVo();
+					JSONObject js = jsonArray.getJSONObject(i);
+					returnGoodsVo.setReturnGoodsId(js.getString("returnGoodsId"));
+					returnGoodsVo.setReturnGoodsNo(js.getString("returnGoodsNo"));
+					returnGoodsVo.setSendEndTime(js.getLong("sendEndTime"));
+					returnGoodsVo.setBillStatus(js.getInt("billStatus"));
+					returnGoodsVo.setBillStatusName(js.getString("billStatusName"));
+					returnGoodsVo.setGoodsTotalSum(js.getInt("goodsTotalSum"));
+					returnGoodsVo.setReturnGoodsId(js.getString("returnGoodsId"));
+					returnGoodsVo.setGoodsTotalPrice(js.getInt("goodsTotalPrice"));
+					returnGoodsVo.setSupplyId(js.getString("supplyId"));
+					returnGoodsVo.setSupplyName(js.getString("supplyName"));
+					// supplyManagevo.setName(js.getString("name"));
+					// supplyManagevo.setId(js.getString("id"));
+					list.add(returnGoodsVo);
+
+				}
+			}
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
+
+	@Override
+	public void onClick(View v) {
+		switch (v.getId()) {
+
+		case R.id.add:
+
+			HashMap<String, List<Object>> map = application.getObjectMap();
+			if (map.get("returnGoods") != null) {
+				map.get("returnGoods").clear();
+				// map.put("returnGoods", null);
+				application.setObjectMap(map);
+			}
+
+			Intent returnGoods = new Intent(StoreReturnGoodsActivity.this, StoreReturnGoodsAddActivity.class);
+			startActivity(returnGoods);
+			break;
+			
+		case R.id.date:
+			pushDate();
+		}
+
+	}
+
+	private void pushDate(){
+		mDateDialog = new DateDialog(StoreReturnGoodsActivity.this);
+		mDateDialog.show();
+		mDateDialog.getConfirmButton().setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				String date = mDateDialog.getPushDate();
+				store_collect_time.setText(date);
+				mDateDialog.dismiss();
+			}
+		});
+		mDateDialog.getCancelButton().setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				mDateDialog.dismiss();
+			}
+		});
+	}
+	
+	@Override
+	public void onSampleItemClick(String eventType, View view, Object obj) {
+		lsStatus.changeData("已确认", "2");
+	}
+
+	@Override
+	public void onItemListClick(ItemEditList obj) {
+		if (obj.getId() == R.id.shop_name) {
+
+			shopsSpinner.setWidth(shop_name.getWidth());
+			shopsSpinner.showAsDropDown(shop_name);
+			// 页面跳转从此添加 代码.
+
+		}
+
+	}
+
+}

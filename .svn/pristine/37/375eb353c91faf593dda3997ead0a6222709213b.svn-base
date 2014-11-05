@@ -1,0 +1,303 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- 通用 -->
+    <string name="app_name">二维火零售</string>
+    <string name="confirm">确定</string>
+    <string name="cancel">取消</string>
+    <string name="exception">程序异常，请重启</string>
+    <string name="waiting">请等待</string>
+    <string name="net_error">当前网络不稳定，请稍后再试</string>
+    <string name="empty_data">没有数据</string>
+    <string name="input_keywords">请输入查询条件</string>
+
+    <!-- 登录 -->
+    <string name="hint_shop">店家编号</string>
+    <string name="hint_username">员工用户名</string>
+    <string name="hint_password">员工密码</string>
+    <string name="login_title">二维火后台管理</string>
+    <string name="in_login">登录中，请稍后…</string>
+    <string name="action_settings">Settings</string>
+    <string name="in_change_password">密码更新中，请稍后…</string>
+    <string name="none"></string>
+    <!-- 店家信息 -->
+    <string name="store_logo">店家LOGO</string>
+    <string name="store_add_logo">添加图片</string>
+    <string name="store_image_size">图片尺寸：300*200px （像素）</string>
+    <string name="store_image_type">图片格式：jpg、png</string>
+    <string name="hint_storenamesearch">店家名称或者店家代码</string>
+    <string name="store_add_title">请选择图片来源</string>
+    <string name="store_add_ablum">相册</string>
+    <string name="store_add_capture">拍照</string>
+    <string name="store_add_cancel">取消</string>
+    <!-- 菜单 -->
+    <string name="member_management">会员管理</string>
+    <string name="marketing_management">营销管理</string>
+
+    <!-- 会员管理 -->
+    <string name="member_administration_usr_name">会员名</string>
+    <string name="member_administration_usr_card">会员卡</string>
+    <string name="member_info_title">会员信息管理</string>
+    <string name="member_info_total_num">会员总数</string>
+    <string name="member_info_search_hint">会员卡号/姓名/手机号</string>
+    <string name="member_info_search">查询</string>
+    <string name="member_info_golden_card">金卡</string>
+    <string name="member_info_card_num">会员总数</string>
+    <string name="member_info_this_month_apply_num">本月申领会员总数</string>
+    <string name="member_info_card_type">卡类型</string>
+    <string name="member_info_birth_date">生日</string>
+    <!-- 会员管理-搜索 -->
+    <string name="member_info_search_name">姓名</string>
+    <string name="member_info_search_card_type">卡类型</string>
+    <string name="member_info_search_card_balance">卡内余额(元)</string>
+    <!-- 会员信息详情 -->
+    <string name="member_info_detail">基本信息</string>
+    <string name="member_info_detail_card_id">会员卡号</string>
+    <string name="member_info_detail_usr_name">会员名</string>
+    <string name="member_info_detail_telephone">手机号码</string>
+    <string name="member_info_detail_card_type">卡类型</string>
+    <string name="member_info_detail_balance">卡内余额(元)</string>
+    <string name="member_info_detail_consumeAmount">累计消费(元)</string>
+    <string name="member_info_detail_consumeCount">消费次数</string>
+    <string name="member_info_detail_point">卡内积分</string>
+    <string name="member_info_detail_activeDate">办卡日期</string>
+    <string name="member_info_detail_status">卡状态</string>
+    <string name="member_info_detail_extended_info">扩展信息</string>
+    <string name="member_info_detail_certificate">身份证</string>
+    <string name="member_info_detail_birthday">生日</string>
+    <string name="member_info_detail_weixin">微信</string>
+    <string name="member_info_detail_address">联系地址</string>
+    <string name="member_info_detail_email">邮箱</string>
+    <string name="member_info_detail_zipcode">邮编</string>
+    <string name="member_info_detail_job">职业</string>
+    <string name="member_info_detail_memo">备注</string>
+    <!-- 会员卡充值 -->
+    <string name="card_recharge">会员卡充值</string>
+    <string name="recharge_type">充值类型</string>
+    <string name="recharge_num">充值金额</string>
+    <string name="gift_integral">赠送积分</string>
+    <string name="recharge">充值</string>
+    <string name="required">必填</string>
+    <string name="recharge_sure">确定充值</string>
+    <string name="recharge_success">充值成功</string>
+    <!-- 兑换商品 -->
+    <string name="exchange_setting">兑换商品设置</string>
+    <string name="input_ma">条形码/简码/拼音码</string>
+
+    <!-- 会员卡充值 -->
+    <string name="member_transaction_search_total_consumption">消费总额(元)</string>
+
+    <!-- 商品详情 -->
+    <string name="goods_detail">商品详情</string>
+    <string name="goods_name">商品名称</string>
+    <string name="goods_price">商品价格(元)</string>
+    <string name="goods_need_score">兑换所需积分</string>
+    <string name="goods_total_num">库存总数量</string>
+    <string name="can_exchange_num">可兑换数量</string>
+    <string name="delete">删除</string>
+
+    <!-- 商品管理 -->
+    <string name="goods_sort">商品分类</string>
+    <string name="goods_sort_sub">商品的分类管理</string>
+    <string name="goods_inf_manager">商品信息管理</string>
+    <string name="goods_inf_manager_sub">商品的基础信息和扩展信息</string>
+    <string name="goods_import">商品导入</string>
+    <string name="goods_import_sub">商品导入</string>
+    <string name="goods_split">商品拆分</string>
+    <string name="goods_split_sub">将大件商品拆分成小件商品出售</string>
+    <string name="goods_assemb">商品组装</string>
+    <string name="goods_assemb_sub">将小件将品组装成大件商品出售</string>
+    <string name="goods_process_manager">商品加工管理</string>
+    <string name="goods_process_manager_sub">将原料商品加工成另外一件商品出售</string>
+
+    <!-- 会员卡交易查询 -->
+    <string name="member_card_transaction_search_result_record">记录数：</string>
+    <string name="member_card_transaction_search_result_consume">消费金额(元)：</string>
+    <string name="member_card_transaction_search_result_balance">卡内余额(元)：</string>
+    <string name="member_card_transaction_search_result_num">流水号</string>
+    <string name="member_card_transaction_search_result_consumes">消费金额(元)</string>
+    <string name="member_card_transaction_order_id_null">订单号为空</string>
+    <!-- 会员卡挂失详情 -->
+    <string name="card_reported_lost_usr_name">会员姓名</string>
+    <string name="card_reported_lost">卡挂失</string>
+
+    <!-- 会员卡交易记录详细 -->
+    <string name="member_card_transaction_record_money">金额(元)</string>
+    <string name="member_card_transaction_record_all">合计</string>
+    <string name="member_card_transaction_record_num">件</string>
+    <string name="member_card_transaction_record_yuan">元</string>
+    <string name="member_card_transaction_record_cash">现金</string>
+    <string name="member_card_transaction_record_back">应找</string>
+    <string name="member_card_transaction_record_can_get_point">可获得的积分</string>
+    <string name="member_card_transaction_record_balance">卡内余额</string>
+    <!-- 会员交易查询 -->
+    <string name="member_transaction_search_title">会员交易信息</string>
+
+    <!-- 满减&促销 -->
+    <string name="full_cut">满就减</string>
+    <string name="full_giving">满就送</string>
+    <string name="recharge_promotions">充值促销</string>
+    <string name="activity_name">活动名称</string>
+    <string name="activity_status">活动状态</string>
+    <string name="untill">至</string>
+    <string name="not_started">未开始</string>
+    <string name="has_ended">已结束</string>
+    <string name="ongoing">正在进行</string>
+    <string name="name">名称</string>
+    <string name="starttime">开始时间</string>
+    <string name="endtime">结束时间</string>
+    <string name="gift_money">赠送金额</string>
+    <string name="minus_money">减去金额(元)</string>
+    <string name="present_gift">赠送商品</string>
+    <!-- 优惠券详情 -->
+    <string name="serial_number">编号</string>
+    <string name="coupins_name">优惠券名称</string>
+    <string name="denomination">面额</string>
+    <string name="num">数量</string>
+    <string name="beyondcansee">总额超过多少元时出券(元)</string>
+    <string name="beyondcanuse">消费满多少元时可以使用(元)</string>
+    <string name="remarks">备注</string>
+    <string name="member_exclusive">会员专享</string>
+    <string name="enable">启用</string>
+    <!-- 促销套餐 -->
+    <string name="sales_combo">促销套餐</string>
+    <string name="event_info">活动信息</string>
+    <string name="sales_combo_name">套餐名</string>
+    <string name="sales_combo_privce">套餐价(元)</string>
+    <string name="sales_combo_goods">套餐商品</string>
+    <string name="add_new_goods">添加新商品...</string>
+    <!-- 换购促销 -->
+    <string name="redemption_promotion">换购促销</string>
+    <string name="need_use">满足订单总额(元)</string>
+    <string name="spread">补差价(元)</string>
+    <string name="redemption_goods">换购商品</string>
+
+    <!-- 后台主界面 -->
+    <string name="profit_sum">详细收入汇总</string>
+    <string name="store_setting">后台设置</string>
+    <string name="store_name">华润万家万塘店</string>
+    <string name="store_manager">后台管理</string>
+    <string name="back">返回</string>
+    <string name="help">帮助</string>
+    <string name="next">下一个</string>
+    <string name="save">保存</string>
+    <string name="affirm">确认</string>
+    <string name="add">添加</string>
+    <string name="change">修改</string>
+    <string name="batch">批量</string>
+    <string name="check_all">全选</string>
+    <string name="uncheck_all">全不选</string>
+    <string name="refresh">更新</string>
+    <string name="test">系统设置系统设置系统设置系统设置系统设置</string>
+    <!-- 设置main -->
+    <string name="setting_main">营业设置</string>
+    <string name="setting_base_text">基础设置</string>
+    <string name="setting_item_lock">被锁住的设置</string>
+    <string name="account_info">店家信息</string>
+    <string name="account_info_sub">已添加%1$s个分类，%2$s个商品</string>
+    <string name="param_setting">系统参数</string>
+    <string name="param_setting_sub">收银使用基础设置</string>
+    <string name="receipt_setting">打印模板</string>
+    <string name="receipt_setting_sub">管理各类单据的打印格式</string>
+    <string name="role_permission_setting">角色管理与权限设置</string>
+    <string name="hardware_setting">硬件设置</string>
+    <string name="pay_setting">付款方式设置</string>
+    <string name="business_setting">设置商业模式</string>
+    <string name="business_setting_subhead">设置店铺的商业模式</string>
+    <string name="operate_log">用户操作日志</string>
+    <string name="operate_log_sub">记录用户操作历史</string>
+    <string name="data_clear">数据清理</string>
+    <string name="data_clear_subhead">清理账单，报表等营业数据</string>
+
+    <!-- 账户信息 -->
+    <string name="account_name">用户名</string>
+    <string name="account_name_number">店家编号</string>
+    <string name="account_passward">密码</string>
+    <string name="account_passward_w">*********</string>
+    <string name="user_name">姓名</string>
+    <string name="shop_name">店家名称</string>
+    <string name="shop_phone_number">联系电话</string>
+    <string name="shop_img">头像</string>
+    <string name="password_change">密码修改</string>
+    <string name="old_password">当前密码</string>
+    <string name="new_password">新密码</string>
+    <string name="new_password_again">确认新密码 </string>
+
+    <!-- 角色权限 -->
+    <string name="setting_role">角色管理</string>
+    <string name="role">角色</string>
+    <string name="order">排序</string>
+    <string name="order_from_little">数字越小越靠前</string>
+    <string name="pre_premission">前台权限</string>
+    <string name="bg_permission">后台权限</string>
+
+    <!-- 付款方式 -->
+    <string name="setting_payway">付款方式</string>
+    <string name="setting_payway_name">名称</string>
+    <string name="setting_payway_mode">支付类型</string>
+    <string name="setting_payway_add">添加</string>
+
+    <!-- 商业模式 -->
+    <string name="setting_business">商业模式</string>
+
+    <!-- 小票设置 -->
+    <string name="shop_logo">店家logo</string>
+    <string name="receipt_setting_title">小票设置</string>
+    <string name="receipt_title">小票标题</string>
+    <string name="endnote">尾注</string>
+    <string name="avorable">优惠劵打印</string>
+    <string name="exchange">换购打印</string>
+    <string name="receipt_standard">小票规格</string>
+    <string name="choice_temp">选择模板</string>
+    <string name="temp_preview">模板预览</string>
+
+    <!-- 参数设置 -->
+    <string name="goods_stock">商品库存小于0禁止销售</string>
+    <string name="odd_dispose">零头处理</string>
+    <string name="bid_setting">进价设置</string>
+    <string name="stock_warning">启用库存预警</string>
+    <string name="past_stock_warning">启用过期处理</string>
+    <string name="less_warning">少于此数量预警</string>
+    <string name="in_advance_warning">提前提醒天数</string>
+
+    <!--  -->
+    <string name="hint_usersearch">名称/工号/手机号</string>
+    <string name="setting_payway_change">修改</string>
+    <string name="setting_payway_in_sale">计入销售额</string>
+    <string name="setting_payway_out_sale">不计入销售额</string>
+    <string name="setting_payway_type_name">付款方式名称</string>
+    <string name="setting_payway_choice_sale">是否计入销售额</string>
+    <string name="setting_payway_choice_discount">是否享受折扣</string>
+    <string name="setting_payway_discount">折扣率(%)</string>
+
+    <!-- 登陆错误消息 -->
+    <string name="um_msg_000001">编号不能为空，请输入!</string>
+    <string name="um_msg_000002">编号输入错误，请重新输入!</string>
+    <string name="um_msg_000003">账号或密码错误，请重新输入!</string>
+    <string name="um_msg_000004">账号不能为空，请输入!</string>
+    <string name="um_msg_000005">密码不能为空，请输入!</string>
+    <string name="um_msg_000006">新密码不能为空，请输入!</string>
+    <string name="um_msg_000007">原密码不正确，请重新输入!</string>
+    <string name="um_msg_000008">两次输入的密码不一致，请重新输入!</string>
+    <string name="um_msg_000009">此编号未注册，请注册之后再登录!</string>
+    <string name="um_msg_0000010">此账号未注册，请注册之后再登录!</string>
+    <string name="um_msg_0000011">用户名已存在，请重新设置!</string>
+    <string name="um_msg_0000012">登陆者不能删除自己!</string>
+    <string name="um_msg_0000013">有营业数据的员工不允许删除!</string>
+    <string name="um_msg_0000014">未知错误</string>
+
+    <!-- 门店管理 -->
+    <string name="employee_info">员工管理</string>
+    <string name="shopcountmsg">下属店家%d个</string>
+    
+    <!-- 店家信息 -->
+    <string name="shop_info">店家信息</string>
+    <string name="shop_name">店家名称</string>
+    <string name="shop_code">店家编号：</string>
+    <string name="scan_text">将二维码放入框内, 即可自动扫描</string>
+    <string name="date_format">"今天是yyyy年MM月dd EEEE"</string>
+    <string name="update_incomemsg">"获取收入信息"</string>
+    <string name="goods_save_fail">保存失败</string>
+
+
+</resources>

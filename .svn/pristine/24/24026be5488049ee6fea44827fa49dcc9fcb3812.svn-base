@@ -1,0 +1,80 @@
+/**
+ * 
+ */
+package com.dfire.retail.app.manage.activity.logisticmanager;
+
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+
+import com.dfire.retail.app.manage.R;
+import com.dfire.retail.app.manage.data.DicVo;
+
+/**
+ * @author 李锦运 2014-10-23
+ */
+public class StoreReturnGoodsReasonItem implements OnClickListener {
+
+	private LayoutInflater inflater;
+
+	private StoreReturnGoodsReasonActivity context;
+
+	private View itemView;
+
+	private TextView txt_reason;
+
+	private LinearLayout layout;
+
+	private String reasontxt;
+
+	public StoreReturnGoodsReasonItem(StoreReturnGoodsReasonActivity context, LayoutInflater inflater) {
+		this.context = context;
+		this.inflater = inflater;
+		this.init();
+	}
+
+	private void init() {
+
+		this.itemView = inflater.inflate(R.layout.store_return_reason_item, null);
+		this.txt_reason = (TextView) itemView.findViewById(R.id.txt_reason);
+		layout = (LinearLayout) itemView.findViewById(R.id.layout);
+		layout.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+
+				Intent returngoods = new Intent();
+				returngoods.setClass(context, StoreReturnGoodsDetailItemActivity.class);
+
+				Bundle bundle = new Bundle();
+				bundle.putString("reason", reasontxt);
+				returngoods.putExtras(bundle);
+
+				context.startActivity(returngoods);
+
+			}
+		});
+
+	}
+
+	public void initWithAppInfo(DicVo dicVo) {
+
+		txt_reason.setText(dicVo.getName() == null ? null : dicVo.getName());
+		reasontxt = dicVo.getName() == null ? null : dicVo.getName();
+	}
+
+	public View getItemView() {
+		return itemView;
+	}
+
+	@Override
+	public void onClick(View v) {
+		// TODO Auto-generated method stub
+
+	}
+
+}

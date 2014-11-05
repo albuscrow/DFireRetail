@@ -1,0 +1,274 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/login_bj"
+    android:orientation="vertical" >
+	<ScrollView 
+	    android:layout_width="fill_parent"
+	    android:layout_height="fill_parent"
+	    android:scrollbars="none">
+	  <LinearLayout 
+	      android:layout_width="fill_parent"
+	      android:layout_height="fill_parent"
+	      android:orientation="vertical">
+	       <LinearLayout
+		        android:id="@+id/linearLayout1"
+		        android:layout_width="match_parent"
+		        android:layout_height="wrap_content"
+		        android:orientation="vertical" >
+		
+		        <RelativeLayout
+		            android:id="@+id/shop"
+		            android:layout_width="match_parent"
+		            android:layout_height="wrap_content"
+		            android:background="@drawable/bg_lit"
+		            android:padding="8dp" >
+		
+		            <TextView
+		                android:layout_width="wrap_content"
+		                android:layout_height="wrap_content"
+		                android:text="门店"
+		                android:textColor="#333"
+		                android:textSize="15sp" />
+		
+		            <TextView
+		                android:id="@+id/shopName"
+		                android:layout_width="wrap_content"
+		                android:layout_height="wrap_content"
+		                android:layout_alignParentEnd="true"
+		                android:layout_alignParentRight="true"
+		                android:textColor="#666"
+		                android:textSize="15sp" />
+		        </RelativeLayout>
+		
+		        <RelativeLayout
+		            android:layout_width="match_parent"
+		            android:layout_height="1dp"
+		            android:background="#A5ACB2" >
+		        </RelativeLayout>
+		
+		        <RelativeLayout
+		            android:id="@+id/shop1"
+		            android:layout_width="match_parent"
+		            android:layout_height="wrap_content"
+		            android:background="@drawable/bg_lit"
+		            android:padding="8dp" >
+		
+		            <TextView
+		                android:layout_width="wrap_content"
+		                android:layout_height="wrap_content"
+		                android:text="盘点员"
+		                android:textColor="#333"
+		                android:textSize="15sp" />
+		
+		            <TextView
+		                android:id="@+id/stockCheckManName"
+		                android:layout_width="wrap_content"
+		                android:layout_height="wrap_content"
+		                android:layout_alignParentEnd="true"
+		                android:layout_alignParentRight="true"
+		                android:textColor="#666"
+		                android:textSize="15sp" />
+		        </RelativeLayout>
+		
+		        <RelativeLayout
+		            android:layout_width="match_parent"
+		            android:layout_height="1dp"
+		            android:background="#A5ACB2" >
+		        </RelativeLayout>
+		
+		        <RelativeLayout
+		            android:id="@+id/shop2"
+		            android:layout_width="match_parent"
+		            android:layout_height="wrap_content"
+		            android:background="@drawable/bg_lit"
+		            android:padding="8dp" >
+		
+		            <TextView
+		                android:layout_width="wrap_content"
+		                android:layout_height="wrap_content"
+		                android:text="盘点时间"
+		                android:textColor="#333"
+		                android:textSize="15sp" />
+		
+		            <TextView
+		                android:id="@+id/select_time"
+		                android:layout_width="wrap_content"
+		                android:layout_height="wrap_content"
+		                android:layout_alignParentEnd="true"
+		                android:layout_alignParentRight="true"
+		                android:textColor="#666"
+		                android:textSize="15sp" />
+		        </RelativeLayout>
+		    </LinearLayout>
+		
+		    <LinearLayout
+		        android:layout_width="match_parent"
+		        android:layout_height="wrap_content"
+		        android:background="#EFF0F2"
+		        android:padding="10dp" >
+		
+		        <TextView
+		            android:id="@+id/textView3"
+		            android:layout_width="wrap_content"
+		            android:layout_height="wrap_content"
+		            android:text="合计"
+		            android:textColor="#000000"
+		            android:textSize="15sp" />
+		    </LinearLayout>
+		
+		    <LinearLayout
+		        android:layout_width="match_parent"
+		        android:layout_height="wrap_content"
+		        android:background="@drawable/bg_lit"
+		        android:padding="10dp" >
+		
+		        <LinearLayout
+		            android:layout_width="wrap_content"
+		            android:layout_height="match_parent"
+		            android:layout_weight="1"
+		            android:orientation="vertical" >
+		
+		            <TextView
+		                android:id="@+id/textView1"
+		                android:layout_width="wrap_content"
+		                android:layout_height="wrap_content"
+		                android:text="账面库存"
+		                android:textSize="13sp"
+		                android:textColor="#666" />
+		
+		            <TextView
+		                android:id="@+id/stockTotalCount"
+		                android:layout_width="wrap_content"
+		                android:layout_height="wrap_content"
+		                android:text="0"
+		                android:textSize="15sp"
+		                android:textColor="#333" />
+		        </LinearLayout>
+		
+		        <LinearLayout
+		            android:layout_width="wrap_content"
+		            android:layout_height="match_parent"
+		            android:layout_weight="1"
+		            android:orientation="vertical" >
+		
+		            <TextView
+		                android:id="@+id/textView15"
+		                android:layout_width="wrap_content"
+		                android:layout_height="wrap_content"
+		                android:text="实库存"
+		                android:textSize="13sp"
+		                android:textColor="#666"  />
+		
+		            <TextView
+		                android:id="@+id/stockRealCount"
+		                android:layout_width="wrap_content"
+		                android:layout_height="wrap_content"
+		                android:text="0"
+		                android:textSize="15sp"
+		                android:textColor="#333"  />
+		        </LinearLayout>
+		
+		        <LinearLayout
+		            android:layout_width="wrap_content"
+		            android:layout_height="match_parent"
+		            android:layout_weight="1"
+		            android:orientation="vertical" >
+		
+		            <TextView
+		                android:id="@+id/textView147"
+		                android:layout_width="wrap_content"
+		                android:layout_height="wrap_content"
+		                android:text="盈亏数"
+		               	android:textSize="13sp"
+		                android:textColor="#666"  />
+		
+		            <TextView
+		                android:id="@+id/exhibitCount"
+		                android:layout_width="wrap_content"
+		                android:layout_height="wrap_content"
+		                android:text="0"
+		                android:textSize="15sp"
+		                android:textColor="#333" />
+		        </LinearLayout>
+		    </LinearLayout>
+		
+		    <LinearLayout
+		        android:layout_width="match_parent"
+		        android:layout_height="wrap_content"
+		        android:background="@drawable/bg_lit"
+		        android:padding="10dp" >
+		
+		        <LinearLayout
+		            android:layout_width="wrap_content"
+		            android:layout_height="match_parent"
+		            android:layout_weight="1"
+		            android:orientation="vertical" >
+		
+		            <TextView
+		                android:id="@+id/textView14"
+		                android:layout_width="wrap_content"
+		                android:layout_height="wrap_content"
+		                android:text="库存金额(元)"
+		                android:textSize="13sp"
+		                android:textColor="#666"  />
+		
+		            <TextView
+		                android:id="@+id/stockMoney"
+		                android:layout_width="wrap_content"
+		                android:layout_height="wrap_content"
+		                android:text="0"
+		                android:textSize="15sp"
+		                android:textColor="#333" />
+		        </LinearLayout>
+		
+		        <LinearLayout
+		            android:layout_width="wrap_content"
+		            android:layout_height="match_parent"
+		            android:layout_weight="1"
+		            android:orientation="vertical" >
+		
+		            <TextView
+		                android:id="@+id/textView155"
+		                android:layout_width="wrap_content"
+		                android:layout_height="wrap_content"
+		                android:text="盈亏金额(元)"
+		                android:textSize="13sp"
+		                android:textColor="#666" />
+		
+		            <TextView
+		                android:id="@+id/exhibit"
+		                android:layout_width="wrap_content"
+		                android:layout_height="wrap_content"
+		                android:text="0"
+		                android:textSize="15sp"
+		                android:textColor="#333" />
+		        </LinearLayout>
+		    </LinearLayout>
+		
+		    <LinearLayout
+		        android:layout_width="match_parent"
+		        android:layout_height="wrap_content"
+		        android:background="#EFF0F2"
+		        android:padding="10dp" >
+		
+		        <TextView
+		            android:id="@+id/textView322"
+		            android:layout_width="wrap_content"
+		            android:layout_height="wrap_content"
+		            android:text="盘点商品"
+		            android:textColor="#000000"
+		            android:textSize="15sp" />
+		    </LinearLayout>
+		
+		    <com.dfire.retail.app.manage.wheel.widget.BaseListView
+		        android:id="@+id/checkRecordDetail"
+		        android:layout_width="match_parent"
+		        android:scrollbars="none"
+		        android:layout_height="wrap_content" >
+		    </com.dfire.retail.app.manage.wheel.widget.BaseListView>
+	      
+	  </LinearLayout>  
+	</ScrollView>
+</LinearLayout>

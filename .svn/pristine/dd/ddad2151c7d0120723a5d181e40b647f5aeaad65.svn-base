@@ -1,0 +1,388 @@
+package com.dfire.retail.app.manage.activity.logisticmanager;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import android.app.ProgressDialog;
+import android.content.Intent;
+import android.graphics.Paint;
+import android.os.Bundle;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.AbsListView;
+import android.widget.AbsListView.OnScrollListener;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ImageButton;
+import android.widget.ListView;
+import android.widget.TextView;
+
+import com.dfire.retail.app.manage.R;
+import com.dfire.retail.app.manage.RetailApplication;
+import com.dfire.retail.app.manage.activity.TitleActivity;
+import com.dfire.retail.app.manage.adapter.StoreOrderAdapter;
+import com.dfire.retail.app.manage.common.BillStatusDialog;
+import com.dfire.retail.app.manage.common.DateDialog;
+import com.dfire.retail.app.manage.common.SelectDateDialog;
+import com.dfire.retail.app.manage.data.AllShopVo;
+import com.dfire.retail.app.manage.data.DicVo;
+import com.dfire.retail.app.manage.data.OrderGoodsVo;
+import com.dfire.retail.app.manage.data.ShopVo;
+import com.dfire.retail.app.manage.global.Constants;
+import com.dfire.retail.app.manage.network.AsyncHttpPost;
+import com.dfire.retail.app.manage.network.RequestParameter;
+import com.dfire.retail.app.manage.network.RequestResultCallback;
+import com.dfire.retail.app.manage.util.JsonUtil;
+import com.dfire.retail.app.manage.util.ToastUtil;
+import com.dfire.retail.app.manage.widget.spinner.AbstractSpinerAdapter.IOnItemSelectListener;
+import com.dfire.retail.app.manage.widget.spinner.SpinerPopWindow;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+import com.google.gson.reflect.TypeToken;
+
+/**
+ * 物流管理-门店订货
+ * @author ys
+ *
+ */
+public class StoreOrderActivity extends TitleActivity implements OnClickListener,IOnItemSelectListener,OnItemClickListener{
+	ImageButton add;
+	
+	private ListView store_order_lv;
+	
+	private TextView store_order_time;
+	
+	private int currentPage = 1;
+	
+	private List<OrderGoodsVo> orderGoods;
+	
+	private OrderGoodsVo orderGoodsVo;
+	
+	private ProgressDialog progressDialog;
+	
+	private SelectDateDialog mDateDialog;
+	
+	private BillStatusDialog billStatusDialog;
+	
+	private SpinerPopWindow shopsSpinner;
+	
+	private TextView shopTextView,status;
+	
+	private ArrayList<String> shopsStr;
+	
+	private ShopVo currentShop;
+	
+	private List<DicVo> dicVos = null;
+	
+	private AllShopVo allShopVo;
+	
+	private String shopId;//店铺id
+	
+	private Integer val = 0;
+	
+	private Integer pageSize = 0;
+	
+	private StoreOrderAdapter storeOrderAdapter;
+	
+	private boolean nodata;
+	
+	private boolean is_divPage;// 是否进行分页操作
+	
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_store_order);
+	
+		showBackbtn();
+		this.findView();
+		this.getStatusList();//获取状态
+	}
+	
+	public void findView(){
+		shopId = RetailApplication.getShopVo().getShopId();
+		dicVos = new ArrayList<DicVo>();//状态
+		orderGoods=new ArrayList<OrderGoodsVo>();
+		currentShop = RetailApplication.getShopVo();
+		store_order_time=(TextView)findViewById(R.id.store_order_time);
+		add=(ImageButton)findViewById(R.id.minus);
+		shopTextView = (TextView) findViewById(R.id.shopName);
+		status=(TextView)findViewById(R.id.status);
+		store_order_lv=(ListView)findViewById(R.id.store_order_lv);
+		storeOrderAdapter = new StoreOrderAdapter(StoreOrderActivity.this, orderGoods);
+		store_order_lv.setAdapter(storeOrderAdapter);
+		store_order_lv.setOnItemClickListener(StoreOrderActivity.this);
+		//判断是否是总部 登陆的
+		if (currentShop.getType() == ShopVo.DANDIAN || currentShop.getType() == ShopVo.MENDIAN) {
+			setTitleText("门店订货");
+			shopTextView.setCompoundDrawables(null, null, null, null);
+			add.setVisibility(View.VISIBLE);
+			shopTextView.setText(currentShop.getShopName());
+		}else{
+			setTitleText("订货单查询");
+			shopTextView.setOnClickListener(this);
+			add.setVisibility(View.GONE);
+			shopTextView.setText("所有门店");
+		}
+		store_order_time.setOnClickListener(this);
+		add.setOnClickListener(this);
+		status.setOnClickListener(this);
+		store_order_lv.setOnScrollListener(new OnScrollListener() {
+
+			@Override
+			public void onScrollStateChanged(AbsListView view, int scrollState) {
+				 if (is_divPage && scrollState == OnScrollListener.SCROLL_STATE_IDLE) {
+					if (nodata) {
+						currentPage++;
+						getStoreOrderGoods(null);
+					}
+				 }
+			}
+
+			@Override
+			public void onScroll(AbsListView view, int firstVisibleItem,
+					int visibleItemCount, int totalItemCount) {
+				is_divPage = (firstVisibleItem + visibleItemCount == totalItemCount);
+			}
+		});
+		
+		progressDialog = new ProgressDialog(StoreOrderActivity.this);
+		progressDialog.setCancelable(false);
+		progressDialog.setCanceledOnTouchOutside(false);
+		progressDialog.setMessage("加载中，请稍后。。。");
+		
+		this.getStoreOrderGoods(null);//获取全部订单列表
+	}
+
+	@Override
+	public void onClick(View v) {
+		switch (v.getId()) {
+		case R.id.store_order_time:
+			this.pushDate();
+			break;
+		case R.id.minus:
+			Intent orderAdd =new Intent(StoreOrderActivity.this,StoreOrderAddActivity.class);
+			orderAdd.putExtra("orderState", Constants.ORDER_ADD);// 新生订单
+			startActivity(orderAdd);
+			break;
+		case R.id.shopName:
+			Intent selectIntent =new Intent(StoreOrderActivity.this,SelectShopActivity.class);
+			selectIntent.putExtra("selectShopId", shopId);
+			startActivityForResult(selectIntent, 100);
+			break;
+		case R.id.status:
+			this.pushStatus();
+//			shopsSpinner.setWidth(status.getWidth());
+//			shopsSpinner.showAsDropDown(status);
+			break;
+		}
+		
+	}
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
+		if(resultCode==100){
+			Bundle b=data.getExtras();
+			allShopVo=(AllShopVo)b.getSerializable("shopVo");
+			if (allShopVo!=null) {
+				shopTextView.setText(allShopVo.getShopName());
+				shopId = allShopVo.getShopId();
+				this.currentPage = 1;//初始化页数
+				this.orderGoods.clear();
+				this.getStoreOrderGoods(null);//根据门店获取订货单
+			}
+		}
+	}
+	/**
+	 * 弹出状态
+	 */
+	private void pushStatus(){
+		billStatusDialog = new BillStatusDialog(StoreOrderActivity.this);
+		billStatusDialog.show();
+		billStatusDialog.getmTitle().setText("订单状态");
+		
+		billStatusDialog.getConfirmButton().setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				String dateStr = billStatusDialog.getCurrentData();
+				status.setText(dateStr);
+				billStatusDialog.dismiss();
+			}
+		});
+		billStatusDialog.getCancelButton().setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				billStatusDialog.dismiss();
+			}
+		});
+	}
+	/**
+	 * 弹出日期
+	 */
+	private void pushDate(){
+		mDateDialog = new SelectDateDialog(StoreOrderActivity.this);
+		mDateDialog.show();
+		mDateDialog.getTitle().setText("要求到货日期");
+		mDateDialog.getConfirmButton().setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				String dateStr = mDateDialog.getCurrentData();
+				store_order_time.setText(dateStr);
+//				getStoreOrderGoods();
+				mDateDialog.dismiss();
+			}
+		});
+		mDateDialog.getCancelButton().setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				mDateDialog.dismiss();
+			}
+		});
+	}
+	/**
+	 * 查询状态 
+	 */
+	private void getStatusList(){
+		progressDialog.show();
+		
+		RequestParameter params = new RequestParameter(true);
+		params.setUrl(Constants.BASE_URL + "orderGoods/statusList");
+		new AsyncHttpPost(params, new RequestResultCallback() {
+			@SuppressWarnings("unchecked")
+			@Override
+			public void onSuccess(String str) {
+				progressDialog.dismiss();
+				JsonObject jo = new JsonParser().parse(str).getAsJsonObject();
+				JsonElement jsonElement = jo.get(Constants.RETURN_CODE);
+				String returnCode = null;
+				if (jsonElement != null) {
+					returnCode = jsonElement.getAsString();
+				}
+				if (returnCode == null ||!returnCode.equals(Constants.LSUCCESS)) {
+					ToastUtil.showShortToast(StoreOrderActivity.this, "获取失败");
+					return;
+				}
+				JsonUtil ju = new JsonUtil(str);
+				if (ju.isError(StoreOrderActivity.this)) {
+					return;
+				}
+				List<DicVo> vos = new ArrayList<DicVo>();
+				vos = (List<DicVo>) ju.get(Constants.STATUSLIST, new TypeToken<List<DicVo>>(){}.getType());
+				if (vos.size()>0) {
+					dicVos.clear();
+					dicVos.addAll(vos);
+				}
+				shopsStr = new ArrayList<String>();
+				int maxLength = 0;
+				String Lengest = Constants.EMPTY_STRING;
+				for (DicVo dicVo : dicVos) {
+					String dicName = dicVo.getName();
+					if (dicName.length() > maxLength) {
+						maxLength = dicName.length();
+						Lengest = dicName;
+					}
+					shopsStr.add(dicName);
+				}
+				Paint paint = new Paint();
+				status.setWidth((int) (paint.measureText(Lengest) * 1.2f));
+				shopsSpinner = new SpinerPopWindow(StoreOrderActivity.this);
+				shopsSpinner.refreshData(shopsStr, 0);
+				status.setText("全部");
+				shopsSpinner.setItemListener(StoreOrderActivity.this);	
+				
+			}
+			@Override
+			public void onFail(Exception e) {
+				progressDialog.dismiss();
+			}
+		}).execute();
+	}
+	/**
+	 * 查询订货列表
+	 */
+	private void getStoreOrderGoods(Long sendEndTime) {
+		nodata = false;
+		progressDialog.show();
+		RequestParameter params = new RequestParameter(true);
+		params.setUrl(Constants.BASE_URL + "orderGoods/list");
+		params.setParam("shopId", shopId);
+		params.setParam("currentPage", currentPage);
+		params.setParam("billStatus", val);
+		new AsyncHttpPost(params, new RequestResultCallback() {
+			@SuppressWarnings("unchecked")
+			@Override
+			public void onSuccess(String str) {
+				progressDialog.dismiss();
+				JsonObject jo = new JsonParser().parse(str).getAsJsonObject();
+				JsonElement jsonElement = jo.get(Constants.RETURN_CODE);
+				String returnCode = null;
+				if (jsonElement != null) {
+					returnCode = jsonElement.getAsString();
+				}
+				if (returnCode == null ||!returnCode.equals(Constants.LSUCCESS)) {
+					ToastUtil.showShortToast(StoreOrderActivity.this, "获取失败");
+					return;
+				}
+				JsonUtil ju = new JsonUtil(str);
+				if (ju.isError(StoreOrderActivity.this)) {
+					return;
+				}
+				pageSize = (Integer)ju.get(Constants.PAGE_SIZE,Integer.class);
+				List<OrderGoodsVo> orders = new ArrayList<OrderGoodsVo>();
+				orders = (List<OrderGoodsVo>) ju.get(Constants.ORDER_GOODS_LIST, new TypeToken<List<OrderGoodsVo>>(){}.getType());
+				
+				if (orders != null && orders.size() > 0) {
+					if (currentPage<=pageSize){
+						nodata = true;
+					}
+					orderGoods.addAll(orders);
+					storeOrderAdapter.notifyDataSetChanged();
+				}
+			}
+			
+			@Override
+			public void onFail(Exception e) {
+				progressDialog.dismiss();
+				ToastUtil.showShortToast(StoreOrderActivity.this, Constants.getErrorInf(null, null));
+				e.printStackTrace();
+			}
+		}).execute();
+	}
+	@Override
+	public void onItemClick(AdapterView<?> parent, View view, int position,
+			long id) {
+		OrderGoodsVo goodsVo = orderGoods.get(position);
+		Integer billStatus = goodsVo.getBillStatus();
+		/**
+		 * 未确认的状态下。可以修改订单数量，也可以删除 添加
+		 */
+		Intent orderAIntent =new Intent(StoreOrderActivity.this,StoreOrderAddActivity.class);
+		Bundle bundle=new Bundle();
+		bundle.putSerializable("orderGoods", goodsVo);
+		orderAIntent.putExtras(bundle);
+		if (billStatus==1) {
+			if (currentShop.getType() == ShopVo.DANDIAN || currentShop.getType() == ShopVo.MENDIAN) {//判断  是 总部 还是分店
+				orderAIntent.putExtra("orderState", Constants.UNRECOGNIZED);// 未确定订单
+			}else{
+				if (currentShop.getParentId()!=null) {
+					orderAIntent.putExtra("orderState", Constants.CONFIRMATION_AFTER);// 分公司 查看订单详情
+				}else {
+					orderAIntent.putExtra("orderState", Constants.CONFIRMATION);// 总部登陆  确认订单
+				}
+			}
+		}else if(billStatus==2){
+			orderAIntent.putExtra("orderState", Constants.CONFIRMATION_AFTER);// 确认后订单查看详情
+		}
+		startActivity(orderAIntent);
+	}
+
+	@Override
+	public void onItemClick(int pos) {
+		this.status.setText(dicVos.get(pos).getName());
+		this.val = dicVos.get(pos).getVal();
+		this.currentPage = 1;//选择以后初始化页数
+		this.orderGoods.clear();
+		this.getStoreOrderGoods(null);//根据门店获取订货单
+	}
+
+}

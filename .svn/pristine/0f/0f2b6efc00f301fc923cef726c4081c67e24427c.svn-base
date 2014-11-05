@@ -1,0 +1,122 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/login_bj" >
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:background="#70FFFFFF" >
+
+        <com.dfire.retail.app.common.item.ItemTextView
+            android:id="@+id/shop_name"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" />
+
+        <com.dfire.retail.app.common.item.ItemEditList
+            android:id="@+id/ls_shop_child"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/shop_name" />
+
+        <RelativeLayout
+            android:id="@+id/shop2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/ls_shop_child"
+            android:background="#dedae4"
+            android:gravity="center_vertical"
+            android:padding="10dp" >
+
+            <TextView
+                android:id="@+id/textView1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:text="调拨商品"
+                android:textSize="20sp" />
+
+            <ImageView
+                android:id="@+id/imageView1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:src="@drawable/add_little" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/store_collect_add_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/shop2"
+            android:orientation="vertical" >
+        </LinearLayout>
+
+        <RelativeLayout
+            android:id="@+id/add_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/store_collect_add_layout"
+            android:layout_marginTop="15dp"
+            android:gravity="center_vertical"
+            android:padding="20dp" >
+
+            <ImageView
+                android:id="@+id/imageView1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/textView1"
+                android:layout_toLeftOf="@+id/textView1"
+                android:src="@drawable/add_little" />
+
+            <TextView
+                android:id="@+id/textView1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:text="添加调拨商品。。。"
+                android:textColor="#CD0102"
+                android:textSize="18sp" />
+        </RelativeLayout>
+
+        <View
+            android:paddingTop="20dp"
+            android:id="@+id/view1"
+            style="@style/content_hline"
+            android:layout_below="@+id/add_layout"
+            android:contentDescription="line" />
+
+        <LinearLayout
+            android:id="@+id/lay1"
+            android:layout_width="wrap_content"
+            android:layout_height="44dp"
+           android:layout_marginRight="10dp"
+            android:layout_below="@+id/view1"
+            android:orientation="horizontal"
+            android:paddingRight="20dp" >
+
+            <TextView
+                style="@style/black_medium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="总件数:" />
+
+            <TextView
+                android:id="@+id/total_num"
+                style="@style/black_medium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <View
+            style="@style/content_hline"
+            android:layout_below="@+id/lay1"
+            android:contentDescription="line" />
+    </RelativeLayout>
+
+</RelativeLayout>

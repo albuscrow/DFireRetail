@@ -1,0 +1,213 @@
+package com.dfire.retail.app.manage.activity.logisticmanager;
+
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+
+import android.app.Activity;
+import android.app.ProgressDialog;
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.ImageButton;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
+
+import com.dfire.retail.app.manage.R;
+import com.dfire.retail.app.manage.RetailApplication;
+import com.dfire.retail.app.manage.activity.item.StoreCollectGoodsItem;
+import com.dfire.retail.app.manage.data.SearchGoodsVo;
+import com.dfire.retail.app.manage.data.StockInDetailVo;
+import com.dfire.retail.app.manage.data.StockInVo;
+import com.dfire.retail.app.manage.global.Constants;
+import com.dfire.retail.app.manage.network.AsyncHttpPost;
+import com.dfire.retail.app.manage.network.RequestParameter;
+import com.dfire.retail.app.manage.network.RequestResultCallback;
+import com.dfire.retail.app.manage.util.JsonUtil;
+import com.dfire.retail.app.manage.util.ToastUtil;
+import com.google.gson.reflect.TypeToken;
+
+/**
+ * 物流管理-门店进货
+ * @author ys
+ *
+ */
+public class StoreCollectAddActivity extends Activity implements OnClickListener{
+
+	private ImageButton title_left;
+	
+	private ImageButton title_right;
+	
+	private RelativeLayout add_layout,collect_layout;
+	
+	private LinearLayout store_collect_add_lv;
+	
+	private StockInDetailVo stockInDetailVo;
+	
+	private List<StockInDetailVo> stockInDetailVos;
+	
+	private SearchGoodsVo searchGoodsVo;
+	
+	private LayoutInflater inflater;
+	
+	private String collectState;//操作状态
+	
+	private StockInVo stockInVo;
+	
+	private ProgressDialog progressDialog;
+
+	private List<StockInDetailVo> stockList;//查询的list
+	
+	private String lastVer = "";//版本号
+	
+	private String stockInNo = "";
+	
+	private TextView supplyName_tx,stockInNo_tx,mGoodsTotalSum,mGoodsTotalPrice;
+	
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_store_collect_add);
+		inflater = LayoutInflater.from(this);
+		findView();
+	}
+	
+	public void findView(){
+		stockList = new ArrayList<StockInDetailVo>();
+		stockInDetailVos=new ArrayList<StockInDetailVo>();
+		title_left=(ImageButton)findViewById(R.id.title_left);
+		title_left.setOnClickListener(this);
+		title_right=(ImageButton)findViewById(R.id.title_right);
+		title_right.setOnClickListener(this);
+		add_layout=(RelativeLayout)findViewById(R.id.add_layout);
+		add_layout.setOnClickListener(this);
+		store_collect_add_lv=(LinearLayout)findViewById(R.id.store_collect_add_lv);
+		collect_layout=(RelativeLayout)findViewById(R.id.collect_layout);
+		supplyName_tx=(TextView)findViewById(R.id.supplyName_tx);
+		stockInNo_tx=(TextView)findViewById(R.id.stockInNo_tx);
+		mGoodsTotalSum=(TextView)findViewById(R.id.goodsTotalSum);
+		mGoodsTotalPrice=(TextView)findViewById(R.id.goodsTotalPrice);
+		
+		progressDialog = new ProgressDialog(StoreCollectAddActivity.this);
+		progressDialog.setCancelable(false);
+		progressDialog.setCanceledOnTouchOutside(false);
+		progressDialog.setMessage("加载中，请稍后。。。");
+		
+		//获取传来的值
+		collectState = getIntent().getStringExtra("collectState").toString();
+		if (!collectState.equals(Constants.COLLECT_ADD)) {
+			stockInVo = (StockInVo) getIntent().getSerializableExtra("stockInVo");
+			if (collectState.equals(Constants.COLLECT_DISTRIBUTION)) {
+				
+			}else if (collectState.equals(Constants.COLLECT_RECEIVING)) {
+				
+			}else if (collectState.equals(Constants.COLLECT_REJECTION)) {
+				add_layout.setVisibility(View.GONE);
+			}
+			this.findCollectInfoById(stockInVo.getStockInId(), stockInVo.getRecordType());
+		}
+		
+	}
+	
+	@Override
+	protected void onResume() {
+		super.onResume();
+		
+	}
+	
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
+		RetailApplication application = (RetailApplication) getApplication();
+		HashMap<String, Object> map = application.getObjMap();
+		stockInDetailVo = (StockInDetailVo)map.get("returnCollectAdd");
+		stockInDetailVos.add(stockInDetailVo);
+			
+		StoreCollectGoodsItem collectGoodsItem = new StoreCollectGoodsItem(this,inflater,false);
+		collectGoodsItem.initWithData(stockInDetailVo);
+		store_collect_add_lv.addView(collectGoodsItem.getItemView());
+	}
+ 
+	@Override
+	public void onClick(View v) {
+		switch (v.getId()) {
+		case R.id.title_left:
+			
+			break;
+
+		case R.id.title_right:
+			
+			break;
+			
+		case R.id.add_layout:
+			Intent addGoods=new Intent(StoreCollectAddActivity.this,StoreOrderAddGoodsActivity.class);
+			addGoods.putExtra("flag", "returnCollectAdd");
+			startActivityForResult(addGoods, 100);
+			break;
+		}
+	}
+	/**
+	 * 根据id 查询进货单详情
+	 */
+	private void findCollectInfoById(String stockInId,String recordType){
+		progressDialog.show();
+		
+		RequestParameter params = new RequestParameter(true);
+		params.setUrl(Constants.BASE_URL + "purchase/detail");
+		params.setParam("stockInId", stockInId);
+		params.setParam("recordType", recordType);
+		new AsyncHttpPost(params, new RequestResultCallback() {
+			@SuppressWarnings("unchecked")
+			@Override
+			public void onSuccess(String str) {
+				progressDialog.dismiss();
+				
+				JsonUtil ju = new JsonUtil(str);
+				if (ju.isError(StoreCollectAddActivity.this)) {
+					return;
+				}
+				stockList = (List<StockInDetailVo>) ju.get(Constants.STOCK_INDETAIL_LIST, new TypeToken<List<StockInDetailVo>>(){}.getType());
+				
+				stockInNo = ju.get("stockInNo",String.class).toString();//订单号
+				lastVer = String.valueOf(ju.get("lastVer",String.class));//得到当前版本号
+				String supplyName = String.valueOf(ju.get("supplyName",String.class));
+				String goodsTotalSum =  String.valueOf(ju.get("goodsTotalSum",Integer.class));
+				String goodsTotalPrice =  String.valueOf(ju.get("goodsTotalPrice",BigDecimal.class));
+				
+				supplyName_tx.setText(supplyName);
+				stockInNo_tx.setText(stockInNo);
+				mGoodsTotalSum.setText("总数量："+goodsTotalSum);
+				mGoodsTotalPrice.setText("进货总金额(元)："+goodsTotalPrice);
+				
+				if (stockList!=null&& stockList.size() > 0) {
+					stockInDetailVos.addAll(stockList);
+				}
+				/**创建单项*/
+				if (stockInDetailVos!=null) {
+					for (int i = 0; i < stockInDetailVos.size(); i++) {
+						StoreCollectGoodsItem storeCollectGoodsItem = null;
+						if(collectState.equals(Constants.COLLECT_RECEIVING)||collectState.equals(Constants.COLLECT_REJECTION)){
+							storeCollectGoodsItem = new StoreCollectGoodsItem(StoreCollectAddActivity.this,inflater,false);
+						}else {
+							storeCollectGoodsItem = new StoreCollectGoodsItem(StoreCollectAddActivity.this,inflater,true);
+						}
+						storeCollectGoodsItem.initWithData(stockInDetailVos.get(i));
+						store_collect_add_lv.addView(storeCollectGoodsItem.getItemView());
+//						storeOrderHashMap.put(stockInDetailVoList.get(i).getGoodsId(), storeCollectGoodsItem);//goodsItem 存入map(原有view)
+						
+					}
+				}
+			}
+			@Override
+			public void onFail(Exception e) {
+				progressDialog.dismiss();
+				ToastUtil.showShortToast(StoreCollectAddActivity.this, Constants.getErrorInf(null, null));
+				e.printStackTrace();
+			}
+		}).execute();
+	}
+}

@@ -1,0 +1,230 @@
+package com.dfire.retail.app.manage.common;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import android.app.Dialog;
+import android.content.Context;
+import android.graphics.Point;
+import android.graphics.Typeface;
+import android.os.Bundle;
+import android.util.Log;
+import android.view.Gravity;
+import android.view.View;
+import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
+import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+
+import com.dfire.retail.app.manage.R;
+import com.dfire.retail.app.manage.data.CityVo;
+import com.dfire.retail.app.manage.data.DistrictVo;
+import com.dfire.retail.app.manage.data.ProvinceVo;
+import com.dfire.retail.app.manage.wheel.widget.OnWheelChangedListener;
+import com.dfire.retail.app.manage.wheel.widget.WheelView;
+import com.dfire.retail.app.manage.wheel.widget.adapters.ArrayWheelAdapter;
+
+public class SelectEreaDialog extends Dialog{
+
+
+	private Context mContext;
+	private WheelView mProvince, mCity, mDistrict;
+	
+	private ArrayAdapter mCityAdapter,mProvinceAdapter,mDistrictAdapter;
+
+	private Button mConfirmButton, mCancelButton;
+	private TextView mTitle;
+	private LinearLayout mClearDate;
+	private String mType = "";// 
+	List<ProvinceVo> provinceVoList;
+	List<CityVo> cityVoList;
+	List<DistrictVo> districtVoList;
+	
+	int provinceIndex,cityIndex ,districtIndex;
+	
+	private ArrayList<String> mProvinceList = new ArrayList<String>();
+	private ArrayList<String> mCityList = new ArrayList<String>();
+	private ArrayList<String> mDistictList =new ArrayList<String>();
+	
+	public SelectEreaDialog(Context context) {
+		super(context, R.style.dialog);
+		mContext = context;
+	}
+
+	public SelectEreaDialog(Context context, String type) {
+		super(context, R.style.dialog);
+		mContext = context;
+		mType = type;
+	}
+	
+	public SelectEreaDialog(Context context,List<ProvinceVo> adressList,
+			int provinceSelect,int citySelect,int districtSelect){
+		super(context,R.style.dialog);
+		mContext = context;
+		this.provinceVoList = adressList;
+		this.cityIndex = citySelect;
+		this.provinceIndex = provinceSelect;
+		this.districtIndex = districtSelect;
+		
+		//获取当前选中的地址城市信息
+		cityVoList = provinceVoList.get(provinceSelect).getCityVoList();
+		//获取当前选中的地区信息
+		districtVoList = cityVoList.get(citySelect).getDistrictVoList();
+		//获取省份列表信息
+		for(int i = 0; i < provinceVoList.size();i++)
+			mProvinceList.add(provinceVoList.get(i).getProvinceName());
+		//获取城市列表信息
+		for(int i = 0; i < cityVoList.size();i++){
+			mCityList.add(cityVoList.get(i).getCityName());			
+		}
+		
+		//获取区域名字列表信息
+		for(int i = 0; i <  districtVoList.size();i++){
+			mDistictList.add(districtVoList.get(i).getDistrictName());
+		}
+	}
+
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.select_date_dialog);
+
+		mConfirmButton = (Button) findViewById(R.id.card_type_confirm);
+		mCancelButton = (Button) findViewById(R.id.card_type_cancel);
+		mTitle = (TextView) findViewById(R.id.date_dialog_title);
+		mClearDate = (LinearLayout) findViewById(R.id.clear_date);
+	
+		this.setCanceledOnTouchOutside(true);
+		Window window = this.getWindow();
+		WindowManager.LayoutParams params = window.getAttributes();
+		Point p = new Point();
+		window.getWindowManager().getDefaultDisplay().getSize(p);
+		params.width = p.x;
+		params.height = WindowManager.LayoutParams.WRAP_CONTENT;
+		params.gravity = Gravity.BOTTOM;
+		window.setAttributes(params);
+
+		
+		mProvince = (WheelView) findViewById(R.id.year_wheel);
+		mCity = (WheelView) findViewById(R.id.month_wheel);
+		mDistrict = (WheelView) findViewById(R.id.day_wheel);
+
+		mProvince.setVisibleItems(7); // Number of items
+		mProvince.setWheelBackground(android.R.color.transparent);
+		mProvince.setWheelForeground(android.R.color.transparent);
+		mProvince.setShadowColor(0x00000000, 0x00000000, 0x00000000);
+		mProvince.setCyclic(true);
+
+		mCity.setVisibleItems(7); // Number of items
+		mCity.setWheelBackground(android.R.color.transparent);
+		mCity.setWheelForeground(android.R.color.transparent);
+		mCity.setShadowColor(0x00000000, 0x00000000, 0x00000000);
+		mCity.setCyclic(true);
+
+		mDistrict.setVisibleItems(7); // Number of items
+		mDistrict.setWheelBackground(android.R.color.transparent);
+		mDistrict.setWheelForeground(android.R.color.transparent);
+		mDistrict.setShadowColor(0x00000000, 0x00000000, 0x00000000);
+		mDistrict.setCyclic(true);
+
+		OnWheelChangedListener listener = new OnWheelChangedListener() {
+			@Override
+			public void onChanged(WheelView wheel, int oldValue, int newValue) {
+				updateDays(mProvince, mCity, mDistrict);
+			}
+		};
+		
+		//省份
+		mProvinceAdapter = new ArrayAdapter(mContext,mProvinceList, provinceIndex);
+		mProvince.setViewAdapter(mProvinceAdapter);
+		mProvince.setCurrentItem(provinceIndex);
+		
+		// 城市
+		mCityAdapter = new ArrayAdapter(mContext,mCityList, cityIndex);
+		mCity.setViewAdapter(mCityAdapter);
+		mCity.setCurrentItem(cityIndex);
+
+		// 地区
+		mDistrictAdapter= new ArrayAdapter(mContext,mDistictList, districtIndex);
+		mDistrict.setViewAdapter(mDistrictAdapter);
+		mDistrict.setCurrentItem(districtIndex);
+	}
+
+	public void updateDays(String time) {
+//		if (time!=null&&!time.equals("请选择")) { 
+//			int year = Integer.parseInt(time.split("-")[0]);
+//			int month = Integer.parseInt(time.split("-")[1]);
+//			int day = Integer.parseInt(time.split("-")[2]);
+//			if (year >= 1960) {
+//				Log.i("year", year + "");
+//				mYear.setCurrentItem(year - 1960);
+//			} else {
+//				mYear.setCurrentItem(0);
+//			}
+//			mMounth.setCurrentItem(month - 1);
+//			mDay.setCurrentItem(day - 1);
+//		}
+	}
+
+	public Button getConfirmButton() {
+		return mConfirmButton;
+
+	}
+
+	public Button getCancelButton() {
+		return mCancelButton;
+
+	}
+
+	public TextView getTitle() {
+		return mTitle;
+
+	}
+
+	public LinearLayout getmClearDate() {
+		return mClearDate;
+	}
+
+	public String getCurrentData() {
+		return "";
+	}
+
+	void updateDays(WheelView year, WheelView month, WheelView day) {
+	
+	}
+
+	
+	private class ArrayAdapter extends ArrayWheelAdapter<String> {
+		// Index of current item
+		// int currentItem;
+		// Index of item to be highlighted
+		// int currentValue;
+
+		/**
+		 * Constructor
+		 */
+		public ArrayAdapter(Context context, ArrayList<String> items, int current) {
+			super(context, items);
+			// this.currentValue = current;
+			setTextSize(20);
+		}
+
+		@Override
+		protected void configureTextView(TextView view) {
+			super.configureTextView(view);
+			// if (currentItem == currentValue) {
+			// view.setTextColor(0xFF0000F0);
+			// }
+			view.setTypeface(Typeface.SANS_SERIF);
+		}
+
+		@Override
+		public View getItem(int index, View cachedView, ViewGroup parent) {
+			// currentItem = index;
+			return super.getItem(index, cachedView, parent);
+		}
+	}
+}
+

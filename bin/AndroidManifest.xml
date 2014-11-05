@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.dfire.retail.app.manage"
     android:versionCode="1"
@@ -27,13 +28,13 @@
     <uses-permission android:name="android.permission.WAKE_LOCK" />
 
     <application
+        android:name=".RetailApplication"
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme"
-        android:name="com.dfire.retail.app.manage.RetailApplication" >
+        android:theme="@style/AppTheme" >
         <activity
-            android:name="com.dfire.retail.app.manage.activity.login.LoginActivity"
+            android:name=".activity.login.LoginActivity"
             android:configChanges="keyboardHidden|navigation|orientation"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Light.NoTitleBar" >
@@ -44,67 +45,67 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.dfire.retail.app.manage.activity.goodsmanager.GoodsOptDetailActivity"
+            android:name=".activity.goodsmanager.GoodsOptDetailActivity"
             android:configChanges="keyboardHidden|navigation|orientation"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Light.NoTitleBar" >
         </activity>
         <activity
-            android:name="com.dfire.retail.app.manage.activity.goodsmanager.ChooseGoodsActivity"
+            android:name=".activity.goodsmanager.ChooseGoodsActivity"
             android:configChanges="keyboardHidden|navigation|orientation"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Light.NoTitleBar" >
         </activity>
         <activity
-            android:name="com.dfire.retail.app.manage.activity.CaptureActivity"
+            android:name=".activity.CaptureActivity"
             android:configChanges="keyboardHidden|navigation|orientation"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Light.NoTitleBar" >
         </activity>
         <activity
-            android:name="com.dfire.retail.app.manage.activity.goodsmanager.GoodsSearchForOptActivity"
+            android:name=".activity.goodsmanager.GoodsSearchForOptActivity"
             android:configChanges="keyboardHidden|navigation|orientation"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Light.NoTitleBar" >
         </activity>
         <activity
-            android:name="com.dfire.retail.app.manage.activity.goodsmanager.SaleSettingActivity"
+            android:name=".activity.goodsmanager.SaleSettingActivity"
             android:configChanges="keyboardHidden|navigation|orientation"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Light.NoTitleBar" >
         </activity>
         <activity
-            android:name="com.dfire.retail.app.manage.activity.goodsmanager.GoodsSortDetailActivity"
+            android:name=".activity.goodsmanager.GoodsSortDetailActivity"
             android:configChanges="keyboardHidden|navigation|orientation"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Light.NoTitleBar" >
         </activity>
         <activity
-            android:name="com.dfire.retail.app.manage.activity.goodsmanager.GoodsSortListActivity"
+            android:name=".activity.goodsmanager.GoodsSortListActivity"
             android:configChanges="keyboardHidden|navigation|orientation"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Light.NoTitleBar" >
         </activity>
         <activity
-            android:name="com.dfire.retail.app.manage.activity.goodsmanager.GoodsListActivity"
+            android:name=".activity.goodsmanager.GoodsListActivity"
             android:configChanges="keyboardHidden|navigation|orientation"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Light.NoTitleBar" >
         </activity>
         <activity
-            android:name="com.dfire.retail.app.manage.activity.goodsmanager.GoodsDetailActivity"
+            android:name=".activity.goodsmanager.GoodsDetailActivity"
             android:configChanges="keyboardHidden|navigation|orientation"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Light.NoTitleBar" >
         </activity>
         <activity
-            android:name="com.dfire.retail.app.manage.activity.goodsmanager.GoodsManagerMainMenuActivity"
+            android:name=".activity.goodsmanager.GoodsManagerMainMenuActivity"
             android:configChanges="keyboardHidden|navigation|orientation"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Light.NoTitleBar" >
         </activity>
         <activity
-            android:name="com.dfire.retail.app.manage.activity.goodsmanager.GoodsListWithImageActivity"
+            android:name=".activity.goodsmanager.GoodsListWithImageActivity"
             android:configChanges="keyboardHidden|navigation|orientation"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Light.NoTitleBar" >
@@ -251,13 +252,13 @@
         </activity>
         <!-- 员工信息查询 -->
         <activity
-            android:name="com.dfire.retail.app.manage.activity.goodsmanager.GoodsManagerBaseActivity"
+            android:name=".activity.goodsmanager.GoodsManagerBaseActivity"
             android:configChanges="keyboardHidden|navigation|orientation"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Light.NoTitleBar" >
         </activity>
         <activity
-            android:name="com.dfire.retail.app.manage.activity.goodsmanager.GoodsSearchActivity"
+            android:name=".activity.goodsmanager.GoodsSearchActivity"
             android:configChanges="keyboardHidden|navigation|orientation"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Light.NoTitleBar" >
@@ -265,13 +266,20 @@
 
         <!-- 员工信息查询 -->
         <activity
-            android:name="com.dfire.retail.app.manage.activity.retailmanager.EmployeeDetailActivity"
+            android:name=".activity.employeemanager.ShowUserDetailInfoActivity"
             android:configChanges="keyboardHidden|navigation|orientation"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Light.NoTitleBar" >
         </activity>
         <activity
-            android:name="com.dfire.retail.app.manage.activity.retailmanager.EmployeeInfoActivity"
+            android:name=".activity.employeemanager.UserShopSelectActivity"
+            android:configChanges="keyboardHidden|navigation|orientation"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Light.NoTitleBar" >
+        </activity>
+        
+        <activity
+            android:name=".activity.employeemanager.EmployeeInfoActivity"
             android:configChanges="keyboardHidden|navigation|orientation"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Light.NoTitleBar" >
@@ -279,69 +287,61 @@
 
         <!-- 后台管理 -->
         <activity
-            android:name="com.dfire.retail.app.manage.activity.retailmanager.RetailBGdetailActivity"
-            android:configChanges="keyboardHidden|navigation|orientation"
-            android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.Light.NoTitleBar" >
-
-            <!--
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-            -->
-        </activity>
-        <activity
-            android:name="com.dfire.retail.app.manage.activity.setting.SettingActivity"
+            android:name=".activity.retailmanager.RetailBGdetailActivity"
             android:configChanges="keyboardHidden|navigation|orientation"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Light.NoTitleBar" >
         </activity>
         <activity
-            android:name="com.dfire.retail.app.manage.activity.setting.SettingHelpActivity"
+            android:name=".activity.setting.SettingActivity"
             android:configChanges="keyboardHidden|navigation|orientation"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Light.NoTitleBar" >
         </activity>
         <activity
-            android:name="com.dfire.retail.app.manage.activity.setting.BusinessSettingActivity"
+            android:name=".activity.setting.SettingHelpActivity"
             android:configChanges="keyboardHidden|navigation|orientation"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Light.NoTitleBar" >
         </activity>
         <activity
-            android:name="com.dfire.retail.app.manage.activity.setting.AccountInfoSettingActivity"
+            android:name=".activity.setting.BusinessSettingActivity"
             android:configChanges="keyboardHidden|navigation|orientation"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Light.NoTitleBar" >
         </activity>
         <activity
-            android:name="com.dfire.retail.app.manage.activity.setting.AccountPWActivity"
+            android:name=".activity.setting.AccountInfoSettingActivity"
             android:configChanges="keyboardHidden|navigation|orientation"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Light.NoTitleBar" >
         </activity>
         <activity
-            android:name="com.dfire.retail.app.manage.activity.retailmanager.SelectDateActivity"
+            android:name=".activity.setting.AccountPWActivity"
             android:configChanges="keyboardHidden|navigation|orientation"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Light.NoTitleBar" >
         </activity>
         <activity
-            android:name="com.dfire.retail.app.manage.activity.setting.RolePermissionShowActivity"
+            android:name=".activity.retailmanager.SelectDateActivity"
             android:configChanges="keyboardHidden|navigation|orientation"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Light.NoTitleBar" >
         </activity>
         <activity
-            android:name="com.dfire.retail.app.manage.activity.setting.RolePermissionSettingActivity"
+            android:name=".activity.setting.RolePermissionShowActivity"
             android:configChanges="keyboardHidden|navigation|orientation"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Light.NoTitleBar" >
         </activity>
         <activity
-            android:name="com.dfire.retail.app.manage.activity.setting.RolePermissionActivity"
+            android:name=".activity.setting.RolePermissionSettingActivity"
+            android:configChanges="keyboardHidden|navigation|orientation"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Light.NoTitleBar" >
+        </activity>
+        <activity
+            android:name=".activity.setting.RolePermissionActivity"
             android:configChanges="keyboardHidden|navigation|orientation"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Light.NoTitleBar" >
@@ -353,121 +353,121 @@
             android:theme="@android:style/Theme.Light.NoTitleBar" >
         </activity>
         <activity
-            android:name="com.dfire.retail.app.manage.activity.retailmanager.RetailLogBookActivity"
+            android:name=".activity.retailmanager.RetailLogBookActivity"
             android:configChanges="keyboardHidden|navigation|orientation"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Light.NoTitleBar" >
         </activity>
         <activity
-            android:name="com.dfire.retail.app.manage.activity.retailmanager.RetailInfoDetailActivity"
+            android:name=".activity.retailmanager.RetailInfoDetailActivity"
             android:configChanges="keyboardHidden|navigation|orientation"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Light.NoTitleBar" >
         </activity>
         <activity
-            android:name="com.dfire.retail.app.manage.activity.retailmanager.RetailInfoActivity"
+            android:name=".activity.retailmanager.RetailInfoActivity"
             android:configChanges="keyboardHidden|navigation|orientation"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Light.NoTitleBar" >
         </activity>
         <activity
-            android:name="com.dfire.retail.app.manage.activity.retailmanager.RetailEMP_PFMActivity"
+            android:name=".activity.retailmanager.RetailEMP_PFMActivity"
             android:configChanges="keyboardHidden|navigation|orientation"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Light.NoTitleBar" >
         </activity>
         <activity
-            android:name="com.dfire.retail.app.manage.activity.setting.ReceiptSettingActicity"
+            android:name=".activity.setting.ReceiptSettingActicity"
             android:configChanges="keyboardHidden|navigation|orientation"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Light.NoTitleBar" >
         </activity>
         <activity
-            android:name="com.dfire.retail.app.manage.activity.retailmanager.PerformanceDetailActivity"
+            android:name=".activity.retailmanager.PerformanceDetailActivity"
             android:configChanges="keyboardHidden|navigation|orientation"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Light.NoTitleBar" >
         </activity>
         <activity
-            android:name="com.dfire.retail.app.manage.activity.PayWayTypeActivity"
+            android:name=".activity.PayWayTypeActivity"
             android:configChanges="keyboardHidden|navigation|orientation"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Light.NoTitleBar" >
         </activity>
         <activity
-            android:name="com.dfire.retail.app.manage.activity.PayWayShowOrCreateActivity"
+            android:name=".activity.PayWayShowOrCreateActivity"
             android:configChanges="keyboardHidden|navigation|orientation"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Light.NoTitleBar" >
         </activity>
         <activity
-            android:name="com.dfire.retail.app.manage.activity.setting.DataClearSettingActivity"
+            android:name=".activity.setting.DataClearSettingActivity"
             android:configChanges="keyboardHidden|navigation|orientation"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Light.NoTitleBar" >
         </activity>
         <activity
-            android:name="com.dfire.retail.app.manage.activity.setting.HardwareSettingActivity"
+            android:name=".activity.setting.HardwareSettingActivity"
             android:configChanges="keyboardHidden|navigation|orientation"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Light.NoTitleBar" >
         </activity>
         <activity
-            android:name="com.dfire.retail.app.manage.activity.setting.OperateLogSettingActivity"
+            android:name=".activity.setting.OperateLogSettingActivity"
             android:configChanges="keyboardHidden|navigation|orientation"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Light.NoTitleBar" >
         </activity>
         <activity
-            android:name="com.dfire.retail.app.manage.activity.setting.ParamSettingActivity"
+            android:name=".activity.setting.ParamSettingActivity"
             android:configChanges="keyboardHidden|navigation|orientation"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Light.NoTitleBar" >
         </activity>
         <activity
-            android:name="com.dfire.retail.app.manage.activity.setting.PayWayHelpActivity"
+            android:name=".activity.setting.PayWayHelpActivity"
             android:configChanges="keyboardHidden|navigation|orientation"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Light.NoTitleBar" >
         </activity>
         <activity
-            android:name="com.dfire.retail.app.manage.activity.setting.PayWaySettingActivity"
+            android:name=".activity.setting.PayWaySettingActivity"
             android:configChanges="keyboardHidden|navigation|orientation"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Light.NoTitleBar" >
         </activity>
         <activity
-            android:name="com.dfire.retail.app.manage.activity.setting.PayWayShowOrCreateActivity"
+            android:name=".activity.setting.PayWayShowOrCreateActivity"
             android:configChanges="keyboardHidden|navigation|orientation"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Light.NoTitleBar" >
         </activity>
         <activity
-            android:name="com.dfire.retail.app.manage.activity.setting.PayWayTypeActivity"
+            android:name=".activity.setting.PayWayTypeActivity"
             android:configChanges="keyboardHidden|navigation|orientation"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Light.NoTitleBar" >
         </activity>
         <activity
-            android:name="com.dfire.retail.app.manage.activity.retailmanager.BGEmployeeManagerActivity"
+            android:name=".activity.retailmanager.BGEmployeeManagerActivity"
             android:configChanges="keyboardHidden|navigation|orientation"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Light.NoTitleBar" >
         </activity>
         <activity
-            android:name="com.dfire.retail.app.manage.activity.login.UserInfoActivity"
+            android:name=".activity.login.UserInfoActivity"
             android:configChanges="keyboardHidden|navigation|orientation"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Light.NoTitleBar" >
         </activity>
         <activity
-            android:name="com.dfire.retail.app.manage.activity.retailmanager.LogBookDetailActivity"
+            android:name=".activity.retailmanager.LogBookDetailActivity"
             android:configChanges="keyboardHidden|navigation|orientation"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Light.NoTitleBar" >
         </activity>
         <activity
-            android:name="com.dfire.retail.app.manage.activity.login.ChangeBackgroundActivity"
+            android:name=".activity.login.ChangeBackgroundActivity"
             android:configChanges="keyboardHidden|navigation|orientation"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Light.NoTitleBar" >
@@ -475,51 +475,172 @@
 
         <!-- 物流管理 -->
         <activity
-            android:name="com.dfire.retail.app.manage.activity.logisticmanager.LogisticsManagerActivity"
+            android:name=".activity.logisticmanager.LogisticsManagerActivity"
             android:configChanges="keyboardHidden|navigation|orientation"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Light.NoTitleBar" >
         </activity>
+        <activity
+            android:name=".activity.logisticmanager.StoreOrderAddGoodsActivity"
+            android:configChanges="keyboardHidden|navigation|orientation"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Light.NoTitleBar" >
+        </activity>
+        <activity
+            android:name=".activity.logisticmanager.StoreCollectAddActivity"
+            android:configChanges="keyboardHidden|navigation|orientation"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Light.NoTitleBar" >
+        </activity>
+        <activity
+            android:name=".activity.logisticmanager.StoreOrderActivity"
+            android:configChanges="keyboardHidden|navigation|orientation"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Light.NoTitleBar" >
+        </activity>
+        <activity
+            android:name=".activity.logisticmanager.StoreOrderDetailActivity"
+            android:configChanges="keyboardHidden|navigation|orientation"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Light.NoTitleBar" >
+        </activity>
+        <activity
+            android:name=".activity.logisticmanager.StoreOrderAddActivity"
+            android:configChanges="keyboardHidden|navigation|orientation"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Light.NoTitleBar" >
+        </activity>
+        <activity
+            android:name=".activity.logisticmanager.StoreCollectActivity"
+            android:configChanges="keyboardHidden|navigation|orientation"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Light.NoTitleBar" >
+        </activity>
+        <activity
+            android:name=".activity.logisticmanager.StoreCollectDetailActivity"
+            android:configChanges="keyboardHidden|navigation|orientation"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Light.NoTitleBar" >
+        </activity>
+        <activity
+            android:name=".activity.logisticmanager.StoreReturnGoodsActivity"
+            android:configChanges="keyboardHidden|navigation|orientation"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Light.NoTitleBar" >
+        </activity>
+        <activity
+            android:name=".activity.logisticmanager.StoreReturnGoodsAddActivity"
+            android:configChanges="keyboardHidden|navigation|orientation"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Light.NoTitleBar" >
+        </activity>
+        <activity
+            android:name=".activity.logisticmanager.StoreAllocationActivity"
+            android:configChanges="keyboardHidden|navigation|orientation"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Light.NoTitleBar" >
+        </activity>
+        <activity
+            android:name=".activity.logisticmanager.LogisticsRecordsCheckActivity"
+            android:configChanges="keyboardHidden|navigation|orientation"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Light.NoTitleBar" >
+        </activity>
+        <activity
+            android:name=".activity.logisticmanager.LogisticsRecordsListActivity"
+            android:configChanges="keyboardHidden|navigation|orientation"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Light.NoTitleBar" >
+        </activity>
+        <activity
+            android:name=".activity.logisticmanager.LogisticsRecordDetailActivity"
+            android:configChanges="keyboardHidden|navigation|orientation"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Light.NoTitleBar" >
+        </activity>
+        <activity
+            android:name=".activity.logisticmanager.SupplierManagementActivity"
+            android:configChanges="keyboardHidden|navigation|orientation"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Light.NoTitleBar" >
+        </activity>
+        <activity
+            android:name=".activity.logisticmanager.SupplyManagerAddActivity"
+            android:configChanges="keyboardHidden|navigation|orientation"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Light.NoTitleBar"
+            android:windowSoftInputMode="stateAlwaysHidden" >
+        </activity>
+        <activity
+            android:name=".activity.logisticmanager.SupplyManagerDetailActivity"
+            android:configChanges="keyboardHidden|navigation|orientation"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Light.NoTitleBar"
+            android:windowSoftInputMode="stateAlwaysHidden" >
+        </activity>
+        <activity
+            android:name=".activity.logisticmanager.SupplyTypeSelectActivity"
+            android:configChanges="keyboardHidden|navigation|orientation"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Light.NoTitleBar" >
+        </activity>
+        <activity
+            android:name=".activity.logisticmanager.SupplyTypeAddActivity"
+            android:configChanges="keyboardHidden|navigation|orientation"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Light.NoTitleBar" >
+        </activity>
+        <activity
+            android:name=".activity.logisticmanager.StoreReturnGoodsDetailItemActivity"
+            android:configChanges="keyboardHidden|navigation|orientation"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Light.NoTitleBar" >
+        </activity>
+        <activity
+            android:name=".activity.logisticmanager.StoreReturnGoodsReasonActivity"
+            android:configChanges="keyboardHidden|navigation|orientation"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Light.NoTitleBar" >
+        </activity>
+        <activity
+            android:name=".activity.logisticmanager.StoreReturnGoodsListDetailActivity"
+            android:configChanges="keyboardHidden|navigation|orientation"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Light.NoTitleBar" >
+        </activity>
+        <activity
+            android:name=".activity.logisticmanager.StoreReturnGoodsReasonAddActivity"
+            android:configChanges="keyboardHidden|navigation|orientation"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Light.NoTitleBar" >
+        </activity>
+        <activity
+            android:name="com.dfire.retail.app.manage.activity.logisticmanager.StoreReturnGoodsDetaiDeleteActivity"
+            android:configChanges="keyboardHidden|navigation|orientation"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Light.NoTitleBar" >
+        </activity> 
         
         <activity
-            android:name="com.dfire.retail.app.manage.activity.logisticmanager.StoreOrderAddGoodsActivity"
+            android:name=".activity.logisticmanager.StoreAllocationAddActivity"
             android:configChanges="keyboardHidden|navigation|orientation"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Light.NoTitleBar" >
         </activity>
         <activity
-            android:name="com.dfire.retail.app.manage.activity.logisticmanager.StoreCollectAddActivity"
-            android:configChanges="keyboardHidden|navigation|orientation"
-            android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.Light.NoTitleBar" >
-        </activity>
-        
-        <activity
-            android:name="com.dfire.retail.app.manage.activity.logisticmanager.StoreOrderActivity"
+            android:name=".activity.logisticmanager.StoreAllocationDetailItemActivity"
             android:configChanges="keyboardHidden|navigation|orientation"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Light.NoTitleBar" >
         </activity>
         <activity
-            android:name="com.dfire.retail.app.manage.activity.logisticmanager.StoreOrderDetailActivity"
+            android:name=".activity.logisticmanager.StoreAllocationListDetailActivity"
             android:configChanges="keyboardHidden|navigation|orientation"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Light.NoTitleBar" >
         </activity>
         <activity
-            android:name="com.dfire.retail.app.manage.activity.logisticmanager.StoreOrderAddActivity"
-            android:configChanges="keyboardHidden|navigation|orientation"
-            android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.Light.NoTitleBar" >
-        </activity>
-        <activity
-            android:name="com.dfire.retail.app.manage.activity.logisticmanager.StoreCollectActivity"
-            android:configChanges="keyboardHidden|navigation|orientation"
-            android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.Light.NoTitleBar" >
-        </activity>
-          <activity
-            android:name="com.dfire.retail.app.manage.activity.logisticmanager.StoreCollectDetailActivity"
+            android:name=".activity.logisticmanager.StoreReturnGoodsListOfCompanyDetailActivity"
             android:configChanges="keyboardHidden|navigation|orientation"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Light.NoTitleBar" >
@@ -527,66 +648,190 @@
 
         <!-- 库存管理 -->
         <activity
-            android:name="com.dfire.retail.app.manage.activity.stockmanager.StockManagerActivity"
+            android:name=".activity.stockmanager.StockManagerActivity"
             android:configChanges="keyboardHidden|navigation|orientation"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Light.NoTitleBar" >
         </activity>
         <activity
-            android:name="com.dfire.retail.app.manage.activity.stockmanager.StockQueryActivity"
+            android:name=".activity.stockmanager.StockQueryActivity"
             android:configChanges="keyboardHidden|navigation|orientation"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Light.NoTitleBar" >
         </activity>
         <activity
-            android:name="com.dfire.retail.app.manage.activity.stockmanager.StockListActivity"
+            android:name=".activity.stockmanager.StockListActivity"
             android:configChanges="keyboardHidden|navigation|orientation"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Light.NoTitleBar" >
         </activity>
         <activity
-            android:name="com.dfire.retail.app.manage.activity.stockmanager.StockCheckRecordActivity"
+            android:name=".activity.stockmanager.StoreCheckAddActivity"
             android:configChanges="keyboardHidden|navigation|orientation"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Light.NoTitleBar" >
         </activity>
         <activity
-            android:name="com.dfire.retail.app.manage.activity.stockmanager.StockCheckRecordResultActivity"
+            android:name=".activity.stockmanager.StockCheckRecordActivity"
             android:configChanges="keyboardHidden|navigation|orientation"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Light.NoTitleBar" >
         </activity>
         <activity
-            android:name="com.dfire.retail.app.manage.activity.stockmanager.StockRemindSettingActivity"
+            android:name=".activity.stockmanager.StockCheckRecordResultActivity"
+            android:configChanges="keyboardHidden|navigation|orientation"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Light.NoTitleBar" >
+        </activity>
+        <activity
+            android:name=".activity.stockmanager.StockRemindSettingActivity"
             android:configChanges="keyboardHidden|navigation|orientation"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Light.NoTitleBar" >
         </activity>
         <!-- 员工 -->
         <activity
-            android:name="com.dfire.retail.app.manage.activity.retailmanager.EmployeeActivity"
+            android:name=".activity.employeemanager.EmployeeActivity"
             android:configChanges="keyboardHidden|navigation|orientation"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Light.NoTitleBar" >
         </activity>
-        
-        
+        <activity
+            android:name=".activity.employeemanager.AddUserInfoActivity"
+            android:configChanges="keyboardHidden|navigation|orientation"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Light.NoTitleBar" >
+        </activity>
+
         <!-- 消息管理 -->
         <activity
-            android:name="com.dfire.retail.app.manage.activity.messagemanage.MessageManangeActivity"
+            android:name=".activity.messagemanage.MessageManangeActivity"
             android:configChanges="keyboardHidden|navigation|orientation"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Light.NoTitleBar" >
         </activity>
-        
-       <!-- 店家信息 -->
         <activity
-            android:name="com.dfire.retail.app.manage.activity.shopmanager.ShopInfoActivity"
+            android:name=".activity.messagemanage.MessageDetailActivity"
+            android:configChanges="keyboardHidden|navigation|orientation"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Light.NoTitleBar" >
+        </activity>
+        <activity
+            android:name=".activity.messagemanage.MessageDetailActivity1"
+            android:configChanges="keyboardHidden|navigation|orientation"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Light.NoTitleBar" >
+        </activity>
+        <activity
+            android:name=".activity.messagemanage.MessageManageraddActivity"
+            android:configChanges="keyboardHidden|navigation|orientation"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Light.NoTitleBar" >
+        </activity>
+        <activity
+            android:name=".activity.messagemanage.MseeageUpdateActivity"
+            android:configChanges="keyboardHidden|navigation|orientation"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Light.NoTitleBar" >
+        </activity>
+        <activity
+            android:name=".activity.messagemanage.MessageShopActivity"
+            android:configChanges="keyboardHidden|navigation|orientation"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Light.NoTitleBar" >
+        </activity>
+        <!-- 店家信息 -->
+        <activity
+            android:name=".activity.shopmanager.ShopInfoActivity"
+            android:configChanges="keyboardHidden|navigation|orientation"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Light.NoTitleBar" >
+        </activity>
+        <activity
+            android:name=".activity.logisticmanager.SelectShopActivity"
+            android:configChanges="keyboardHidden|navigation|orientation"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Light.NoTitleBar" >
+        </activity>
+        <activity
+            android:name=".activity.shopmanager.ChildShopInfoActivity"
+            android:configChanges="keyboardHidden|navigation|orientation"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Light.NoTitleBar" >
+        </activity>
+        <activity
+            android:name=".activity.shopmanager.AddChildShopActivity"
+            android:configChanges="keyboardHidden|navigation|orientation"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Light.NoTitleBar" >
+        </activity>
+         <activity
+            android:name=".activity.shopmanager.SelecCopyShopActivity"
             android:configChanges="keyboardHidden|navigation|orientation"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Light.NoTitleBar" >
         </activity>
         
+        <activity
+            android:name=".activity.shopmanager.LastStageShopInfoActivity"
+            android:configChanges="keyboardHidden|navigation|orientation"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Light.NoTitleBar" >
+        </activity>
+        <activity
+            android:name=".activity.logisticmanager.StoreCollectInfoActivity"
+            android:configChanges="keyboardHidden|navigation|orientation"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Light.NoTitleBar" >
+        </activity>
+        <activity
+            android:name=".activity.stockmanager.StockAdjustmentActivity"
+            android:configChanges="keyboardHidden|navigation|orientation"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Light.NoTitleBar" >
+        </activity>
+        <activity
+            android:name=".activity.stockmanager.StockAdjustmentAddActivity"
+            android:configChanges="keyboardHidden|navigation|orientation"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Light.NoTitleBar" >
+        </activity>
+        <activity
+            android:name=".activity.stockmanager.StockAddGoodsActivity"
+            android:configChanges="keyboardHidden|navigation|orientation"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Light.NoTitleBar" >
+        </activity>
+        <activity
+            android:name=".activity.stockmanager.StockExportActivity"
+            android:configChanges="keyboardHidden|navigation|orientation"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Light.NoTitleBar" >
+        </activity>
+        <activity
+            android:name=".activity.stockmanager.StockGoodInfoActivity"
+            android:configChanges="keyboardHidden|navigation|orientation"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Light.NoTitleBar" >
+        </activity>
+        <activity
+            android:name=".activity.stockmanager.AdjusSelectShopActivity"
+            android:configChanges="keyboardHidden|navigation|orientation"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Light.NoTitleBar" > 
+        </activity>
+        <activity
+            android:name=".activity.stockmanager.AdjustmentReasonActivity"
+            android:configChanges="keyboardHidden|navigation|orientation"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Light.NoTitleBar" >
+        </activity>
+        <activity
+            android:name=".activity.stockmanager.AdjustmentReasonAddActivity"
+            android:configChanges="keyboardHidden|navigation|orientation"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Light.NoTitleBar" >
+        </activity>
     </application>
 
 </manifest>

@@ -1,0 +1,92 @@
+package com.dfire.retail.app.manage.activity.shopmanager;
+
+import java.util.List;
+
+import android.os.Bundle;
+import android.os.Message;
+import android.util.Log;
+
+import com.dfire.retail.app.manage.R;
+import com.dfire.retail.app.manage.activity.TitleActivity;
+import com.dfire.retail.app.manage.common.CommonUtils;
+import com.dfire.retail.app.manage.data.AllShopVo;
+import com.dfire.retail.app.manage.data.DicVo;
+import com.dfire.retail.app.manage.data.ProvinceVo;
+import com.dfire.retail.app.manage.data.ShopVo;
+import com.dfire.retail.app.manage.global.Constants;
+import com.dfire.retail.app.manage.network.AsyncHttpPost;
+import com.dfire.retail.app.manage.network.RequestParameter;
+import com.dfire.retail.app.manage.network.RequestResultCallback;
+import com.dfire.retail.app.manage.util.JsonUtil;
+import com.google.gson.reflect.TypeToken;
+
+public class SelecShopActivity extends TitleActivity{
+	
+	static final String TAG="ShopInfo";
+	private List<AllShopVo> mShopList;
+	
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		
+		setContentView(R.layout.activity_retail_info);
+		
+		setTitleRes(R.string.shop_info);
+		showBackbtn();
+			
+	
+	}
+	
+	/*
+	 * 通过网络请求，获取门店信息
+	 */
+	private void getRetialInfo(){
+		//传递请求参数
+		RequestParameter param = new RequestParameter(true);
+		param.setUrl(Constants.SHOPALLSHOPLIST);
+		param.setUrl(Constants.SHOPDETAILBYCODE);
+		param.setParam(Constants.SHOP_ID,"");
+		param.setParam("keyWord","");
+		param.setParam(Constants.PAGE,"1");
+		
+		AsyncHttpPost httppost = new AsyncHttpPost(param,
+	    new RequestResultCallback() {
+	        @Override
+	        public void onSuccess(String str) {
+	        	
+	        //	Log.i(TAG,"STR = "+str.length());
+	        	
+	        	JsonUtil ju = new JsonUtil(str);
+	        	
+	       	 mShopList =  (List<AllShopVo>) ju.get(Constants.SHOP_LIST, 
+						new TypeToken<List<AllShopVo>>(){}.getType());
+				// updateView();
+				 getProgressDialog().dismiss();
+
+	            Message msg = new Message();
+	            if(CommonUtils.isResuestSucess(str)){
+	            	msg.what = Constants.HANDLER_SUCESS;
+	                msg.obj = str;
+	            }else{
+	            	msg.what = Constants.HANDLER_ERROR;
+	            	msg.obj = CommonUtils.getUMFailMsg(getBaseContext(),str);
+	            }
+
+	           // mLoginHandler.sendMessage(msg);
+	        }
+	        @Override
+	        public void onFail(Exception e) {
+	            e.printStackTrace();
+	            getProgressDialog().dismiss();
+	            Log.e("results", "Login FaiL");
+	            Message msg = new Message();
+	            msg.what = Constants.HANDLER_FAIL;
+	            msg.obj = e.getMessage();
+	            //mLoginHandler.sendMessage(msg);
+	        }
+	    });
+
+	}
+
+
+}

@@ -1,0 +1,115 @@
+/**
+ * 
+ */
+package com.dfire.retail.app.manage.common;
+
+import android.annotation.SuppressLint;
+import android.app.Dialog;
+import android.content.Context;
+import android.graphics.Point;
+import android.os.Bundle;
+import android.view.Gravity;
+import android.view.View;
+import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
+import android.widget.Button;
+import android.widget.TextView;
+
+import com.dfire.retail.app.manage.R;
+import com.dfire.retail.app.manage.wheel.widget.WheelView;
+import com.dfire.retail.app.manage.wheel.widget.adapters.AbstractWheelTextAdapter;
+
+/**
+ * @author ys
+ * 
+ */
+@SuppressLint("NewApi")
+public class BillStatusDialog extends Dialog {
+
+	private Context mContext;
+	private CardTypeAdapter mAdapter;
+	private WheelView mWheelView;
+	private Button mConfirmButton, mCancelButton;
+	private TextView mTitle;
+
+	public BillStatusDialog(Context context) {
+		super(context, R.style.dialog);
+		mContext = context;
+	}
+
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.card_type_dialog);
+		
+		mTitle = (TextView) findViewById(R.id.card_type_title);
+		mConfirmButton = (Button) findViewById(R.id.card_type_confirm);
+		mCancelButton = (Button) findViewById(R.id.card_type_cancel);
+		this.setCanceledOnTouchOutside(true);
+		Window window = this.getWindow();
+		WindowManager.LayoutParams params = window.getAttributes();
+		Point p = new Point();
+		window.getWindowManager().getDefaultDisplay().getSize(p);
+		params.width = p.x;
+		params.height = WindowManager.LayoutParams.WRAP_CONTENT;
+		params.gravity = Gravity.BOTTOM;
+		window.setAttributes(params);
+
+		mWheelView = (WheelView) findViewById(R.id.card_type_wheel);
+		mWheelView.setVisibleItems(4); // Number of items
+		mWheelView.setWheelBackground(android.R.color.transparent);
+		mWheelView.setWheelForeground(android.R.color.transparent);
+		mWheelView.setShadowColor(0x00000000, 0x00000000, 0x00000000);
+		mAdapter = new CardTypeAdapter(mContext);
+		mWheelView.setViewAdapter(mAdapter);
+		mWheelView.setCurrentItem(2);
+	}
+
+	public Button getConfirmButton() {
+		return mConfirmButton;
+
+	}
+
+	public Button getCancelButton() {
+		return mCancelButton;
+
+	}
+
+	public String getCurrentData() {
+		return mAdapter.getItemText(mWheelView.getCurrentItem()).toString();
+
+	}
+	public TextView getmTitle() {
+		return mTitle;
+	}
+
+	public void setmTitle(TextView mTitle) {
+		this.mTitle = mTitle;
+	}
+
+	private class CardTypeAdapter extends AbstractWheelTextAdapter {
+		final String cities[] = new String[] { "全部", "确定", "未确定"};
+		protected CardTypeAdapter(Context context) {
+			super(context, R.layout.card_type_wheel, NO_RESOURCE);
+			setItemTextResource(R.id.card_type_text);
+		}
+
+		@Override
+		public View getItem(int index, View cachedView, ViewGroup parent) {
+			View view = super.getItem(index, cachedView, parent);
+			return view;
+		}
+
+		@Override
+		public int getItemsCount() {
+			return cities.length;
+		}
+
+		@Override
+		protected CharSequence getItemText(int index) {
+			return cities[index];
+		}
+	}
+
+}

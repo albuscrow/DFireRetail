@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/login_bj"
+    android:orientation="vertical" >   
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:paddingBottom="20dp" >
+            <com.dfire.retail.app.common.item.ItemEditList
+                android:id="@+id/shop_choice"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"/>
+           <com.dfire.retail.app.common.item.ItemEditList
+                android:id="@+id/role_choice"
+                android:onClick="ClickListener"          
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"/>
+            <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="60dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:gravity="center_vertical" >          
+            <EditText
+                android:id="@+id/edit_user_name"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_weight="1"
+                android:background="@drawable/user_info_search"
+                android:ems="10"
+                android:hint="@string/hint_usersearch"
+                android:paddingLeft="30dp"
+                android:textColor="#ffffff"
+                android:textColorHint="#99ffffff"
+                android:textSize="15sp" />
+
+            <Button
+                android:id="@+id/bt_search_userinfo"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:background="@null"
+                android:paddingLeft="15dp"
+                android:text="查询"
+                android:textSize="20sp" />
+        </LinearLayout>
+
+        <ListView
+            android:id="@+id/attendance_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            android:cacheColorHint="#00000000"
+            android:scrollbars="none" />
+            <!-- bottom -->
+
+  
+    <LinearLayout
+            android:id="@+id/line_bottom"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingBottom="5dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:paddingTop="5dp" >
+
+            <Button
+                android:id="@+id/member_info_help"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left|bottom"
+                android:layout_weight="0"
+                android:background="@drawable/user_info_help"
+                android:gravity="left|bottom" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left|center_horizontal"
+                android:layout_weight="1"
+                android:clickable="false"
+                android:gravity="left|center_horizontal|bottom"
+                android:visibility="invisible" />
+
+            <Button
+                android:id="@+id/member_info_add"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right|bottom"
+                android:layout_weight="0"
+                android:background="@drawable/user_info_add"
+                android:gravity="right|bottom"
+                android:tag="3" />
+        </LinearLayout>   
+            
+     </LinearLayout>     
+ </ScrollView>

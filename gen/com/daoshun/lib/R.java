@@ -53,55 +53,55 @@ public final class R {
 		public static final int indicator_right_padding = 0x7f070000;
 	}
 	public static final class drawable {
-		public static final int default_ptr_flip = 0x7f02003b;
-		public static final int default_ptr_rotate = 0x7f02003c;
-		public static final int indicator_arrow = 0x7f020094;
-		public static final int indicator_bg_bottom = 0x7f020095;
-		public static final int indicator_bg_top = 0x7f020096;
-		public static final int switch_bg_disabled_holo_dark = 0x7f0200e5;
-		public static final int switch_bg_disabled_holo_light = 0x7f0200e6;
-		public static final int switch_bg_focused_holo_dark = 0x7f0200e7;
-		public static final int switch_bg_focused_holo_light = 0x7f0200e8;
-		public static final int switch_bg_holo_dark = 0x7f0200e9;
-		public static final int switch_bg_holo_light = 0x7f0200ea;
-		public static final int switch_inner_holo_dark = 0x7f0200eb;
-		public static final int switch_inner_holo_light = 0x7f0200ec;
-		public static final int switch_thumb_activated_holo_dark = 0x7f0200ed;
-		public static final int switch_thumb_activated_holo_light = 0x7f0200ee;
-		public static final int switch_thumb_disabled_holo_dark = 0x7f0200ef;
-		public static final int switch_thumb_disabled_holo_light = 0x7f0200f0;
-		public static final int switch_thumb_holo_dark = 0x7f0200f1;
-		public static final int switch_thumb_holo_light = 0x7f0200f2;
-		public static final int switch_thumb_pressed_holo_dark = 0x7f0200f3;
-		public static final int switch_thumb_pressed_holo_light = 0x7f0200f4;
-		public static final int switch_track_holo_dark = 0x7f0200f5;
-		public static final int switch_track_holo_light = 0x7f0200f6;
+		public static final int default_ptr_flip = 0x7f020047;
+		public static final int default_ptr_rotate = 0x7f020048;
+		public static final int indicator_arrow = 0x7f0200a3;
+		public static final int indicator_bg_bottom = 0x7f0200a4;
+		public static final int indicator_bg_top = 0x7f0200a5;
+		public static final int switch_bg_disabled_holo_dark = 0x7f0200f5;
+		public static final int switch_bg_disabled_holo_light = 0x7f0200f6;
+		public static final int switch_bg_focused_holo_dark = 0x7f0200f7;
+		public static final int switch_bg_focused_holo_light = 0x7f0200f8;
+		public static final int switch_bg_holo_dark = 0x7f0200f9;
+		public static final int switch_bg_holo_light = 0x7f0200fa;
+		public static final int switch_inner_holo_dark = 0x7f0200fb;
+		public static final int switch_inner_holo_light = 0x7f0200fc;
+		public static final int switch_thumb_activated_holo_dark = 0x7f0200fd;
+		public static final int switch_thumb_activated_holo_light = 0x7f0200fe;
+		public static final int switch_thumb_disabled_holo_dark = 0x7f0200ff;
+		public static final int switch_thumb_disabled_holo_light = 0x7f020100;
+		public static final int switch_thumb_holo_dark = 0x7f020101;
+		public static final int switch_thumb_holo_light = 0x7f020102;
+		public static final int switch_thumb_pressed_holo_dark = 0x7f020103;
+		public static final int switch_thumb_pressed_holo_light = 0x7f020104;
+		public static final int switch_track_holo_dark = 0x7f020105;
+		public static final int switch_track_holo_light = 0x7f020106;
 	}
 	public static final class id {
 		public static final int both = 0x7f060003;
 		public static final int disabled = 0x7f060000;
-		public static final int fl_inner = 0x7f060164;
+		public static final int fl_inner = 0x7f06021f;
 		public static final int flip = 0x7f060008;
 		public static final int gridview = 0x7f060009;
-		public static final int image_view = 0x7f0600ff;
+		public static final int image_view = 0x7f0601ba;
 		public static final int manualOnly = 0x7f060004;
-		public static final int progress_bar = 0x7f060100;
+		public static final int progress_bar = 0x7f0601bb;
 		public static final int pullDownFromTop = 0x7f060005;
 		public static final int pullFromEnd = 0x7f060002;
 		public static final int pullFromStart = 0x7f060001;
 		public static final int pullUpFromBottom = 0x7f060006;
-		public static final int pull_to_refresh_image = 0x7f060165;
-		public static final int pull_to_refresh_progress = 0x7f060166;
-		public static final int pull_to_refresh_sub_text = 0x7f060168;
-		public static final int pull_to_refresh_text = 0x7f060167;
+		public static final int pull_to_refresh_image = 0x7f060220;
+		public static final int pull_to_refresh_progress = 0x7f060221;
+		public static final int pull_to_refresh_sub_text = 0x7f060223;
+		public static final int pull_to_refresh_text = 0x7f060222;
 		public static final int rotate = 0x7f060007;
 		public static final int scrollview = 0x7f06000b;
 		public static final int webview = 0x7f06000a;
 	}
 	public static final class layout {
-		public static final int image_upload = 0x7f030037;
-		public static final int pull_to_refresh_header_horizontal = 0x7f030057;
-		public static final int pull_to_refresh_header_vertical = 0x7f030058;
+		public static final int image_upload = 0x7f030063;
+		public static final int pull_to_refresh_header_horizontal = 0x7f030087;
+		public static final int pull_to_refresh_header_vertical = 0x7f030088;
 	}
 	public static final class raw {
 		public static final int access_sample = 0x7f050001;

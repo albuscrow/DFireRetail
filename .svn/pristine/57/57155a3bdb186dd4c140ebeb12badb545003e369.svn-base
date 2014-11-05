@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/login_bj"
+    android:orientation="vertical"  >
+    <LinearLayout 
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+     android:background="#8fff" 
+    android:orientation="vertical" >
+    
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@null"
+        android:orientation="vertical" >
+
+    <RelativeLayout
+            android:id="@+id/message"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:padding="8dp" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="门店"
+                android:textColor="#333" 
+                android:textSize="15sp"               
+              />
+
+            <TextView
+                android:id="@+id/message_shop"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:text="迪火体验超市"
+                android:textColor="#08c"
+                  android:drawableEnd="@drawable/ico_next"
+                android:drawableRight="@drawable/ico_next_w"
+                android:textSize="15sp" />
+            <TextView
+                android:id="@+id/message_shop_noti"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+               />
+    </RelativeLayout>
+</LinearLayout>    
+<LinearLayout
+   		 android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="#999999"
+         >
+</LinearLayout>  
+ <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@null"
+        android:orientation="vertical" >
+
+    <RelativeLayout
+            
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:padding="8dp" >
+
+            <TextView
+                android:id="@+id/message_title_falg"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="消息标题"
+                  android:textColor="#333" 
+                android:textSize="15sp"  />
+
+            <TextView
+                android:id="@+id/message_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:text="必填"
+                android:textColor="#08c"
+                android:textSize="15sp" />
+             <EditText
+                android:id="@+id/message_title_Content_edit"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:textColor="#0d8dc8"
+                android:background="@null"
+                android:visibility="gone"
+                android:layout_below="@id/message_title_falg"
+                android:maxLength="50"
+                android:textSize="13sp" />
+    </RelativeLayout>
+</LinearLayout>   
+<LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="#999999"
+         >
+</LinearLayout>   
+ <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@null"
+        android:orientation="vertical" >
+
+    <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:padding="8dp" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="发布日期"
+                android:textSize="15sp" />
+
+            <TextView
+                 android:id="@+id/message_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:text="2014-10-22"
+                android:textColor="#08c"
+               android:drawableEnd="@drawable/ico_next_down"
+                android:drawableRight="@drawable/ico_next_down"
+                android:textSize="15sp" />
+    </RelativeLayout>
+</LinearLayout>  
+<LinearLayout
+   		 android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="#999999"
+         
+         >
+</LinearLayout>    
+ <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@null"
+        android:orientation="vertical" >
+
+    <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:padding="8dp" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="发布时间"
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/message_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:text="10：43"
+                android:drawableEnd="@drawable/ico_next_down"
+                android:drawableRight="@drawable/ico_next_down"
+               android:textColor="#08c"
+                android:textSize="15sp" />
+    </RelativeLayout>
+</LinearLayout>    
+ <LinearLayout
+     	android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="#999999"
+         >
+</LinearLayout>  
+<LinearLayout
+    	
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@null"
+        android:orientation="vertical" >
+
+    <RelativeLayout
+            
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:padding="8dp" >
+
+            <TextView
+                android:id="@+id/message_title_content"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="消息内容"
+                android:textColor="#333"
+                android:textSize="15sp" />
+				
+            <EditText
+                android:lineSpacingExtra="5dp"
+                android:id="@+id/message_Content"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                 android:layout_below="@+id/message_title_content"
+              	android:maxLength="500"
+              	android:background="@null"
+               android:textColor="#08c"
+                android:textSize="15sp" />
+    </RelativeLayout>
+    <LinearLayout
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="#999999"
+         >
+</LinearLayout> 
+</LinearLayout>    
+	<TextView 
+	    android:layout_marginTop="10dp"
+	    android:id="@+id/message_delete"
+	    android:layout_width="wrap_content"
+       	android:layout_height="wrap_content"
+       	android:layout_gravity="center_horizontal"
+       	android:background="@drawable/delete"
+       	android:textColor="@color/white"  
+       	android:textSize="20dp"
+       	android:gravity="center"
+       	android:text="册除"
+	    />
+	<TextView 
+	    android:id="@+id/message_noticeId"
+	    android:layout_width="wrap_content"
+       	android:layout_height="wrap_content"
+     	android:visibility="gone"
+	    />
+	<TextView 
+	    android:id="@+id/message_lastV"
+	    android:layout_width="wrap_content"
+       	android:layout_height="wrap_content"
+     	android:visibility="gone"
+	    />
+ </LinearLayout>
+   
+</LinearLayout>

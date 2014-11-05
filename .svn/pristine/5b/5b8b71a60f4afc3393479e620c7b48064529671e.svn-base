@@ -1,0 +1,61 @@
+package com.dfire.retail.app.manage.activity.logisticmanager;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.HashMap;
+import android.annotation.SuppressLint;
+import android.app.Activity;
+import android.os.Bundle;
+import android.widget.ImageButton;
+import android.widget.TextView;
+import com.dfire.retail.app.manage.R;
+import com.dfire.retail.app.manage.RetailApplication;
+import com.dfire.retail.app.manage.data.SearchGoodsVo;
+
+@SuppressLint("SimpleDateFormat")
+public class StoreCollectInfoActivity extends Activity{
+
+	private ImageButton cancel,save;
+	
+	private TextView goods_name,goods_code,goods_price,goods_num,goods_date;
+	
+	private SearchGoodsVo searchGoodsVo;
+	
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_store_collect_info);
+		
+		this.init();
+		this.initData();
+	}
+	/**
+	 * 初始化控件
+	 */
+	private void init(){
+		
+		this.cancel = (ImageButton) this.findViewById(R.id.cancel);
+		this.save = (ImageButton) this.findViewById(R.id.save);
+		this.goods_name = (TextView) this.findViewById(R.id.goods_name);
+		this.goods_code = (TextView) this.findViewById(R.id.goods_code);
+		this.goods_price = (TextView) this.findViewById(R.id.goods_price);
+		this.goods_num = (TextView) this.findViewById(R.id.goods_num);
+		this.goods_date = (TextView) this.findViewById(R.id.goods_date);
+		
+	}
+	/**
+	 * 初始化数据
+	 */
+	private void initData(){
+		RetailApplication application = (RetailApplication) getApplication();
+		HashMap<String, Object> map = application.getObjMap();
+		searchGoodsVo = (SearchGoodsVo) map.get("returnCollectAdd");
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+		this.goods_name.setText(searchGoodsVo.getGoodsName());
+		this.goods_code.setText(searchGoodsVo.getBarcode());
+		this.goods_price.setText(String.format("%.2f", searchGoodsVo.getPurchasePrice()));
+		this.goods_num.setText("1");
+		this.goods_date.setText(format.format(new Date()));
+		
+	}
+}
