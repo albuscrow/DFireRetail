@@ -9,6 +9,7 @@
         android:id="@+id/linearLayout1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="#70FFFFFF"
         android:orientation="vertical" >
 
         <RelativeLayout
@@ -116,7 +117,6 @@
             android:fadingEdge="none"
             android:listSelector="@android:color/transparent"
             android:scrollbars="@null"
-            android:layout_marginTop="5dp"
             android:layout_below="@+id/linearLayout1"
             ptr:ptrHeaderSubTextColor="#fff"
             ptr:ptrHeaderTextColor="#fff" >

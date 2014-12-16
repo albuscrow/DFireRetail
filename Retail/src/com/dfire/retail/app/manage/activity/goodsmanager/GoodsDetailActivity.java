@@ -1687,13 +1687,14 @@ public class GoodsDetailActivity extends GoodsManagerBaseActivity implements OnC
 //		goods.setUnitId(null);
 //		goods.setMemo(null);
 //		goods.setBrandId(null);
-		if (goods.getType() == null) {
-			goods.setType(Constants.ONE_INT);
-		}
+//		if (goods.getType() == null) {
+//			goods.setType(Constants.ONE_INT);
+//		}
 		
 //		goods.setInnerCode("1234567890123");
 //		goods.setSpell("jxj");
 //		return new GsonBuilder().serializeNulls().create().toJson(goods);
+		goods.setType(goods.getType());//设置type
 		return goods;
 	}
 

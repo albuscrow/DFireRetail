@@ -14,7 +14,7 @@ public class Constants {
 //	public static final String BASE_URL = "http://10.1.6.131/serviceCenter/api/";
 //    public static final String BASE_URL = "http://10.1.2.36:8080/retail/serviceCenter/api/";
 
-//	public static final String BASE_URL = "http://10.1.4.240:8080/retail/serviceCenter/api/";
+//	public static final String BASE_URL = "http://10.1.4.240:8080/serviceCenter/api/";
 
 	
 	
@@ -135,6 +135,8 @@ public class Constants {
 	// 供应商
 
 	public static final String SUPPLY_INFO_MANAGE_LIST = BASE_URL + "supplyinfoManage/list";
+	
+	public static final String SUPPLY_INFO = BASE_URL+"supplyinfoManage/supplyDetail";
 
 	public static final String SUPPLY_INFO_MANAGE_ADD = BASE_URL + "supplyinfoManage/addSaveSupply";
 	

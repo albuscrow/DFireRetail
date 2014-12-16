@@ -81,13 +81,11 @@
             android:fadingEdge="none"
             android:listSelector="@android:color/transparent"
             android:scrollbars="@null"
-            android:layout_marginTop="5dp"
             android:layout_below="@+id/search_container"
             ptr:ptrHeaderSubTextColor="#fff"
             ptr:ptrHeaderTextColor="#fff" >
 
     </com.handmark.pulltorefresh.listview.PullToRefreshListView>
-
 	<ImageButton
         android:id="@+id/helps"
         android:layout_width="wrap_content"

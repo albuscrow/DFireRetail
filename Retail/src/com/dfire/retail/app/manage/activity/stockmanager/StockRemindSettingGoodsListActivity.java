@@ -29,7 +29,6 @@ import com.dfire.retail.app.manage.activity.goodsmanager.GoodsManagerBaseActivit
 import com.dfire.retail.app.manage.activity.goodsmanager.GoodsSortListActivity;
 import com.dfire.retail.app.manage.adapter.GoodsSortListForMenuAdapter;
 import com.dfire.retail.app.manage.adapter.StockRemindSettingGoodsAdapter;
-import com.dfire.retail.app.manage.common.ErrDialog;
 import com.dfire.retail.app.manage.data.GoodsVo;
 import com.dfire.retail.app.manage.data.bo.StockInfoAlertGoodsListBo;
 import com.dfire.retail.app.manage.global.Constants;
@@ -49,10 +48,10 @@ import com.handmark.pulltorefresh.listview.PullToRefreshListView;
  */
 public class StockRemindSettingGoodsListActivity extends
 		GoodsManagerBaseActivity implements OnItemClickListener,
-		OnClickListener{
+		OnClickListener {
 
-	/** 商品list */
-	private ArrayList<GoodsVo> goods;
+	// /** 商品list */
+	// private ArrayList<GoodsVo> goods;
 	/** 店铺id */
 	private String shopId;
 	/** 适配器 */
@@ -65,8 +64,6 @@ public class StockRemindSettingGoodsListActivity extends
 	private String searchCode;
 	/** PullToRefreshListView goodsList */
 	private PullToRefreshListView goodsListView;
-	/** 总页数 */
-	private int totalPage;
 	/** 右边的类别目录 */
 	private MenuDrawer mMenu;
 	/** 类别listView */
@@ -75,31 +72,38 @@ public class StockRemindSettingGoodsListActivity extends
 	private ArrayList<Category> categorys;
 	/** 类别适配器 */
 	private GoodsSortListForMenuAdapter categoryAdapter;
-	
+
 	private Integer pageSize = 0;
-	
+
 	private EditText code;
-	
+
 	private ArrayList<GoodsVo> mGoodsVos;
-	
+
 	private int mode;// 判断异步执行完是否禁用加载更多
-	
+
 	private String categoryName;
-	
+
 	private ImageView clear_input;
-	
-	@SuppressWarnings("unchecked")
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		findView();
+	}
+
+	@SuppressWarnings("unchecked")
+	private void findView() {
 		// 分类
 		mMenu = MenuDrawer.attach(this, Position.RIGHT);
 		mMenu.setContentView(R.layout.goods_manager_title_layout);
 		mMenu.setMenuView(R.layout.activity_goods_sort_menu);
 		mMenu.findViewById(R.id.fenlei).setOnClickListener(this);
+		categorys = new ArrayList<Category>();
 		sortList = ((ListView) mMenu.findViewById(R.id.goods_sort_list));
-		categorys = (ArrayList<Category>) getIntent().getSerializableExtra(Constants.CATEGORY);
-		categoryAdapter = new GoodsSortListForMenuAdapter(StockRemindSettingGoodsListActivity.this, categorys);
+		categorys = (ArrayList<Category>) getIntent().getSerializableExtra(
+				Constants.CATEGORY);
+		categoryAdapter = new GoodsSortListForMenuAdapter(
+				StockRemindSettingGoodsListActivity.this, categorys);
 		addFooter(sortList);
 		sortList.setAdapter(categoryAdapter);
 		// 分类点击 查询商品
@@ -108,38 +112,9 @@ public class StockRemindSettingGoodsListActivity extends
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
 				currentPage = 1;
-				mGoodsVos.clear();
-				categoryId = categorys.get(position).id;   
+				categoryId = categorys.get(position).id;
 				categoryName = categorys.get(position).name;
-				RequestParameter params = new RequestParameter(true);
-				params.setUrl(Constants.BASE_URL+"stockInfoAlert/getGoodsList");
-				params.setParam(Constants.SHOP_ID, shopId);
-				params.setParam(Constants.CATEGORY_ID,categorys.get(position).id);
-				params.setParam(Constants.PAGE, currentPage);
-				new AsyncHttpPost(StockRemindSettingGoodsListActivity.this, params, StockInfoAlertGoodsListBo.class, new RequestCallback() {
-					@Override
-					public void onSuccess(Object oj) {
-						goodsListView.onRefreshComplete();
-						StockInfoAlertGoodsListBo bo = (StockInfoAlertGoodsListBo)oj;
-						if (bo!=null) {
-							ArrayList<GoodsVo> goods = (ArrayList<GoodsVo>) bo.getGoodsList();
-							if (goods == null || goods.size() == 0) {
-								new ErrDialog(StockRemindSettingGoodsListActivity.this, getResources().getString(R.string.the_kind_not_goods)).show();
-								return;
-							} else {
-								if (currentPage>pageSize){
-									goodsListView.setMode(Mode.DISABLED);
-								}
-							mGoodsVos.addAll(goods);
-							adapter.notifyDataSetChanged();
-							mMenu.toggleMenu();
-						}}
-					}
-					@Override
-					public void onFail(Exception e) {
-						goodsListView.onRefreshComplete();
-					}
-				}).execute();
+				search();
 			}
 		});
 
@@ -149,29 +124,26 @@ public class StockRemindSettingGoodsListActivity extends
 		findViewById(R.id.title_left).setOnClickListener(this);
 		findViewById(R.id.title_right).setOnClickListener(this);
 		((TextView) findViewById(R.id.title_text)).setText(Constants.CHOOSE_GOODS);
-		mGoodsVos = new ArrayList<GoodsVo>();
-		goods = (ArrayList<GoodsVo>) getIntent().getSerializableExtra(Constants.GOODS);
 		shopId = getIntent().getStringExtra(Constants.SHOP_ID);
-		categoryId = getIntent().getStringExtra(Constants.CATEGORY_ID);
-		searchCode = getIntent().getStringExtra(Constants.SEARCH_CODE);
-		totalPage = getIntent().getIntExtra(Constants.PAGE_SIZE,Constants.INVALID_INT);
-		pageSize = totalPage;
-		if (searchCode!=null) {
+		if (searchCode != null) {
 			((EditText) findViewById(R.id.code)).setText(searchCode);
 		}
+		mGoodsVos = new ArrayList<GoodsVo>();
+		adapter = new StockRemindSettingGoodsAdapter(this, mGoodsVos);
 		goodsListView = (PullToRefreshListView) findViewById(R.id.goodsList);
 		goodsListView.setMode(Mode.BOTH);
-		goodsListView.setRefreshing(false);
 		goodsListView.setOnItemClickListener(this);
 		new ListAddFooterItem(this, goodsListView.getRefreshableView());
-		if (goods!=null) {
-			mGoodsVos.addAll(goods);
-			goodsListView.onRefreshComplete();
-		}
-		adapter = new StockRemindSettingGoodsAdapter(this, mGoodsVos);
 		goodsListView.setAdapter(adapter);
-		adapter.notifyDataSetChanged();
-		
+		findViewById(R.id.scan).setOnClickListener(this);
+		findViewById(R.id.more).setOnClickListener(this);
+		findViewById(R.id.scanButton).setOnClickListener(this);
+		findViewById(R.id.search).setOnClickListener(this);
+		code = (EditText) findViewById(R.id.code);
+		clear_input = (ImageView) findViewById(R.id.clear_input);
+		clear_input.setOnClickListener(this);
+		setBack();
+		setRightBtn(R.drawable.ico_cate, Constants.CATEGORY_TEXT);
 		// 列表刷新和加载更多操作
 		goodsListView.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<ListView>() {
 			/**
@@ -199,40 +171,33 @@ public class StockRemindSettingGoodsListActivity extends
 				search();
 			}
 		});	
-		findViewById(R.id.scan).setOnClickListener(this);
-		findViewById(R.id.more).setOnClickListener(this);
-		findViewById(R.id.scanButton).setOnClickListener(this);
-		findViewById(R.id.search).setOnClickListener(this);
-		code = (EditText) findViewById(R.id.code);
-		clear_input = (ImageView) findViewById(R.id.clear_input);
-		clear_input.setOnClickListener(this);
-		setBack();
-		setRightBtn(R.drawable.ico_cate, Constants.CATEGORY_TEXT);
-		
 		code.addTextChangedListener(new TextWatcher() {
 			@Override
-			public void onTextChanged(CharSequence s, int start, int before, int count) {
-				if (s!=null&&!s.toString().equals("")) {
+			public void onTextChanged(CharSequence s, int start, int before,
+					int count) {
+				if (s != null && !s.toString().equals("")) {
 					clear_input.setVisibility(View.VISIBLE);
-				}else{
+				} else {
 					clear_input.setVisibility(View.GONE);
 				}
 			}
+
 			@Override
 			public void beforeTextChanged(CharSequence s, int start, int count,
 					int after) {
 			}
+
 			@Override
 			public void afterTextChanged(Editable s) {
 			}
 		});
+		reFreshing();
 	}
 
 	@Override
 	protected void onResume() {
 		super.onResume();
 	}
-
 	/**
 	 * 点击按钮
 	 */
@@ -259,15 +224,19 @@ public class StockRemindSettingGoodsListActivity extends
 			startActivity(new Intent(this, GoodsSortListActivity.class));
 			break;
 		case R.id.scan:
-			startActivityForResult(new Intent(this, MipcaActivityCapture.class), Constants.FOR_GET);
+			startActivityForResult(
+					new Intent(this, MipcaActivityCapture.class),
+					Constants.FOR_GET);
 			break;
 		case R.id.search:
+			categoryId = null;
+			categoryName = null;
 			reFreshing();
 			break;
 		case R.id.clear_input:
 			code.setText("");
 			clear_input.setVisibility(View.GONE);
-		break;
+			break;
 		default:
 			break;
 		}
@@ -278,7 +247,9 @@ public class StockRemindSettingGoodsListActivity extends
 	 */
 	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
-		if (keyCode == KeyEvent.KEYCODE_BACK&& (mMenu.getDrawerState() == MenuDrawer.STATE_OPEN || mMenu.getDrawerState() == MenuDrawer.STATE_OPENING)) {
+		if (keyCode == KeyEvent.KEYCODE_BACK
+				&& (mMenu.getDrawerState() == MenuDrawer.STATE_OPEN || mMenu
+						.getDrawerState() == MenuDrawer.STATE_OPENING)) {
 			mMenu.closeMenu();
 			return true;
 		}
@@ -292,7 +263,7 @@ public class StockRemindSettingGoodsListActivity extends
 	public void onItemClick(AdapterView<?> parent, View view, int position,
 			long id) {
 		ArrayList<String> ids = new ArrayList<String>();
-		ids.add(mGoodsVos.get(position-1).getGoodsId());
+		ids.add(mGoodsVos.get(position - 1).getGoodsId());
 
 		if (ids.size() == 0) {
 			ToastUtil.showShortToast(this, Constants.CHOOSE_SOMETHING);
@@ -311,23 +282,28 @@ public class StockRemindSettingGoodsListActivity extends
 	 */
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
-		if (resultCode==RESULT_OK) {
+		if (resultCode == RESULT_OK) {
 			String findParameter = data.getStringExtra(Constants.DEVICE_CODE);
 			code.setText(findParameter);
+			categoryId = null;
+			categoryName = null;
 			reFreshing();
 		}
 	}
+
 	/**
 	 * 加条件以后刷新数据
 	 */
-	public void reFreshing(){
-		currentPage = 1;//选择以后初始化页数
+	public void reFreshing() {
+		currentPage = 1;// 选择以后初始化页数
 		goodsListView.setMode(Mode.PULL_FROM_START);
 		search();
 		goodsListView.setRefreshing();
 	}
+
 	/**
 	 * 搜索
+	 * 
 	 * @param code
 	 */
 	private void search() {
@@ -337,42 +313,44 @@ public class StockRemindSettingGoodsListActivity extends
 		params.setParam(Constants.SEARCH_CODE, code.getText().toString());
 		params.setParam(Constants.PAGE, currentPage);
 		params.setParam(Constants.CATEGORY_ID, categoryId);
-		new AsyncHttpPost(this, params, StockInfoAlertGoodsListBo.class,false, new RequestCallback() {
-			@Override
-			public void onSuccess(Object oj) {
-				StockInfoAlertGoodsListBo bo = (StockInfoAlertGoodsListBo)oj;
-				if (bo!=null) {
-					pageSize = bo.getPageCount();
-					List<GoodsVo> goodsVos = new ArrayList<GoodsVo>();
-					goodsVos = bo.getGoodsList();
-					
-					if (pageSize!=null&&pageSize!=0) {
-						if (currentPage == 1) {
-							mGoodsVos.clear();
+		new AsyncHttpPost(this, params, StockInfoAlertGoodsListBo.class, false,
+				new RequestCallback() {
+					@Override
+					public void onSuccess(Object oj) {
+						StockInfoAlertGoodsListBo bo = (StockInfoAlertGoodsListBo) oj;
+						if (bo != null) {
+							pageSize = bo.getPageCount();
+							List<GoodsVo> goodsVos = new ArrayList<GoodsVo>();
+							goodsVos = bo.getGoodsList();
+
+							if (pageSize != null && pageSize != 0) {
+								if (currentPage == 1) {
+									mGoodsVos.clear();
+								}
+								if (goodsVos != null && goodsVos.size() > 0) {
+									goodsListView.setMode(Mode.BOTH);
+									mGoodsVos.addAll(goodsVos);
+								} else {
+									mode = 1;
+								}
+								adapter.notifyDataSetChanged();
+							} else {
+								mGoodsVos.clear();
+								adapter.notifyDataSetChanged();
+								mode = 1;
+							}
+							goodsListView.onRefreshComplete();
+							if (mode == 1) {
+								goodsListView.setMode(Mode.PULL_FROM_START);
+							}
+							mode = -1;
 						}
-						if (goodsVos != null && goodsVos.size() > 0) {
-							goodsListView.setMode(Mode.BOTH);
-							mGoodsVos.addAll(goodsVos);
-						}else {
-							mode = 1;
-						}
-						adapter.notifyDataSetChanged();
-					}else {
-						mGoodsVos.clear();
-						adapter.notifyDataSetChanged();
-						mode = 1;
 					}
-					goodsListView.onRefreshComplete();
-					if (mode == 1) {
-						goodsListView.setMode(Mode.PULL_FROM_START);
+
+					@Override
+					public void onFail(Exception e) {
+						goodsListView.onRefreshComplete();
 					}
-					mode = -1;
-				}
-			}
-			@Override
-			public void onFail(Exception e) {
-				goodsListView.onRefreshComplete();
-			}
-		}).execute();
+				}).execute();
 	}
 }

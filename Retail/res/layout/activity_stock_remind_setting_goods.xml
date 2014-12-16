@@ -5,114 +5,140 @@
     android:background="@drawable/login_bj"
     android:orientation="vertical" >
 
+    <LinearLayout
+        android:id="@+id/layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical" >
-            <LinearLayout 
-                android:layout_width="match_parent"
-                android:layout_height="44dp"
-                android:background="#70FFFFFF">
-	            <RelativeLayout 
-	                android:id="@+id/shop"
-	                android:layout_width="match_parent"
-	                android:background="@drawable/bg_lit"
-	                android:padding="8dp"
-	                android:layout_height="wrap_content">
-	                
-	                <TextView
-	                    android:layout_width="wrap_content"
-	                    android:layout_height="fill_parent"
-	                    android:gravity="center_vertical"
-	                    android:text="门店"
-	                    android:textSize="15sp" />
-	                
-	                <TextView
-	                    android:id="@+id/shop_name"
-	                    android:layout_width="wrap_content"
-	                    android:layout_height="wrap_content"
-	                    android:layout_alignParentEnd="true"
-	                    android:maxLines="1"
-	                    android:gravity="right|center_vertical"
-	                    android:layout_alignParentRight="true"
-	                    android:drawableEnd="@drawable/ico_next_down"
-	                    android:drawableRight="@drawable/ico_next_down"
-	                    android:textColor="#0d8dc8"
-	                    android:textSize="15sp" />
-	            </RelativeLayout>
-            </LinearLayout>
-            
+            android:layout_height="44dp"
+            android:background="#70FFFFFF" >
+
             <RelativeLayout
+                android:id="@+id/shop"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="#448f97a6"
+                android:background="@drawable/bg_lit"
                 android:padding="8dp" >
-                
-                <ImageButton
-                    android:id="@+id/scan"
-                    android:contentDescription="@null"
-                    android:background="@null"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/user_info_flicking"/>
-                
+
                 <TextView
-                    android:id="@+id/search"
+                    android:layout_width="wrap_content"
+                    android:layout_height="fill_parent"
+                    android:gravity="center_vertical"
+                    android:text="门店"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:id="@+id/shop_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
                     android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:text="查询"
-                    android:textColor="#fff"
+                    android:drawableEnd="@drawable/ico_next_down"
+                    android:drawableRight="@drawable/ico_next_down"
+                    android:gravity="right|center_vertical"
+                    android:maxLines="1"
+                    android:textColor="#0d8dc8"
                     android:textSize="15sp" />
-                
-                <EditText
-                    android:id="@+id/code"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="20dp"
-                    android:layout_toLeftOf="@id/search"
-                    android:layout_toRightOf="@id/scan"
-                    android:background="@drawable/recharge_search"
-                    android:textColor="#fff"
-		    		android:textColorHint="#90ffffff"
-                    android:hint="条形码/简码/拼音码"
-                    android:inputType="text"
-                    android:textSize="15sp"
-                    android:orientation="horizontal" />
-                 <ImageView
-		          android:id="@+id/clear_input"
-		          android:layout_width="wrap_content"
-		          android:layout_height="wrap_content"
-		          android:layout_alignRight="@+id/code"
-		          android:layout_centerVertical="true"
-		          android:visibility="gone"
-		          android:layout_marginRight="5dp"
-		          android:src="@drawable/ico_clear_input" />
             </RelativeLayout>
-            
         </LinearLayout>
-            
-           <ImageButton
-               android:id="@+id/help"
-               android:layout_width="wrap_content"
-               android:layout_height="wrap_content"
-               android:layout_alignParentBottom="true"
-               android:background="@null"
-               android:padding="8dp"
-               android:src="@drawable/ico_help" />
-           
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#448f97a6"
+            android:padding="8dp" >
+
             <ImageButton
-                android:id="@+id/scanButton"
+                android:id="@+id/scan"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:layout_alignParentRight="true"
                 android:background="@null"
-                android:padding="8dp"
-                android:src="@drawable/ico_scan" />
+                android:contentDescription="@null"
+                android:src="@drawable/user_info_flicking" />
+
+            <TextView
+                android:id="@+id/search"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:text="查询"
+                android:textColor="#fff"
+                android:textSize="15sp" />
+
+            <EditText
+                android:id="@+id/code"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="20dp"
+                android:layout_toLeftOf="@id/search"
+                android:layout_toRightOf="@id/scan"
+                android:background="@drawable/recharge_search"
+                android:hint="条形码/简码/拼音码"
+                android:inputType="text"
+                android:orientation="horizontal"
+                android:textColor="#fff"
+                android:textColorHint="#90ffffff"
+                android:textSize="15sp" />
+
+            <ImageView
+                android:id="@+id/clear_input"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignRight="@+id/code"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="5dp"
+                android:src="@drawable/ico_clear_input"
+                android:visibility="gone" />
+        </RelativeLayout>
+    </LinearLayout>
+
+    <com.handmark.pulltorefresh.listview.PullToRefreshListView
+        xmlns:ptr="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/goodsList"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/layout"
+        android:cacheColorHint="@android:color/transparent"
+        android:divider="#999"
+        android:dividerHeight="0.1dp"
+        android:fadingEdge="none"
+        android:listSelector="@android:color/transparent"
+        android:scrollbars="@null"
+        ptr:ptrHeaderSubTextColor="#fff"
+        ptr:ptrHeaderTextColor="#fff" >
+    </com.handmark.pulltorefresh.listview.PullToRefreshListView>
+
+    <ImageButton
+        android:id="@+id/help"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@null"
+        android:padding="8dp"
+        android:src="@drawable/ico_help" />
+	<ImageButton
+        android:id="@+id/minus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_toLeftOf="@id/scanButton"
+        android:background="@null"
+        android:padding="8dp"
+        android:src="@drawable/user_info_add" />
+    <ImageButton
+        android:id="@+id/scanButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:background="@null"
+        android:padding="8dp"
+        android:src="@drawable/ico_scan" />
 
 </RelativeLayout>

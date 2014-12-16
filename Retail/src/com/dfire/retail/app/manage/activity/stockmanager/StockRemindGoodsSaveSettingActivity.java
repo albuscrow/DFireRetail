@@ -49,9 +49,11 @@ public class StockRemindGoodsSaveSettingActivity extends TitleActivity implement
 	
 	private StockInfoAlertVo stockInfoAlertVo;
 	
-	private LinearLayout good_info_lv;
+	private LinearLayout good_info_lv,alertnumlayout,alertdaylayout;
 	
 	private String shopId;
+	
+	private View numview,dayview;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -79,6 +81,10 @@ public class StockRemindGoodsSaveSettingActivity extends TitleActivity implement
 		this.code = (TextView)findViewById(R.id.code);
 		this.goodname = (TextView)findViewById(R.id.goodname);
 		this.good_info_lv = (LinearLayout)findViewById(R.id.good_info_lv);
+		this.alertnumlayout = (LinearLayout)findViewById(R.id.alertnumlayout);
+		this.alertdaylayout = (LinearLayout)findViewById(R.id.alertdaylayout);
+		this.numview = (View)findViewById(R.id.numview);
+		this.dayview = (View)findViewById(R.id.dayview);
 		
 		this.mRight.setOnClickListener(this);
 		
@@ -100,7 +106,32 @@ public class StockRemindGoodsSaveSettingActivity extends TitleActivity implement
 		this.isAlertNum.setIsChangeListener(this.getItemChangeListener());
 		this.isAlertDay.initLabel("保质期提醒", null);
 		this.isAlertDay.setIsChangeListener(this.getItemChangeListener());
-		
+		this.isAlertNum.getBtn().setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				isAlertNum.setOnclik();
+				if (isAlertNum.getStrVal().equals("0")) {
+					alertnumlayout.setVisibility(View.GONE);
+					numview.setVisibility(View.GONE);
+				}else {
+					alertnumlayout.setVisibility(View.VISIBLE);
+					numview.setVisibility(View.VISIBLE);
+				}
+			}
+		});
+		this.isAlertDay.getBtn().setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				isAlertDay.setOnclik();
+				if (isAlertDay.getStrVal().equals("0")) {
+					alertdaylayout.setVisibility(View.GONE);
+					dayview.setVisibility(View.GONE);
+				}else {
+					alertdaylayout.setVisibility(View.VISIBLE);
+					dayview.setVisibility(View.VISIBLE);
+				}
+			}
+		});
 		/**
 		 * 全选 初始化
 		 */
@@ -150,7 +181,6 @@ public class StockRemindGoodsSaveSettingActivity extends TitleActivity implement
 			}else {
 				new ErrDialog(StockRemindGoodsSaveSettingActivity.this, getResources().getString(R.string.please_print_success_number)).show();
 			}
-		
 			break;
 		default:
 			break;
@@ -182,6 +212,14 @@ public class StockRemindGoodsSaveSettingActivity extends TitleActivity implement
 						alertDay.clearChange();
 						isAlertNum.clearChange();
 						isAlertDay.clearChange();
+						if (isAlertNum.getStrVal().equals("1")) {
+							alertnumlayout.setVisibility(View.VISIBLE);
+							numview.setVisibility(View.VISIBLE);
+						}
+						if (isAlertDay.getStrVal().equals("1")) {
+							alertdaylayout.setVisibility(View.VISIBLE);
+							dayview.setVisibility(View.VISIBLE);
+						}
 					}
 				}
 			}

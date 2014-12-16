@@ -22,6 +22,7 @@ import com.dfire.retail.app.common.item.ListAddFooterItem;
 import com.dfire.retail.app.manage.R;
 import com.dfire.retail.app.manage.activity.TitleActivity;
 import com.dfire.retail.app.manage.adapter.SupplyListAdapter;
+import com.dfire.retail.app.manage.data.bo.SupplyManageBo;
 import com.dfire.retail.app.manage.data.bo.SupplyManageListBo;
 import com.dfire.retail.app.manage.global.Constants;
 import com.dfire.retail.app.manage.network.AsyncHttpPost;
@@ -52,25 +53,25 @@ public class SupplierManagementActivity extends TitleActivity implements OnItemC
 
 	private SupplyListAdapter supplyListAdapter;
 
-	public List<supplyManageVo> supplyManageVos;
+	private List<supplyManageVo> supplyManageVos;
 
-	public int currentPage = 1;
+	private int currentPage = 1;
 
 	private String findParameter = null;
 	
 	private int mode;// 判断异步执行完是否禁用加载更
 
+	private supplyManageVo supplyManageVo;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_supplier_management);
-		setTitleText("供应商");
 		instance = this;
 		showBackbtn();
-		findSupplyView();
-		supplyList.setMode(Mode.PULL_FROM_START);
-		getSupplyList();
-		supplyList.setRefreshing();
+		setTitleText("供应商");
+		this.findSupplyView();
+		reFreshing();
 	}
 
 	private void findSupplyView() {
@@ -120,13 +121,12 @@ public class SupplierManagementActivity extends TitleActivity implements OnItemC
 	public void reFreshing(){
 		currentPage = 1;//选择以后初始化页数
 		supplyList.setMode(Mode.PULL_FROM_START);
-		getSupplyList();
 		supplyList.setRefreshing();
 	}
 	/**
 	 * 查询供应商
 	 */
-	public void getSupplyList() {
+	private void getSupplyList() {
 		RequestParameter params = new RequestParameter(true);
 		params.setUrl(Constants.SUPPLY_INFO_MANAGE_LIST);
 		params.setParam("currentPage", currentPage);
@@ -173,14 +173,37 @@ public class SupplierManagementActivity extends TitleActivity implements OnItemC
 
 	@Override
 	public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-		supplyManageVo supplyManageVo = supplyManageVos.get(position-1);
-		Intent supplyIntent = new Intent(SupplierManagementActivity.this, SupplyManagerDetailActivity.class);
-		Bundle bundle = new Bundle();
-		bundle.putSerializable("supplyManageVo", supplyManageVo);
-		supplyIntent.putExtras(bundle);
-		startActivity(supplyIntent);
+		
+		supplyManageVo mSupplyManageVo = supplyManageVos.get(position-1);
+		getSupplyInfo(mSupplyManageVo.getId());
 	}
-
+	/**
+	 * 供应商详情
+	 */
+	public void getSupplyInfo(String supplyManageId) {
+		RequestParameter params = new RequestParameter(true);
+		params.setUrl(Constants.SUPPLY_INFO);
+		params.setParam("id", supplyManageId);
+		new AsyncHttpPost(this, params, SupplyManageBo.class,true, new RequestCallback() {
+			@Override
+			public void onSuccess(Object oj) {
+				SupplyManageBo bo = (SupplyManageBo)oj;
+				if (bo!=null) { 
+					supplyManageVo = bo.getSupplyManageVo();
+					if (supplyManageVo!=null) {
+						Intent supplyIntent = new Intent(SupplierManagementActivity.this, SupplyManagerDetailActivity.class);
+						Bundle bundle = new Bundle();
+						bundle.putSerializable("supplyManageVo", supplyManageVo);
+						supplyIntent.putExtras(bundle);
+						startActivity(supplyIntent);
+					}
+				}
+			}
+			@Override
+			public void onFail(Exception e) {
+			}
+		}).execute();
+	}
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {

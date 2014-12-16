@@ -425,21 +425,20 @@ public class SelectEreaDialog extends Dialog{
 				//更新选择省份信息
 				if(provinceVoList.size() >0){
 					for(int i=0; i < provinceVoList.size();i++){
-						if(provinceVoList.get(i).getProvinceId() == proviceId){
+						if(provinceVoList.get(i).getProvinceId().intValue() == proviceId.intValue()){
 							mProvince.setCurrentItem(i);
 							//更新选择城市信息
 							cityVoList = provinceVoList.get(i).getCityVoList();
 							if(cityVoList.size() >0){
 								for(int j = 0;j < cityVoList.size();j++){
-									if(cityId == cityVoList.get(j).getCityId()){										
+									if(cityId.intValue() == cityVoList.get(j).getCityId().intValue()){										
 										mCity.setCurrentItem(j);
 										//查找地区
 										districtVoList = cityVoList.get(j).getDistrictVoList();
-										
 										//判断地区信息
 										if(districtVoList.size() >0){
 											for(int p=0;p < districtVoList.size();p++){
-												if(districtVoList.get(p).getDistrictId() == countryId){
+												if(countryId.intValue()==districtVoList.get(p).getDistrictId().intValue()){
 													mDistrict.setCurrentItem(p);
 													break;
 												}

@@ -16,12 +16,13 @@ public class SupplyManageBo extends BaseRemoteBo{
 	/**
 	 * 供应商
 	 */
-	private supplyManageVo supply;
-	public supplyManageVo getSupply() {
-		return supply;
+	private supplyManageVo supplyManageVo;
+	
+	public supplyManageVo getSupplyManageVo() {
+		return supplyManageVo;
 	}
-	public void setSupply(supplyManageVo supply) {
-		this.supply = supply;
+	public void setSupplyManageVo(supplyManageVo supplyManageVo) {
+		this.supplyManageVo = supplyManageVo;
 	}
 }
 

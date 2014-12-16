@@ -46,8 +46,6 @@ public class SupplyManagerDetailActivity extends TitleActivity implements OnClic
 
 	private supplyManageVo supplyManageVo;
 
-	private String typeStr;
-	
 	private DicVo dicVo;
 
 	@Override
@@ -135,9 +133,7 @@ public class SupplyManagerDetailActivity extends TitleActivity implements OnClic
 			linkPerson.initData(supplyManageVo.getRelation());
 			linkPhone.initData(supplyManageVo.getMobile());
 			telePhone.initData(supplyManageVo.getPhone());
-			if (typeStr != null) {
-				type.initData(typeStr, typeStr);
-			} else {
+			if (supplyManageVo.getTypeName()!=null&&!supplyManageVo.getTypeName().equals("")) {
 				type.initData(supplyManageVo.getTypeName(), supplyManageVo.getTypeName());
 			}
 			supplyEmail.initData(supplyManageVo.getEmail());
@@ -146,11 +142,11 @@ public class SupplyManagerDetailActivity extends TitleActivity implements OnClic
 			openBank.initData(supplyManageVo.getBankaccountname());
 			bankAccount.initData(supplyManageVo.getBankcardno());
 			bankAccountName.initData(supplyManageVo.getBankname());
-			Integer val = 0;
+			Integer val;
 			try {
 				val = Integer.parseInt(supplyManageVo.getTypeVal());
 			} catch (NumberFormatException e) {
-				val = 1;
+				val = null;
 			}
 			dicVo.setVal(val);
 			dicVo.setName(supplyManageVo.getTypeName());
@@ -235,10 +231,8 @@ public class SupplyManagerDetailActivity extends TitleActivity implements OnClic
 			public void onSuccess(Object oj) {
 				SupplyManageBo bo = (SupplyManageBo)oj;
 				if (bo!=null) {
-					SupplierManagementActivity.instance.currentPage=1;
-					SupplierManagementActivity.instance.supplyManageVos.clear();
-					SupplierManagementActivity.instance.getSupplyList();
-					finish();
+					SupplyManagerDetailActivity.this.finish();
+					SupplierManagementActivity.instance.reFreshing();
 				}
 			}
 			@Override
@@ -261,10 +255,8 @@ public class SupplyManagerDetailActivity extends TitleActivity implements OnClic
 			public void onSuccess(Object oj) {
 				ReturnNotMsgBo bo = (ReturnNotMsgBo)oj;
 				if (bo!=null) {
-					SupplierManagementActivity.instance.currentPage=1;
-					SupplierManagementActivity.instance.supplyManageVos.clear();
-					SupplierManagementActivity.instance.getSupplyList();
-					finish();
+					SupplyManagerDetailActivity.this.finish();
+					SupplierManagementActivity.instance.reFreshing();
 				}
 			}
 			@Override
@@ -304,10 +296,7 @@ public class SupplyManagerDetailActivity extends TitleActivity implements OnClic
 		} else if (StringUtils.isEmpty(telePhone.getStrVal())) {
 			new ErrDialog(this, getResources().getString(R.string.please_print_phone)).show();
 			return false;
-		} else if (StringUtils.isEmpty(type.getStrVal())) {
-			new ErrDialog(this, getResources().getString(R.string.please_select_supply)).show();
-			return false;
-		}else if(!StringUtils.isEmpty(telePhone.getStrVal())&&!isMobileNO(telePhone.getStrVal())){
+		} else if(!StringUtils.isEmpty(telePhone.getStrVal())&&!isMobileNO(telePhone.getStrVal())){
 			new ErrDialog(this, getResources().getString(R.string.phone_kind_err)).show();
 			return false;
 		}else if(!StringUtils.isEmpty(supplyFox.getStrVal())&&!isfax(supplyFox.getStrVal())){

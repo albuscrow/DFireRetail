@@ -164,6 +164,20 @@ public class ItemEditRadio extends ItemBase {
 	}
 
 	/**
+	 * 设置图标
+	 */
+	public void setOnclik(){
+		Boolean isOn = getVal();
+		String val = "1";
+		if (getVal()) {
+			val = "0";
+		}
+		changeData(val);
+		if(itemClickListener!=null){
+			itemClickListener.onItemRadioChange(ItemEditRadio.this);
+		}
+	}
+	/**
 	 * 得到名称标签.
 	 * 
 	 * @return 名称标签.
@@ -179,6 +193,12 @@ public class ItemEditRadio extends ItemBase {
 	 */
 	public ImageView getImg() {
 		return img;
+	}
+	/**
+	 * 得到button
+	 */
+	public Button getBtn(){
+		return btn;
 	}
 	/**
 	 * 获取分割线

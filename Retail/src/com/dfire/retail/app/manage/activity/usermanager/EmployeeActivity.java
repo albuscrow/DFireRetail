@@ -55,13 +55,20 @@ public class EmployeeActivity extends TitleActivity {
         mListView.setOnItemClickListener(new OnItemClickListener() {
 
             @Override
-            public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
+            public void onItemClick(AdapterView<?> arg0, View view, int position,
                     long arg3) {
-            	if(!CommonUtils.getPermission(ConfigConstants.ACTION_EMPLOYEE_ACTION)||!CommonUtils.getPermission(ConfigConstants.ACTION_EMPLOYEE_MANAGE)) {//角色
-            		new ErrDialog(EmployeeActivity.this, EmployeeActivity.this.getString(R.string.MC_MSG_000005)).show();
-    	            return;
-        		}
-                Intent intent = new Intent(EmployeeActivity.this, mList.get(arg2).getDestClass());
+            	if (position==0) {
+            		if(!CommonUtils.getPermission(ConfigConstants.ACTION_EMPLOYEE_ACTION)) {//角色
+                		new ErrDialog(EmployeeActivity.this, EmployeeActivity.this.getString(R.string.MC_MSG_000005)).show();
+        	            return;
+            		}	
+				}else {
+					if(!CommonUtils.getPermission(ConfigConstants.ACTION_EMPLOYEE_MANAGE)) {//角色
+						new ErrDialog(EmployeeActivity.this, EmployeeActivity.this.getString(R.string.MC_MSG_000005)).show();
+						return;
+					}
+				}
+                Intent intent = new Intent(EmployeeActivity.this, mList.get(position).getDestClass());
                 startActivity(intent);
             }
         });

@@ -242,7 +242,7 @@ public class AddUserInfoActivity extends TitleActivity implements RequestCallbac
 			break;
 
 		case 2:
-			if (RetailApplication.getShopVo().getType() == ShopVo.ZHONGBU) {
+			if (RetailApplication.getShopVo().getType() == ShopVo.ZHONGBU||RetailApplication.getShopVo().getType() == ShopVo.FENGBU) {
 				Intent intent = new Intent(AddUserInfoActivity.this,UserShopSelectActivity.class);
 				startActivityForResult(intent, SELECTSHOPRECODE);
 	 		}

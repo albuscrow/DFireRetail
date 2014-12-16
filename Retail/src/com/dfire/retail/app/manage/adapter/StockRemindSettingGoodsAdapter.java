@@ -3,6 +3,7 @@ package com.dfire.retail.app.manage.adapter;
 import java.util.List;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,7 +13,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.dfire.retail.app.manage.R;
-import com.dfire.retail.app.manage.activity.stockmanager.StockRemindSettingGoodsListActivity;
 import com.dfire.retail.app.manage.data.GoodsVo;
 import com.dfire.retail.app.manage.util.ImageUtil;
 import com.dfire.retail.app.manage.util.StringUtils;
@@ -22,14 +22,12 @@ import com.nostra13.universalimageloader.core.assist.ImageLoadingListener;
 
 @SuppressLint("InflateParams")
 public class StockRemindSettingGoodsAdapter extends BaseAdapter {
-	StockRemindSettingGoodsListActivity activity;
 	private LayoutInflater layoutInflater;
 	private List<GoodsVo> data;
 
 	public StockRemindSettingGoodsAdapter(
-			StockRemindSettingGoodsListActivity stockRemindSettingGoodsListActivity, List<GoodsVo> goods) {
-		this.activity = stockRemindSettingGoodsListActivity;
-		this.layoutInflater = LayoutInflater.from(activity);
+			Context mContext, List<GoodsVo> goods) {
+		this.layoutInflater = LayoutInflater.from(mContext);
 		this.data = goods;
 	}
 

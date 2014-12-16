@@ -264,8 +264,7 @@ public class ShowUserDetailInfoActivity extends UserBaseActivity implements
 	protected void dialog() {
 		final AlertDialogCommon alertDialog = new AlertDialogCommon(
 				ShowUserDetailInfoActivity.this);
-		alertDialog.setMessage(ShowUserDetailInfoActivity.this.getResources()
-				.getString(R.string.user_delete));
+		alertDialog.setMessage(String.format(ShowUserDetailInfoActivity.this.getResources().getString(R.string.user_delete),mUserVo.getName()));
 		alertDialog.setPositiveButton(Constants.CONFIRM, new OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -298,7 +297,7 @@ public class ShowUserDetailInfoActivity extends UserBaseActivity implements
 			break;
 
 		case 2:
-			if (RetailApplication.getShopVo().getType() == ShopVo.ZHONGBU) {
+			if (RetailApplication.getShopVo().getType() == ShopVo.ZHONGBU||RetailApplication.getShopVo().getType() == ShopVo.FENGBU) {
 				Intent intent = new Intent(ShowUserDetailInfoActivity.this,
 						UserShopSelectActivity.class);
 				startActivityForResult(intent, SELECTSHOPRECODE);

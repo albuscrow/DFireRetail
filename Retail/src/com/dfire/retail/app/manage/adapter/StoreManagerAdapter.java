@@ -2,6 +2,7 @@ package com.dfire.retail.app.manage.adapter;
 
 import java.util.ArrayList;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -15,6 +16,7 @@ import com.dfire.retail.app.manage.R;
 import com.dfire.retail.app.manage.common.CommonUtils;
 import com.dfire.retail.app.manage.global.ConfigConstants;
 
+@SuppressLint("InflateParams")
 public class StoreManagerAdapter extends BaseAdapter {
 
     private static final String TAG = "StoreManagerAdapter";
@@ -37,25 +39,21 @@ public class StoreManagerAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        // TODO Auto-generated method stub
         return mList.size();
     }
 
     @Override
     public Object getItem(int position) {
-        // TODO Auto-generated method stub
         return mList.get(position);
     }
 
     @Override
     public long getItemId(int position) {
-        // TODO Auto-generated method stub
         return position;
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        // TODO Auto-generated method stub
         ViewHolder viewHolder = null;
         if (convertView == null) {
             convertView = mLayoutInflater.inflate(R.layout.storemanager_item,null);
@@ -68,8 +66,14 @@ public class StoreManagerAdapter extends BaseAdapter {
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
         }
-        if(!CommonUtils.getPermission(ConfigConstants.ACTION_EMPLOYEE_ACTION)||!CommonUtils.getPermission(ConfigConstants.ACTION_EMPLOYEE_MANAGE)) {//角色
-        	viewHolder.lock.setVisibility(View.VISIBLE);
+        if (position==0) {
+        	if(!CommonUtils.getPermission(ConfigConstants.ACTION_EMPLOYEE_ACTION)) {
+        		viewHolder.lock.setVisibility(View.VISIBLE);
+        	}
+		}else {
+			if (!CommonUtils.getPermission(ConfigConstants.ACTION_EMPLOYEE_MANAGE)) {
+				viewHolder.lock.setVisibility(View.VISIBLE);
+			}
 		}
         viewHolder.imageView.setImageResource(mList.get(position).getImageId());
         viewHolder.mainText.setText(mList.get(position).getMainText());

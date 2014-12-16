@@ -1,14 +1,9 @@
 package com.dfire.retail.app.manage.activity.setting;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageView;
@@ -18,27 +13,21 @@ import android.widget.TextView;
 import com.dfire.retail.app.manage.R;
 import com.dfire.retail.app.manage.RetailApplication;
 import com.dfire.retail.app.manage.activity.TitleActivity;
-import com.dfire.retail.app.manage.activity.goodsmanager.GoodsDetailActivity;
-import com.dfire.retail.app.manage.activity.retailmanager.RetailInfoActivity;
 import com.dfire.retail.app.manage.activity.shopchain.ShopInfoActivity;
-import com.dfire.retail.app.manage.data.ConfigItemOptionVo;
-import com.dfire.retail.app.manage.data.ReceiptStyleVo;
 import com.dfire.retail.app.manage.data.ReceiptVo;
 import com.dfire.retail.app.manage.global.Constants;
-import com.dfire.retail.app.manage.netData.IncomeResult;
 import com.dfire.retail.app.manage.network.AsyncHttpPost;
 import com.dfire.retail.app.manage.network.RequestParameter;
 import com.dfire.retail.app.manage.network.RequestResultCallback;
 import com.dfire.retail.app.manage.util.JsonUtil;
 import com.dfire.retail.app.manage.util.ToastUtil;
-import com.google.gson.reflect.TypeToken;
 
 public class SettingActivity extends TitleActivity implements OnClickListener {
 
 	public static final int[][] RES = new int[][]{
 		/*setting中位置,  图片, 主标题, 副标题, 小图标 */
 		{R.id.systemParamenter, R.drawable.setting_params, R.string.param_setting, R.string.param_setting_sub},/* 参数设置 */
-		{R.id.shopInformation, R.drawable.setting_account_info, R.string.account_info, R.string.account_info_sub},/* 账号信息 */
+		{R.id.shopInformation, R.drawable.setting_account_info, R.string.account_info, R.string.account_info_sub},/* 店家信息 */
 		{R.id.busnessMode, R.drawable.setting_business_model, R.string.business_setting, R.string.business_setting_subhead},/* 商业模式设置 */
 
 		{R.id.printPatern, R.drawable.setting_receipt, R.string.receipt_setting, R.string.receipt_setting_sub},/* 小票设置 */

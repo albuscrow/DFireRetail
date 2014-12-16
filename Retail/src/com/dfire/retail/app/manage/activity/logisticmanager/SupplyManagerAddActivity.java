@@ -155,9 +155,7 @@ public class SupplyManagerAddActivity extends TitleActivity implements OnClickLi
 			public void onSuccess(Object oj) {
 				SupplyManageBo bo = (SupplyManageBo)oj;
 				if (bo!=null) {
-					SupplierManagementActivity.instance.currentPage=1;
-					SupplierManagementActivity.instance.supplyManageVos.clear();
-					SupplierManagementActivity.instance.getSupplyList();
+					SupplierManagementActivity.instance.reFreshing();
 					finish();
 				}
 			}

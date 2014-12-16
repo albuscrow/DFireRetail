@@ -95,9 +95,7 @@ public class StoreOrderActivity extends TitleActivity implements OnClickListener
 		showBackbtn();
 		instance = this;
 		this.findView();
-		store_order_lv.setMode(Mode.PULL_FROM_START);
-		getStoreOrderGoods();
-		store_order_lv.setRefreshing();
+		reFreshing();
 	}
 	
 	public void findView(){
@@ -296,7 +294,7 @@ public class StoreOrderActivity extends TitleActivity implements OnClickListener
 	public void reFreshing(){
 		currentPage = 1;//选择以后初始化页数
 		store_order_lv.setMode(Mode.PULL_FROM_START);
-		getStoreOrderGoods();
+//		getStoreOrderGoods();
 		store_order_lv.setRefreshing();
 	}
 	/**
