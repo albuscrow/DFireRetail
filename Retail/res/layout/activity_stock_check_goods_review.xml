@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="fill_parent"
+     android:background="@drawable/login_bj">
+
+
+      <RelativeLayout
+            android:id="@+id/ll_goods_list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+            <LinearLayout 
+                android:id="@+id/ll_list_title"
+                android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_lit">
+                <TextView
+		    android:id="@+id/txt_list_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_lit"
+                    android:padding="8dp"
+                    android:text="盘点商品"
+                    android:textSize="18sp"
+                    android:visibility="visible"
+                     />
+            </LinearLayout>
+ 
+        <ListView
+            android:id="@+id/lv_check_goods"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scrollbars="none"
+            android:divider="@color/divider"
+            android:dividerHeight="0.1dp"
+            android:footerDividersEnabled="false"
+            android:layout_below="@id/ll_list_title" >
+        </ListView>
+      </RelativeLayout> 
+
+	<FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/setting_payway_bottom"
+        android:layout_gravity="bottom"
+        android:paddingLeft="10dp"
+        android:paddingTop="5dp"
+        android:paddingRight="10dp"
+        android:paddingBottom="5dp" >
+
+        <LinearLayout
+            android:id="@+id/print"
+            android:layout_width="@dimen/setting_payway_botton_pic"
+            android:layout_height="@dimen/setting_payway_botton_pic"
+            android:layout_marginRight="70dp"
+            android:background="@drawable/ico_rnd_green"
+            android:layout_gravity="right|bottom"
+            android:gravity="center"
+            android:clickable="true"
+            android:orientation="vertical">
+            
+            <ImageView 
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ico_print"
+                android:contentDescription="@string/print"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/whitesmoke"
+                android:textSize="12sp"
+                android:text="@string/print"/>
+        </LinearLayout>
+        
+        <LinearLayout
+            android:id="@+id/saveAndContinue"
+            android:layout_width="@dimen/setting_payway_botton_pic"
+            android:layout_height="@dimen/setting_payway_botton_pic"
+            android:background="@drawable/ico_rnd_green"
+            android:layout_gravity="right|bottom"
+            android:gravity="center"
+            android:clickable="true"
+            android:orientation="vertical">
+            
+            <ImageView 
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ico_next_btn"
+                android:contentDescription="@string/continued"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/whitesmoke"
+                android:textSize="12sp"
+                android:text="@string/continued"/>
+        </LinearLayout>
+    </FrameLayout>
+</FrameLayout>

@@ -1,0 +1,55 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="88dp"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:id="@+id/gooditemview"
+        android:layout_width="match_parent"
+        android:layout_height="86dp"
+        android:orientation="vertical"
+        android:padding="10dp" >
+
+        <TextView
+            android:id="@+id/goods_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="15sp"
+            android:textColor="#333"
+            />
+		<TextView
+            android:id="@+id/barCode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="15sp"
+            android:textColor="#666"
+            />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="fill_parent"
+            android:gravity="center_vertical"
+            android:layout_gravity="center"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:id="@+id/adjustStore"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+				android:textSize="15sp"
+            	android:textColor="#666"
+                />
+            <TextView 
+                android:id="@+id/resultPrice"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:textSize="15sp"
+            	android:textColor="#666"
+               />
+        </LinearLayout>
+    </LinearLayout>
+	<View 
+	    android:layout_width="fill_parent"
+	    android:layout_height="0.1dp"
+	    android:background="#999999"/>
+</LinearLayout>

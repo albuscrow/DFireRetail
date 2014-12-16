@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:minHeight="60dp"
+    android:background="@drawable/bg_lit"
+    android:paddingBottom="5dp"
+    android:paddingTop="5dp" >
+
+    <!-- 员工头像 -->
+    <RelativeLayout 
+        android:layout_width="87dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/photoLine"
+        android:gravity="right|end|center_vertical"
+        >
+        <ImageView
+            android:id="@+id/userPortrait"
+	 		android:background="@drawable/img_nopic_square"
+            android:layout_width="77dp"
+            android:layout_height="77dp"
+            android:layout_alignParentLeft="true"
+            android:enabled="false"
+            android:gravity="center_vertical" />
+        <TextView
+	        android:id="@+id/profession"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_centerHorizontal="true"
+	        android:gravity="center|bottom"
+	        android:text=""
+	        android:layout_alignParentBottom="true"
+	        android:singleLine="true"
+	        android:textSize="14sp"
+	        android:textStyle="bold" />
+    </RelativeLayout>
+    
+       <ImageView
+        android:id="@+id/image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="5dp"
+        android:background="@drawable/ico_next"
+        android:contentDescription="@string/none" />
+    
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_toLeftOf="@+id/image"
+        android:layout_toRightOf="@id/photoLine"
+        android:layout_marginLeft="5dp"
+        android:padding="5dp" >
+
+        <!-- 交接员工信息 -->
+        <LinearLayout 
+            android:id="@+id/emp_line"
+        	android:layout_width="match_parent"
+        	android:layout_height="wrap_content"
+        	android:orientation="horizontal"
+        >
+             <TextView
+            android:id="@+id/emp_name"
+            android:layout_weight="1"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:text="王小红"
+            android:textSize="15sp"
+            android:singleLine="true" />
+
+	        <TextView
+	            android:id="@+id/emp_number"
+	            android:layout_width="120dp"
+	            android:layout_weight="1"
+	            android:layout_height="wrap_content"
+	            android:layout_alignParentRight="true"
+	            android:paddingRight="5dp"
+	            android:text="工号：001"
+	            android:textSize="13sp"
+	            android:singleLine="true" />
+        </LinearLayout>
+  
+        
+        <!-- 交接班时间 -->
+
+        <TextView
+            android:id="@+id/start_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/emp_line"
+            android:layout_marginTop="5dp"
+            android:text="开始时间:"
+            android:textSize="13sp"
+            android:singleLine="true" />
+
+        <TextView
+            android:id="@+id/start_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/start_time"
+            android:layout_alignBaseline="@id/start_time"
+            android:paddingLeft="5dp"
+            android:text="2014-08-21"
+            android:textSize="13sp"
+            android:singleLine="true" />
+
+        <TextView
+            android:id="@+id/start_hour"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/start_date"
+            android:layout_alignBaseline="@id/start_time"
+            android:paddingLeft="5dp"
+            android:text="08:00"
+            android:textSize="13sp"
+            android:singleLine="true" />
+
+        <!-- 交接班时间 -->
+
+        <TextView
+            android:id="@+id/end_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/start_time"
+            android:layout_marginTop="5dp"
+            android:text="结束时间:"
+            android:textSize="13sp"
+            android:singleLine="true" />
+
+        <TextView
+            android:id="@+id/end_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/end_time"
+            android:layout_alignBaseline="@id/end_time"
+            android:paddingLeft="5dp"
+            android:text="2014-08-21"
+            android:textSize="13sp"
+            android:singleLine="true" />
+
+        <TextView
+            android:id="@+id/end_hour"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/end_date"
+            android:layout_alignBaseline="@id/end_time"
+            android:paddingLeft="5dp"
+            android:text="08:00"
+            android:textSize="13sp"
+            android:singleLine="true" />
+    </RelativeLayout>
+</RelativeLayout>

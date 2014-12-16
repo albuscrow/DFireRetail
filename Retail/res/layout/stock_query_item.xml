@@ -1,0 +1,119 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:paddingBottom="5dp"
+            android:gravity="center_vertical"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/stock_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Large Text"
+                android:textSize="17sp" />
+               <TextView
+                android:id="@+id/stock_good_code"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="15sp"
+                android:text="Large Text" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="top"
+                android:layout_marginTop="10dp" >
+				<LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" >
+		                <TextView
+		                    android:layout_width="wrap_content"
+		                    android:layout_height="wrap_content"
+		                    android:textSize="13sp"
+		                    android:text="库存数:" />
+		
+		                <TextView
+		                    android:id="@+id/stock_number"
+		                    android:layout_width="wrap_content"
+		                    android:layout_height="wrap_content"
+		                    android:textSize="13sp"
+		                    android:textColor="#0d8dc8"
+		                    android:text="" />
+                </LinearLayout>
+               <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:layout_weight="1" >
+		                <TextView
+		                    android:layout_width="wrap_content"
+		                    android:layout_height="wrap_content"
+		                    android:textSize="13sp"
+		                    android:text="临期商品数:"/>
+		
+		                <TextView
+		                    android:id="@+id/stock_goods_number"
+		                    android:textSize="13sp"
+		                    android:layout_width="wrap_content"
+		                    android:layout_height="wrap_content"
+		                    android:text="0" />
+		         </LinearLayout>       
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/show_income_price"
+                android:layout_marginTop="10dp" >
+			<LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" >
+	                <TextView
+	                    android:id="@+id/tock_purchase_price_text"
+	                    android:layout_width="wrap_content"
+	                    android:layout_height="wrap_content"
+	                    android:textSize="13sp"
+	                    android:text="进货价:" />
+	                <TextView
+	                    android:id="@+id/tock_purchase_price"
+	                    android:layout_width="wrap_content"
+	                    android:textSize="13sp"
+	                    android:layout_height="wrap_content"
+	                    android:text="0.00" />
+	                </LinearLayout>
+	        <LinearLayout
+	            android:id="@+id/tock_total_layoutd"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:layout_weight="1" >    
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="13sp"
+                    android:text="库存总金额:" />
+                 <TextView
+                    android:id="@+id/tock_total"
+                    android:layout_width="wrap_content"
+                    android:textSize="13sp"
+                    android:layout_height="wrap_content"
+                    android:text="0.00" />
+               </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+        <View 
+            android:layout_width="fill_parent"
+            android:layout_height="0.1dp"
+            android:background="#999"
+            android:layout_marginTop="10dp"/>
+
+</LinearLayout>

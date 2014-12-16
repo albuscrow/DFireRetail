@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/transparent"
+    android:orientation="vertical"
+    android:layout_marginLeft="10dp"
+    android:layout_marginRight="10dp"
+    >
+
+    <!--  <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/textshape"
+        android:gravity="center_horizontal|center_vertical"
+        android:minHeight="50dp"
+        android:text="@string/store_add_title" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/black" /> -->
+         <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/buttonradius"
+        android:minHeight="50dp"
+        android:id="@+id/addCapture"
+        android:text="@string/store_add_capture"
+        android:textColor="#0d8dc8" />
+       <View
+        android:id="@+id/captureSpareLine"   
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/black" />   
+
+	    <Button
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:background="@drawable/textradius"
+	        android:id="@+id/addAblum"
+	        android:minHeight="50dp"
+	        android:text="@string/store_add_ablum"
+	        android:textColor="#0d8dc8" />
+	
+	      <View
+        android:layout_width="match_parent"
+        android:layout_height="6dp"
+        android:background="@null" />
+
+
+
+    <!--  Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/textradius"
+        android:minHeight="50dp"
+        android:id="@+id/deleteImage"
+        android:text="@string/store_delete_pohto"
+        android:textColor="#0d8dc8" />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="6dp"
+        android:background="@null" /> -->
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/radius"
+        android:id="@+id/addCancel"
+        android:minHeight="50dp"
+        android:text="@string/store_add_cancel"
+        android:textColor="#0d8dc8" />
+
+</LinearLayout>

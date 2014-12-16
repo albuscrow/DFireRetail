@@ -1,0 +1,268 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/login_bj"
+    android:orientation="vertical" >
+  <ScrollView 
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content">
+   	<LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:background="@drawable/bg"
+        android:orientation="vertical" >
+ 		<RelativeLayout
+	        android:id="@+id/title"
+	        android:layout_width="match_parent"
+	        android:layout_height="44dp"
+	        android:background="#cc0000" >
+			<ImageButton
+	            android:id="@+id/title_return"
+	            android:layout_width="wrap_content"
+	            android:layout_height="match_parent"
+	            android:layout_alignParentLeft="true"
+	            android:layout_marginLeft="10dp"
+	            android:background="@null"
+	            android:scaleType="centerInside"
+	            android:visibility="gone"
+	            android:src="@drawable/user_info_return" />
+	        
+	        <ImageButton
+	            android:id="@+id/title_left"
+	            android:layout_width="wrap_content"
+	            android:layout_height="match_parent"
+	            android:layout_alignParentLeft="true"
+	            android:layout_marginLeft="10dp"
+	            android:background="@null"
+	            android:scaleType="centerInside"
+	            android:src="@drawable/cancel" />
+	
+	        <ImageButton
+	            android:id="@+id/title_right"
+	            android:layout_width="wrap_content"
+	            android:layout_height="match_parent"
+	            android:layout_alignParentRight="true"
+	            android:layout_marginRight="10dp"
+	            android:background="@null"
+	            android:scaleType="centerInside"
+	            android:src="@drawable/save" />
+	
+	        <TextView
+	            android:id="@+id/title_text"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:layout_centerInParent="true"
+	            android:text="门店调拨"
+	            android:textColor="#ffffff"
+	            android:textSize="20sp"
+	            android:textStyle="bold" />
+	    </RelativeLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+		<RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="44dp"
+            android:padding="8dp" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:gravity="center_vertical"
+                android:text="调出门店"
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/out_shop"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:gravity="center_vertical"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:textColor="#0d8dc8"
+                android:textSize="15sp" />
+        </RelativeLayout>
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="0.1dp"
+            android:background="#999" 
+            android:layout_marginLeft="10dp"
+			android:layout_marginRight="10dp" >
+        </View>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="44dp"
+            android:padding="8dp" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:gravity="center_vertical"
+                android:text="调入门店"
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/in_shop"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:gravity="center_vertical"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:drawableEnd="@drawable/ico_next"
+                android:drawableRight="@drawable/ico_next"
+                android:textColor="#0d8dc8"
+                android:textSize="15sp" />
+        </RelativeLayout>
+<!--             <com.dfire.retail.app.common.item.ItemTextView -->
+<!--                 android:id="@+id/lblName" -->
+<!--                 android:layout_width="fill_parent" -->
+<!--                 android:visibility="gone" -->
+<!--                 android:layout_height="wrap_content" /> -->
+
+<!--             <com.dfire.retail.app.common.item.ItemTextView -->
+<!--                 android:id="@+id/out_shop" -->
+<!--                 android:layout_width="fill_parent" -->
+<!--                 android:layout_height="wrap_content" /> -->
+
+<!--             <com.dfire.retail.app.common.item.ItemTextView -->
+<!--                 android:id="@+id/in_shop" -->
+<!--                 android:layout_width="fill_parent" -->
+<!--                 android:layout_height="wrap_content" /> -->
+		<View
+            android:layout_width="match_parent"
+            android:layout_height="0.1dp"
+            android:layout_marginLeft="10dp"
+			android:layout_marginRight="10dp"
+            android:background="#999999"  >
+        </View>
+        </LinearLayout>
+		<View
+            android:layout_width="match_parent"
+            android:layout_height="0.1dp"
+            android:layout_marginTop="15dp"
+            android:background="#999999"  >
+        </View>
+        <RelativeLayout
+            android:id="@+id/shop2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_lit"
+            android:gravity="center_vertical"
+            android:padding="10dp" >
+
+            <TextView
+                android:id="@+id/textView1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:text="调拨商品"
+                android:textSize="17sp" />
+        </RelativeLayout>
+
+      	<View
+            android:layout_width="match_parent"
+            android:layout_height="0.1dp"
+            android:background="#999999"  >
+        </View>
+        <LinearLayout
+            android:id="@+id/allocation_add_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+        </LinearLayout>
+        
+        <RelativeLayout
+	        android:id="@+id/add_layout"
+	        android:layout_width="match_parent"
+	        android:layout_height="44dp"
+	        android:layout_marginTop="10dp"
+	        android:layout_marginBottom="10dp"
+	        android:gravity="center_vertical"
+	        android:padding="10dp" >
+	
+	        <ImageView
+	            android:id="@+id/imageView2"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:layout_alignBottom="@+id/textView2"
+	            android:layout_toLeftOf="@+id/textView2"
+	            android:src="@drawable/add_red" />
+	
+	        <TextView
+	            android:id="@+id/textView2"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:layout_centerHorizontal="true"
+	            android:layout_centerVertical="true"
+	            android:layout_marginLeft="5dp"
+	            android:text="添加调拨商品..."
+	            android:textColor="#CD0102"
+	            android:textSize="15sp" />
+	    </RelativeLayout>
+	    <View
+            android:layout_width="match_parent"
+            android:layout_height="0.1dp"
+            android:background="#999999"  >
+        </View>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="44dp"
+            android:padding="10dp" >
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="总件数:" />
+
+                <TextView
+                    android:id="@+id/num_total"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.1dp"
+            android:background="#999" >
+        </View>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="gone"
+            android:padding="10dp" >
+
+            <Button
+                android:id="@+id/btn_confirm"
+                style="@style/white_medium"
+                android:layout_width="fill_parent"
+                android:layout_height="44dp"
+                android:layout_gravity="right|center_vertical"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/btn_green_style"
+                android:text="确认收货" />
+
+            <Button
+                android:id="@+id/btn_refuse"
+                style="@style/white_medium"
+                android:layout_width="fill_parent"
+                android:layout_height="44dp"
+                android:layout_gravity="right|center_vertical"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/btn_red_style"
+                android:text="拒绝收货" />
+        </LinearLayout>
+    </LinearLayout>
+	</ScrollView>
+</LinearLayout>

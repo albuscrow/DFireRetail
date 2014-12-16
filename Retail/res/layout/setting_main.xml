@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/login_bj" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+
+        <TextView
+            style="@style/setting_explain_text"
+            android:text="基础设置" />
+        
+        <include
+            android:id="@+id/systemParamenter"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            layout="@layout/setting_main_item"/>
+        
+        <include
+            android:layout_marginTop="1dp"
+            android:id="@+id/shopInformation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            layout="@layout/setting_main_item" />
+        
+        <include
+            android:layout_marginTop="1dp"
+            android:id="@+id/busnessMode"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            layout="@layout/setting_main_item" />
+        
+		<TextView
+            style="@style/setting_explain_text"
+            android:text="收银设置" />
+		
+        <include
+            android:id="@+id/printPatern"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            layout="@layout/setting_main_item" />
+
+        <TextView
+            style="@style/setting_explain_text"
+            android:text="其它设置"
+            android:visibility="gone" />
+        
+        <include
+            android:id="@+id/clearData"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            layout="@layout/setting_main_item"
+            android:visibility="gone" />
+        
+        <include
+            android:id="@+id/oprateLog"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="1dp"
+            layout="@layout/setting_main_item"
+            android:visibility="gone" />
+        
+    </LinearLayout>
+
+</ScrollView>

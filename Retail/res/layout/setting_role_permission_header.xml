@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingBottom="5dp"
+    android:paddingTop="5dp">
+    	<TextView
+            android:id="@+id/saveTag"
+            style="@style/save_small"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="1dp"
+            android:background="@drawable/unsave"
+            android:text="未保存"
+            android:textColor="@color/white"
+            android:textSize="9sp" />
+          <TextView
+              	android:id="@+id/txt_system_info_name"
+                style="@style/setting_list_main_text"
+                android:layout_width="match_parent"
+                android:layout_gravity="center_vertical"
+                android:text="@string/pre_premission" />
+            
+            <CheckBox
+                android:id="@+id/checkbox_permission"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right|center_vertical"
+                android:background="@drawable/ico_switch"
+                android:button="@drawable/ico_switch"
+                android:checked="true" />
+            
+            <TextView 
+                android:layout_width="match_parent"
+                android:layout_height="0.1dp"
+                android:background="@color/divider"
+                android:layout_gravity="bottom"
+                android:visibility="gone"/>
+
+</FrameLayout>

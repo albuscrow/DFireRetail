@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+  <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/login_bj" >     
+    <LinearLayout
+        android:id="@+id/layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        >
+       <LinearLayout 
+           android:layout_width="fill_parent"
+           android:layout_height="wrap_content"
+           android:background="#70FFFFFF"
+           android:orientation="vertical">
+	        <com.dfire.retail.app.common.item.ItemEditList
+	            android:id="@+id/shop_choice"
+	            android:background="@drawable/bg_lit"
+	            android:layout_width="fill_parent"
+	            android:layout_height="wrap_content"/>
+	       	<com.dfire.retail.app.common.item.ItemEditList
+	            android:id="@+id/role_choice"
+	            android:onClick="ClickListener"      
+	            android:background="@drawable/bg_lit"    
+	            android:layout_width="fill_parent"
+	            android:layout_height="wrap_content"/>
+       </LinearLayout>
+    <RelativeLayout
+   		    android:id="@+id/search_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#448f97a6"
+            android:gravity="center_vertical"
+            android:padding="8dp" >
+
+            <Button
+                android:id="@+id/bt_search_userinfo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="10dp"
+                android:text="查询"
+                android:background="@null"
+                android:textColor="#fff"
+                android:textSize="15sp" />
+            <EditText
+		     	android:id="@+id/edit_user_name"
+		     	android:layout_width="fill_parent"
+		  		android:layout_height="wrap_content"
+		 		android:layout_marginLeft="10dp"
+				android:layout_marginRight="20dp"
+		  		android:layout_toLeftOf="@id/bt_search_userinfo"
+		        android:background="@drawable/recharge_search"
+		        android:textColor="#fff"
+		        android:hint="@string/hint_usersearch"
+		        android:textColorHint="#90ffffff"
+		        android:inputType="text"
+		        android:textSize="13sp"
+		        android:orientation="horizontal" />
+
+		      <ImageView
+		          android:id="@+id/clear_input"
+		          android:layout_width="wrap_content"
+		          android:layout_height="wrap_content"
+		          android:layout_alignRight="@+id/edit_user_name"
+		          android:layout_centerVertical="true"
+		          android:visibility="gone"
+		          android:layout_marginRight="5dp"
+		          android:src="@drawable/ico_clear_input" />
+
+        </RelativeLayout>
+    
+     </LinearLayout> 
+     <com.handmark.pulltorefresh.listview.PullToRefreshListView
+            xmlns:ptr="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/attendance_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:cacheColorHint="@android:color/transparent"
+            android:divider="#999"
+            android:layout_below="@+id/layout"
+            android:dividerHeight="0.1dp"
+            android:fadingEdge="none"
+            android:listSelector="@android:color/transparent"
+            android:scrollbars="@null"
+            ptr:ptrHeaderSubTextColor="@color/pull_to_refresh_hint"
+            ptr:ptrHeaderTextColor="@color/pull_to_refresh_hint" >
+
+    </com.handmark.pulltorefresh.listview.PullToRefreshListView>
+     <ImageButton
+	     android:id="@+id/member_info_help"
+	     android:layout_width="wrap_content"
+	     android:layout_height="wrap_content"
+	     android:layout_alignParentBottom="true"
+	     android:background="@null"
+	     android:padding="14dp"
+	     android:src="@drawable/ico_help" />
+
+	 <ImageButton
+	     android:id="@+id/member_info_add"
+	     android:layout_width="wrap_content"
+	     android:layout_height="wrap_content"
+	     android:layout_alignParentBottom="true"
+	     android:layout_alignParentRight="true"
+	     android:background="@null"
+	     android:padding="8dp"
+	     android:src="@drawable/user_info_add" /> 
+</RelativeLayout>

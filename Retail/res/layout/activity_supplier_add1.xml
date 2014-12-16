@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/login_bj"
+    android:orientation="vertical" >
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" 
+        android:background="@drawable/bg"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <com.dfire.retail.app.common.item.ItemEditText
+                android:id="@+id/supply_name"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content" >
+            </com.dfire.retail.app.common.item.ItemEditText>
+
+            <com.dfire.retail.app.common.item.ItemEditText
+                android:id="@+id/supply_name_spell"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content" >
+            </com.dfire.retail.app.common.item.ItemEditText>
+
+            <com.dfire.retail.app.common.item.ItemEditText
+                android:id="@+id/supply_name_code"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content" >
+            </com.dfire.retail.app.common.item.ItemEditText>
+
+            <com.dfire.retail.app.common.item.ItemEditText
+                android:id="@+id/link_person"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content" >
+            </com.dfire.retail.app.common.item.ItemEditText>
+
+            <com.dfire.retail.app.common.item.ItemEditText
+                android:id="@+id/link_phone"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content" >
+            </com.dfire.retail.app.common.item.ItemEditText>
+
+            <com.dfire.retail.app.common.item.ItemEditText
+                android:id="@+id/tel_phone"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content" >
+            </com.dfire.retail.app.common.item.ItemEditText>
+
+            <com.dfire.retail.app.common.item.ItemEditList
+                android:id="@+id/type"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content" 
+                android:tag="1">
+            </com.dfire.retail.app.common.item.ItemEditList>
+
+            <com.dfire.retail.app.common.item.ItemEditText
+                android:id="@+id/supply_email"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content" >
+            </com.dfire.retail.app.common.item.ItemEditText>
+
+            <com.dfire.retail.app.common.item.ItemEditText
+                android:id="@+id/supply_fox"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content" >
+            </com.dfire.retail.app.common.item.ItemEditText>
+
+            <com.dfire.retail.app.common.item.ItemEditText
+                android:id="@+id/supply_address"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content" >
+            </com.dfire.retail.app.common.item.ItemEditText>
+
+            <com.dfire.retail.app.common.item.ItemEditText
+                android:id="@+id/supply_open_bank"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content" >
+            </com.dfire.retail.app.common.item.ItemEditText>
+
+            <com.dfire.retail.app.common.item.ItemEditText
+                android:id="@+id/supply_bank_account"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content" >
+            </com.dfire.retail.app.common.item.ItemEditText>
+
+            <com.dfire.retail.app.common.item.ItemEditText
+                android:id="@+id/supply_bank_name"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content" >
+            </com.dfire.retail.app.common.item.ItemEditText>
+
+            <Button
+                android:id="@+id/search_logistics_records"
+                android:layout_width="fill_parent"
+	            android:layout_height="wrap_content"
+				android:gravity="center"
+	            android:layout_marginTop="15dp"
+	            android:layout_marginRight="10dp"
+				android:layout_marginLeft="10dp"
+	            android:background="@drawable/button_confirm"
+	            android:padding="10dp"
+	            android:text="查询物流记录"
+	            android:textSize="15sp"
+	            android:textColor="#fff"
+	             />
+
+            <Button
+                android:id="@+id/delete_supply_record"
+                android:layout_width="fill_parent"
+	            android:layout_height="wrap_content"
+				android:gravity="center"
+	            android:layout_marginTop="15dp"
+				android:layout_marginBottom="15dp"
+				android:layout_marginRight="10dp"
+				android:layout_marginLeft="10dp"
+	            android:background="@drawable/delete"
+	            android:padding="10dp"
+	            android:text="删除"
+	            android:textColor="#fff"
+	            android:textSize="15sp" />
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

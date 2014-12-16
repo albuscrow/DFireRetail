@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout  xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/login_bj" >
+
+<LinearLayout 
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+    
+    <RelativeLayout
+        android:id="@+id/message"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_lit"
+        android:padding="10dp" >
+        
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="门店"
+            
+            android:textSize="15sp" />
+        <TextView
+            android:id="@+id/shopName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:drawableEnd="@drawable/ico_next"
+            android:drawableRight="@drawable/ico_next"
+            android:textColor="#08C"
+            android:textSize="15sp" />
+         <TextView
+            android:id="@+id/shopId"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+             />
+    </RelativeLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.1dp"
+        android:background="#999">
+	</View> 
+	<RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:padding="10dp" >
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:background="@drawable/setting_payway_explain" >
+
+                <TextView
+                    android:id="@+id/textView1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:textColor="#FFFFFF"
+                    android:layout_marginLeft="5dp"
+                    android:text="消息标题" />
+
+                <TextView
+                    android:id="@+id/textView2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="5dp"
+                    android:textColor="#FFFFFF"
+                    android:text="发布状态"/>
+                
+                </RelativeLayout>
+        </RelativeLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.1dp"
+        android:background="#999">
+	</View> 
+	<com.handmark.pulltorefresh.listview.PullToRefreshListView
+            xmlns:ptr="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/message_remind_setting_lv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:cacheColorHint="@android:color/transparent"
+            android:divider="#999"
+            android:dividerHeight="0.1dp"
+            android:fadingEdge="none"
+            android:listSelector="@android:color/transparent"
+            android:scrollbars="@null"
+            android:layout_below="@+id/linearLayout1"
+            ptr:ptrHeaderSubTextColor="#fff"
+            ptr:ptrHeaderTextColor="#fff" >
+
+        </com.handmark.pulltorefresh.listview.PullToRefreshListView>
+<!--      <ListView -->
+<!--         android:layout_marginBottom="15dp" -->
+<!--         android:layout_marginLeft="15dp" -->
+<!--         android:layout_marginRight="15dp" -->
+<!--         android:id="@+id/message_remind_setting_lv" -->
+<!--         android:layout_width="match_parent" -->
+<!--         android:layout_height="wrap_content" -->
+<!--         android:divider="#999999" -->
+<!-- 		android:dividerHeight="1px"  -->
+<!-- 		android:scrollbars="none" -->
+<!-- 		> -->
+        
+<!--      </ListView> -->
+  <TextView
+      	android:id="@+id/line"
+      	android:visibility="gone"
+     	android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="#999999"
+         />
+
+</LinearLayout>
+	<ImageButton
+        android:id="@+id/helps"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:background="@null"
+        android:padding="8dp"
+        android:src="@drawable/user_info_help" />
+    <ImageButton
+        android:id="@+id/message_add"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:background="@null"
+        android:padding="8dp"
+        android:src="@drawable/user_info_add" />
+	
+</RelativeLayout>

@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:paddingBottom="5dp"
+    android:gravity="center_horizontal" >
+
+    <FrameLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/frame_layout_line"
+        android:layout_marginLeft="10dp"
+        android:layout_marginBottom="5dp"
+        android:layout_marginRight="10dp" >
+
+        <TextView
+            android:id="@+id/saveTag"
+            style="@style/save_small"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="1dp"
+            android:background="@drawable/unsave"
+            android:text="未保存"
+            android:textColor="@color/white"
+            android:textSize="9sp" />
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/transparent"
+            android:gravity="center_vertical"
+            android:orientation="vertical" >
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/transparent"
+                android:gravity="center_vertical" >
+
+                <TextView
+                    android:id="@+id/lblName"
+                    style="@style/black_medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="44dp"
+                    android:layout_alignParentLeft="true"
+                    android:gravity="left|center_vertical"
+                    android:textSize="15sp" />
+
+
+                <ImageView
+                    android:id="@+id/lblVal"
+                    android:layout_marginTop="5dp"
+					android:background="@drawable/pic_none"
+                    android:layout_width="77dp"
+                    android:layout_height="77dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentTop="true"
+                    android:enabled="false"
+                    android:gravity="right|end|center_vertical" />
+            </RelativeLayout>
+
+            <!--  <TextView
+                android:id="@+id/lblHit"
+                style="@style/hit_medium"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="left|center_vertical"
+                android:paddingBottom="5dp"
+                android:paddingTop="5dp"
+                android:text=""
+                android:textSize="12sp" /> -->
+        </LinearLayout>
+    </FrameLayout>
+    
+
+    <ImageView
+         android:id="@+id/img"
+         android:layout_width="30dp"
+         android:layout_height="30dp"
+         android:paddingRight="5dp"
+         android:layout_alignParentRight="true"
+         android:layout_alignParentTop="true"
+         android:contentDescription="line"
+         android:src="@drawable/ico_remove"
+         android:visibility="visible" />    
+
+    <View
+        android:layout_below="@id/frame_layout_line"
+        android:layout_alignParentLeft="true"
+        style="@style/content_hline"
+        android:contentDescription="line" />
+
+</RelativeLayout>

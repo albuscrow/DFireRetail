@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_lit"
+     >
+	
+    <LinearLayout 
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="30dp"
+    	android:layout_marginTop="30dp"
+    	android:layout_marginLeft="20dp"
+    	
+        android:layout_weight="2"
+        android:orientation="vertical">
+	    <TextView 
+	        android:id="@+id/supply_name"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:textColor="#333"
+	        android:textSize="17sp"/>
+	    
+	    <TextView 
+	        android:id="@+id/supply_phone"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:textColor="#666"
+	        android:textSize="13sp"/>
+    </LinearLayout>
+	<RelativeLayout 
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    android:layout_marginBottom="30dp"
+    	android:layout_marginTop="30dp"
+    	android:layout_marginRight="20dp"
+    	android:layout_gravity="center_vertical"
+	    android:layout_weight="5"
+	   >
+	    <TextView 
+	        android:id="@+id/linkman"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_centerVertical="true"
+	        android:layout_marginRight="8dp"
+	        android:textColor="#333"
+	        android:textSize="15sp"
+	        />
+	    
+	    <ImageView 
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_centerVertical="true"
+			android:src="@drawable/arrow_right"
+			android:layout_alignParentRight="true"
+			android:layout_alignParentEnd="true"/>
+	</RelativeLayout>
+</LinearLayout>

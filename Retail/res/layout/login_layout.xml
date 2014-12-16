@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:gravity="right"
+        android:paddingBottom="5dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:paddingTop="5dp" >
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="@null"
+            android:scaleType="center"
+            android:src="@drawable/login_shop" />
+
+
+
+        <EditText
+            android:id="@+id/edit_shop_num"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="10dp"
+            android:layout_weight="1"
+            android:background="@null"
+            android:ems="10"
+            android:hint="@string/hint_shop"
+            android:text="1984"
+            android:textColor="#ffffff"
+            android:textColorHint="#99ffffff"
+            android:textSize="15sp" >
+        </EditText>
+
+        <ImageView
+            android:id="@+id/edit_shop_num_clear"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:src="@drawable/clear_input"
+            android:visibility="visible" />
+
+        <ProgressBar
+            android:id="@+id/scanning_progress"
+            style="?android:attr/progressBarStyleLarge"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:visibility="gone" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@drawable/login_line" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:paddingBottom="5dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:paddingTop="5dp" >
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="@null"
+            android:scaleType="center"
+            android:src="@drawable/login_user" />
+
+
+
+        <EditText
+            android:id="@+id/edit_user_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="10dp"
+            android:layout_weight="1"
+            android:background="@null"
+            android:ems="10"
+            android:hint="@string/hint_username"
+            android:text="admin"
+            android:textColor="#ffffff"
+            android:textColorHint="#99ffffff"
+            android:textSize="15sp" />
+
+        <ImageView
+            android:id="@+id/edit_user_name_clear"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:src="@drawable/clear_input"
+            android:visibility="visible" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@drawable/login_line" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:paddingBottom="5dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:paddingTop="5dp" >
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="@null"
+            android:scaleType="center"
+            android:src="@drawable/login_password" />
+
+        <EditText
+            android:id="@+id/edit_pass"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="10dp"
+            android:layout_weight="1"
+            android:background="@null"
+            android:ems="10"
+            android:hint="@string/hint_password"
+            android:inputType="textPassword"
+            android:text="123456"
+            android:textColor="#ffffff"
+            android:textColorHint="#99ffffff"
+            android:textSize="15sp" />
+
+        <ImageView
+            android:id="@+id/edit_pass_clear"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:src="@drawable/clear_input"
+            android:visibility="visible" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@drawable/login_line" />
+
+    <Button
+        android:id="@+id/loigin_button"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/login_btn"
+        android:onClick="login"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:text="" />
+
+</LinearLayout>

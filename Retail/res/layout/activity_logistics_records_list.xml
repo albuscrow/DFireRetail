@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/login_bj"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:id="@+id/linearLayout1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="#448f97a6"
+            android:gravity="center_vertical"
+            android:padding="10dp" >
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="30dp"
+                android:gravity="center_vertical"
+                android:background="@drawable/setting_payway_explain" >
+
+                <TextView
+                    android:id="@+id/textView1"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="3"
+                    android:layout_marginLeft="10dp"
+                    android:textColor="#FFFFFF"
+                    android:textSize="15sp"
+                    android:text="供应商" />
+                
+                <TextView
+                    android:id="@+id/textView2"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="5"
+                    android:textSize="15sp"
+                    android:textColor="#FFFFFF"
+                    android:text="类型" />
+
+                <TextView
+                    android:id="@+id/textView3"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="5"
+                    android:textSize="15sp"
+                    android:textColor="#FFFFFF"
+                    android:layout_marginRight="10dp"
+                    android:text="状态"/>
+                
+                </LinearLayout>
+
+        </RelativeLayout>
+    </LinearLayout>
+	<com.handmark.pulltorefresh.listview.PullToRefreshListView
+            xmlns:ptr="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/logistics_records_lv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:cacheColorHint="@android:color/transparent"
+            android:divider="#999"
+            android:dividerHeight="0.1dp"
+            android:fadingEdge="none"
+            android:listSelector="@android:color/transparent"
+            android:scrollbars="@null"
+            android:layout_marginTop="5dp"
+            android:layout_below="@+id/linearLayout1"
+            ptr:ptrHeaderSubTextColor="#fff"
+            ptr:ptrHeaderTextColor="#fff" >
+
+    </com.handmark.pulltorefresh.listview.PullToRefreshListView>
+</RelativeLayout>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_lit"
+    android:paddingLeft="@dimen/setting_payway_left"
+    android:paddingRight="@dimen/setting_payway_left">
+    <TextView
+            android:id="@+id/saveTag"
+            style="@style/save_small"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="1dp"
+            android:background="@drawable/unsave"
+            android:text="未提交"
+            android:textColor="@color/white"
+            android:textSize="9sp" />
+    <TextView 
+        android:id="@+id/text"
+        style="@style/setting_list_main_text"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:layout_gravity="center_vertical" 
+        android:text="region1"/>
+
+    <ImageView 
+        android:layout_gravity="right|center_vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ico_next"
+        android:contentDescription="@string/next"/>
+</FrameLayout>

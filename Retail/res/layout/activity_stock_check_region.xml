@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/login_bj"
+    android:orientation="vertical">
+    
+    <ListView
+	        android:id="@+id/stock_check_region_list"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:divider="@color/divider"
+	        android:dividerHeight="1dp"
+	        android:cacheColorHint="@color/transparent"
+	        android:scrollbars="none" />
+    
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/setting_payway_bottom"
+        android:layout_gravity="bottom"
+        android:paddingLeft="10dp"
+        android:paddingTop="5dp"
+        android:paddingRight="10dp"
+        android:paddingBottom="5dp" >
+
+        <ImageButton
+            android:id="@+id/help"
+            style="@style/title_btn_style"
+            android:src="@drawable/ico_help"
+            android:layout_gravity="bottom"
+            android:contentDescription="@string/help" />
+        <LinearLayout
+            android:id="@+id/submit"
+            android:layout_width="@dimen/setting_payway_botton_pic"
+            android:layout_height="@dimen/setting_payway_botton_pic"
+            android:layout_marginRight="70dp"
+            android:background="@drawable/ico_rnd_green"
+            android:layout_gravity="right|bottom"
+            android:gravity="center"
+            android:clickable="true"
+            android:orientation="vertical">
+            
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/whitesmoke"
+                android:textSize="12sp"
+                android:text="全部"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/whitesmoke"
+                android:textSize="12sp"
+                android:text="提交"/>
+        </LinearLayout>
+        
+        
+        <LinearLayout
+            android:id="@+id/minus"
+            android:layout_width="@dimen/setting_payway_botton_pic"
+            android:layout_height="@dimen/setting_payway_botton_pic"
+            android:background="@drawable/ico_rnd_green"
+            android:layout_gravity="right|bottom"
+            android:gravity="center"
+            android:clickable="true"
+            android:orientation="vertical">
+            
+            <ImageView 
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ico_new"
+                android:contentDescription="@string/setting_payway_add"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/whitesmoke"
+                android:textSize="12sp"
+                android:text="@string/setting_payway_add"/>
+        </LinearLayout>
+    </FrameLayout>
+</FrameLayout>

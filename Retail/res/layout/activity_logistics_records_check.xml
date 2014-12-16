@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/login_bj"
+    android:orientation="vertical" >
+	<RelativeLayout
+	    android:layout_width="match_parent"
+	    android:layout_height="match_parent"
+	    android:background="@drawable/bg"
+	    >
+	    <LinearLayout
+	        android:id="@+id/linearLayout1"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:orientation="vertical" >
+	
+	        <RelativeLayout
+	            android:id="@+id/shop"
+	            android:layout_width="match_parent"
+	            android:layout_height="wrap_content"
+	            android:padding="8dp" >
+	
+	            <TextView
+	                android:layout_width="wrap_content"
+	                android:layout_height="wrap_content"
+	                android:text="门店"
+	                android:textSize="15sp" />
+	
+	            <TextView
+	                android:id="@+id/shop_name"
+	                android:layout_width="wrap_content"
+	                android:layout_height="wrap_content"
+	                android:layout_alignParentEnd="true"
+	                android:layout_alignParentRight="true"
+	                android:drawableEnd="@drawable/ico_next"
+	                android:drawableRight="@drawable/ico_next"
+	                android:textColor="#0d8dc8"
+	                android:gravity="right"
+	                android:textSize="15sp" />
+	        </RelativeLayout>
+	        <View
+				android:layout_width="fill_parent"
+				android:layout_height="0.1dp"
+				android:layout_marginLeft="10dp"
+				android:layout_marginRight="10dp"
+				android:background="#999999">
+			</View>
+	        <RelativeLayout
+	            android:layout_width="match_parent"
+	            android:layout_height="wrap_content"
+	            android:padding="8dp" >
+	
+	            <TextView
+	                android:id="@+id/no"
+	                android:layout_width="wrap_content"
+	                android:layout_height="wrap_content"
+	                android:text="单号"
+	                android:textSize="15sp" />
+
+	            <LinearLayout
+	                android:layout_width="wrap_content"
+	                android:layout_height="wrap_content"
+	                android:layout_alignParentRight="true" >
+
+		            <EditText
+		                android:id="@+id/logistics_no"
+		                android:layout_width="wrap_content"
+		                android:layout_height="wrap_content"
+		                android:background="@null"
+		                android:gravity="right"
+		                android:hint="查询单号"
+		                android:maxLength="50"
+		                android:textColor="#0d8dc8"
+		                android:textSize="15sp" />
+
+		            <ImageView
+			          android:id="@+id/clear_input"
+			          android:layout_width="wrap_content"
+			          android:layout_height="wrap_content"
+			          android:visibility="gone"
+			          android:src="@drawable/ico_clear_input" />
+		        </LinearLayout>
+	        </RelativeLayout>
+	        <View
+				android:layout_width="fill_parent"
+				android:layout_height="0.1dp"
+				android:layout_marginLeft="10dp"
+				android:layout_marginRight="10dp"
+				android:background="#999999">
+			</View>
+	        <RelativeLayout
+	            android:layout_width="match_parent"
+	            android:layout_height="wrap_content"
+	            android:padding="8dp" >
+	
+	            <TextView
+	                android:layout_width="wrap_content"
+	                android:layout_height="wrap_content"
+	                android:text="供应商"
+	                android:textSize="15sp" />
+	
+	            <TextView
+	                android:id="@+id/supply_name"
+	                android:layout_width="180dp"
+	                android:layout_height="wrap_content"
+	                android:layout_alignParentEnd="true"
+	                android:layout_alignParentRight="true"
+	                android:drawableEnd="@drawable/ico_next_down"
+	                android:drawableRight="@drawable/ico_next_down"
+	                android:gravity="right"
+	                android:text="全部"
+	                android:textColor="#0d8dc8"
+	                android:textSize="15sp" />
+	        </RelativeLayout>
+	        <View
+				android:layout_width="fill_parent"
+				android:layout_height="0.1dp"
+				android:layout_marginLeft="10dp"
+				android:layout_marginRight="10dp"
+				android:background="#999999">
+			</View>
+	        <RelativeLayout
+	            android:layout_width="match_parent"
+	            android:layout_height="wrap_content"
+	            android:padding="8dp" >
+	
+	            <TextView
+	                android:layout_width="wrap_content"
+	                android:layout_height="wrap_content"
+	                android:text="时间"
+	                android:textSize="15sp" />
+	
+	            <TextView
+	                android:id="@+id/date"
+	                android:layout_width="wrap_content"
+	                android:layout_height="wrap_content"
+	                android:layout_alignParentEnd="true"
+	                android:layout_alignParentRight="true"
+	                android:drawableEnd="@drawable/ico_next_down"
+	                android:drawableRight="@drawable/ico_next_down"
+	                android:textColor="#0d8dc8"
+	                android:text="请选择"
+	                android:textSize="15sp" />
+	        </RelativeLayout>
+	        <View
+				android:layout_width="fill_parent"
+				android:layout_height="0.1dp"
+				android:layout_marginLeft="10dp"
+				android:layout_marginRight="10dp"
+				android:background="#999999">
+			</View>
+	
+	        <RelativeLayout
+	            android:layout_width="match_parent"
+	            android:layout_height="wrap_content"
+	            android:gravity="center_vertical"
+	            android:padding="8dp" >
+	            <TextView 
+	                android:layout_width="match_parent"
+	            	android:layout_height="wrap_content"
+	            	android:textColor="#999"
+	            	android:textSize="13sp"
+	            	android:text="提示：可以根据上面的条件查询相应的物流记录"/>
+	        </RelativeLayout>
+	        
+	        <Button
+		        android:id="@+id/btn_confirm"
+		        style="@style/white_medium"
+		        android:layout_width="match_parent"
+		        android:layout_height="wrap_content"
+		        android:layout_marginLeft="10dp"
+				android:layout_marginRight="10dp"
+				android:layout_marginTop="10dp"
+		        android:layout_gravity="right|center_vertical"
+		        android:padding="10dp"
+		        android:textColor="#fff"
+		        android:background="@drawable/btn_green_style"
+		        android:text="查询" />
+	    </LinearLayout>
+    </RelativeLayout>
+    <ImageButton
+        android:id="@+id/helps"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:background="@null"
+        android:padding="8dp"
+        android:src="@drawable/user_info_help" />
+</RelativeLayout>

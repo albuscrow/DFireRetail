@@ -1,7 +1,0 @@
-package com.dihuo.twodfire.retail.activity.setting;
-
-import android.app.Activity;
-
-public class DataClearSettingActivity extends Activity {
-
-}

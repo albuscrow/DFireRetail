@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/root"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/login_bj" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#b3ffffff"
+        android:orientation="vertical" >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="44dp"
+                android:background="@color/half_white"
+                android:gravity="center_vertical"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:paddingStart="20dp"
+                android:text="基本信息"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <ImageButton
+                android:id="@+id/scan"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="20dp"
+                android:background="@null"
+                android:contentDescription="@null"
+                android:src="@drawable/ico_saoyisao"
+                android:visibility="gone" />
+        </RelativeLayout>
+
+        <include
+            android:id="@+id/tiaoma"
+            layout="@layout/set_edit_textview" />
+
+        <include
+            android:id="@+id/daima"
+            layout="@layout/set_edit_textview" />
+
+        <include
+            android:id="@+id/name"
+            layout="@layout/set_edit_textview" />
+
+        <include
+            android:id="@+id/jinhuojia"
+            layout="@layout/set_edit_textview" />
+
+        <include
+            android:id="@+id/lingshoujia"
+            layout="@layout/set_edit_textview" />
+
+        <include
+            android:id="@+id/kucun"
+            layout="@layout/set_edit_textview" />
+
+        <include
+            android:id="@+id/tongbu"
+            layout="@layout/next_down" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:background="#e8ecef"
+            android:paddingBottom="10dp"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:paddingStart="20dp"
+            android:paddingTop="10dp"
+            android:text="扩展信息"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <include
+            android:id="@+id/jianma"
+            layout="@layout/set_edit_textview" />
+
+        <include
+            android:id="@+id/pingyinma"
+            layout="@layout/set_edit_textview" />
+
+        <include
+            android:id="@+id/sort"
+            layout="@layout/next_down" />
+
+        <include
+            android:id="@+id/guige"
+            layout="@layout/set_edit_textview" />
+
+        <include
+            android:id="@+id/pinpan"
+            layout="@layout/set_edit_textview" />
+
+        <include
+            android:id="@+id/chandi"
+            layout="@layout/set_edit_textview" />
+
+        <include
+            android:id="@+id/baozhiqi"
+            layout="@layout/set_edit_textview" />
+
+        <include
+            android:id="@+id/image"
+            layout="@layout/set_edit_textview" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <ImageButton
+                android:id="@+id/imageView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_marginTop="15dp"
+                android:layout_marginLeft="25dp"
+                android:layout_marginRight="25dp"
+                android:background="@null"
+                android:scaleType="fitXY"
+                android:src="@drawable/goods_image_add" />
+
+            <ImageButton
+                android:id="@+id/deleteImage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="-11dp"
+                android:layout_marginTop="-14dp"
+                android:layout_alignRight="@id/imageView"
+                android:layout_alignEnd="@id/imageView"
+                android:layout_alignTop="@id/imageView"
+                android:background="@null"
+                android:src="@drawable/ico_remove" />
+        </RelativeLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:background="#e8ecef"
+            android:paddingBottom="10dp"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:paddingStart="20dp"
+            android:paddingTop="10dp"
+            android:text="销售设置"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <include
+            android:id="@+id/ticheng"
+            layout="@layout/set_edit_textview" />
+
+        <include
+            android:id="@+id/jifen"
+            layout="@layout/checkbox" />
+
+        <include
+            android:id="@+id/youhui"
+            layout="@layout/checkbox" />
+
+        <Button
+            android:id="@+id/action"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/delete_btn"
+            android:padding="10dp"
+            android:text="删除"
+            android:textColor="#fff"
+            android:textSize="18sp" />
+
+        <include layout="@layout/empty" />
+    </LinearLayout>
+
+</ScrollView>
+<!--
+        <RelativeLayout 
+            android:layout_width="match_parent"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_height="wrap_content" >
+            
+ 			<CheckBox
+ 			    android:id="@+id/checkbox"
+ 			    android:layout_width="wrap_content"
+ 			    android:layout_height="wrap_content"
+ 			    android:layout_gravity="right|center_vertical"
+ 			    android:background="@drawable/ico_switch"
+ 			    android:button="@drawable/ico_switch"
+ 			    android:checked="true" />
+
+ 			<TextView
+ 			    android:id="@+id/_isSold"
+ 			    android:layout_width="match_parent"
+ 			    android:layout_height="wrap_content"
+ 			    android:textColor="#f00"
+ 			    android:gravity="center_horizontal"
+ 			    android:textSize="20sp"
+ 			    android:text="商品已下架"
+ 			    android:layout_toRightOf="@id/checkbox" />
+ 			
+			<TextView
+			    android:layout_width="match_parent"
+			    android:layout_height="wrap_content"
+			    android:layout_below="@id/_isSold"
+			    android:layout_toRightOf="@id/checkbox"
+			    android:gravity="center_horizontal"
+			    android:text="在收银以外的所有设备上(包括来我店)不显示"
+			    android:textSize="12sp" />
+
+        </RelativeLayout>
+-->

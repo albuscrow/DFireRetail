@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/login_bj">
+    
+    <RelativeLayout
+        android:layout_width="match_parent"
+    	android:layout_height="wrap_content"
+    	android:background="@drawable/bg_lit">
+        <FrameLayout
+            android:id="@+id/fl_role"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="10dp"
+    	    android:paddingRight="10dp"
+            android:minHeight="@dimen/setting_role_list_height" >
+    
+            <!-- <TextView
+                style="@style/setting_list_main_text"
+                android:paddingTop="5dp"
+            	android:paddingBottom="5dp"
+                android:layout_gravity="center_vertical"
+                android:text="@string/role" />
+    
+            <TextView
+                android:id="@+id/role"
+                style="@style/setting_payway_create_button"
+                android:layout_gravity="right|center_vertical"
+                android:text="@string/role" /> -->
+    		<com.dfire.retail.app.common.item.ItemEditText
+	                    android:id="@+id/role"
+			            android:layout_width="fill_parent"
+		            	android:layout_height="44dp"
+		            	android:gravity="right|center_vertical"	
+			            android:textSize="15sp" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_gravity="bottom"
+                android:layout_marginLeft="10dp"
+		        android:layout_marginRight="10dp"
+                android:background="@color/divider" />
+        </FrameLayout>
+        
+        <!-- <ScrollView 
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/fl_role"
+	        android:layout_above="@id/delete">
+            <LinearLayout 
+	            android:id="@+id/ll_role_permission"
+	            android:layout_width="match_parent"
+	            android:layout_height="wrap_content"
+	            android:orientation="vertical"
+	            android:visibility="visible"/>
+            
+        </ScrollView> -->
+        
+		<!-- <com.daoshun.lib.view.sticklistview.StickyListHeadersListView 
+		    android:id="@+id/lv_role_permission"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scrollbars="none"
+            android:footerDividersEnabled="true"
+            android:layout_below="@id/fl_role"
+            android:layout_above="@id/delete">
+            
+        </com.daoshun.lib.view.sticklistview.StickyListHeadersListView> -->
+        <ExpandableListView 
+		    android:id="@+id/lv_role_permission"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="@dimen/setting_payway_left"
+    		android:paddingRight="@dimen/setting_payway_left"
+            android:divider="@color/divider"
+            android:childDivider="@color/divider"
+  			android:dividerHeight="0.1dp"
+            android:scrollbars="none"
+            android:footerDividersEnabled="true"
+            android:layout_below="@id/fl_role">
+        </ExpandableListView>
+        
+       
+    </RelativeLayout>
+        
+</RelativeLayout>

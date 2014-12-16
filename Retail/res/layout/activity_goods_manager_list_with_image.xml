@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/login_bj" >
+
+    <!-- <com.dfire.retail.app.manage.widget.swipelayout.SwipeRefreshLayout
+        android:id="@+id/goodsListLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+ -->
+
+        <com.handmark.pulltorefresh.library.PullToRefreshListView
+            xmlns:ptr="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/goodsList"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:cacheColorHint="@android:color/transparent"
+            android:divider="@color/divider_color"
+            android:dividerHeight="1px"
+            android:fadingEdge="none"
+            android:listSelector="@android:color/transparent"
+            android:scrollbars="@null"
+            ptr:ptrHeaderSubTextColor="@color/pull_to_refresh_hint"
+            ptr:ptrHeaderTextColor="@color/pull_to_refresh_hint" >
+
+        </com.handmark.pulltorefresh.library.PullToRefreshListView>
+    
+<!--     </com.dfire.retail.app.manage.widget.swipelayout.SwipeRefreshLayout> -->
+
+    <ImageButton
+        android:id="@+id/help"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@null"
+        android:padding="8dp"
+        android:src="@drawable/ico_help" />
+
+    <ImageButton
+        android:id="@+id/add"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:background="@null"
+        android:padding="8dp"
+        android:src="@drawable/user_info_add" />
+
+    <ImageButton
+        android:id="@+id/more"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_toLeftOf="@id/add"
+        android:background="@null"
+        android:padding="8dp"
+        android:src="@drawable/ico_batch" />
+    
+	<ImageButton
+        android:id="@+id/scanButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_toLeftOf="@id/more"
+        android:background="@null"
+        android:padding="8dp"
+        android:src="@drawable/ico_scan" />
+
+</RelativeLayout>
